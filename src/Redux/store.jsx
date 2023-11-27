@@ -9,13 +9,15 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const userPersistedReducer = persistReducer(persistConfig, userReducer);
+const vendorPersistedReducer = persistReducer(persistConfig, vendorReducer);
 
 
 const Store = configureStore({
   reducer: 
     {
-      User:persistedReducer
+      User:userPersistedReducer,
+      Vendor: vendorPersistedReducer,
     },
    
 });

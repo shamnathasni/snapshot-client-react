@@ -1,99 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { VendorImage } from "../../Api/VendorApi"; 
-import { vendorDetails, logoutDetails } from "../../Redux/VendorSlice";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import UploadWidget from "../../Components/Upload/UploadWidget";
+import { logoutDetails, updateVendorImage } from "../../Redux/VendorSlice";
+import VendorNavbar from '../../Components/Layouts/VendorNavbar'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 const VendorProfilePage = () => {
-  const [images, setImage] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const vendor = useSelector((state) => state.Vendor.vendor);
-console.log(vendor,"vendor");
-  // Destructure the properties after defining 'user'
-  const { id, name, number, email, image } = vendor;
-
-  const handleUpdateImage = async (event) => {
-    try {
-      const file = event.target.files && event.target.files[0];
-      if(file) {
-        setImage(file)
-      const response = await VendorImage(id, file);
-      console.log(response,"rrr");
-      if (response.data.updated) {
-        // Assuming you have a response variable from somewhere
-        const { _id, name, number, email, image } = response.data.data;
-        dispatch(
-          vendorDetails(response.data.data)
-        );
-      }
-    }
-
-    } catch (error) {
-      console.log(error.message);
-    }
+  const navigate = useNavigate();
+  const vendor = useSelector((state => state.Vendor.vendor));
+  console.log(vendor, "vendor");
+  const{name,email,number,image} = vendor
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+  
+      dispatch(logoutDetails());
+      navigate("/vendor/login");
+    
   };
 
-  const handleLogout = async()=>{
-    localStorage.removeItem("token")
-    dispatch(
-        logoutDetails()
-    )
-    navigate("/")
-  }
+  const handleImageUpload = (uploadedImageUrl) => {
+    // Dispatch an action to update the image in the Redux store
+    dispatch(updateVendorImage(uploadedImageUrl));
+  };
+
   return (
-    <section className="pt-16 bg-blueGray-50">
+    <>
+    <VendorNavbar/>
+    <div className="pt-16 bg-blueGray-50">
       <div className="w-full lg:w-4/12 px-4 mx-auto">
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
           <div className="px-6">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4 flex justify-center">
                 <div className="relative">
-                <label htmlFor="fileInput" className="cursor-pointer w-4/5">
-                  {/* <FontAwesomeIcon icon={faUserSecret} onClick={handleUpdateImage} /> */}
-                  <img
-                    src={
-                      image
-                        ? `../../../../../SnapShot-server/Public/Images/1700800807172-TAH-5.jpg`
-                        : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
-                    }
-                    alt="card-image"
-                    className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                  />
-            
+                  <label htmlFor="fileInput" className="cursor-pointer w-4/5">
+                    <img
+                      src={image ? image : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"}
+                      alt="card-image"
+                      className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                    />
                   </label>
-                  <input
-                    id="fileInput"
-                    type="file"
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    onChange={handleUpdateImage}
-                 />
                 </div>
               </div>
-              {/* {image && (
-                <img src="" alt="" srcset="" />
-              )} */}
               <div className="w-full px-4 text-center mt-20">
-                <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      09/12/2023
-                    </span>
-                    <span className="text-[15px] text-blueGray-400">
-                      joinedDate
-                    </span>
-                  </div>
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      10/10/2023
-                    </span>
-                    <span className="text-[15px] text-blueGray-400">
-                      Date of Birth
-                    </span>
-                  </div>
+                {/* Include UploadWidget and pass the callback function */}
+
+                <UploadWidget isImage={image?true:false} onImageUpload={handleImageUpload} />
+              </div>
+            </div>
+            <div className="w-full px-4 text-center mt-20">
+              <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                <div className="mr-4 p-3 text-center">
+                  <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    09/12/2023
+                  </span>
+                  <span className="text-[15px] text-blueGray-400">
+                    joinedDate
+                  </span>
+                </div>
+                <div className="mr-4 p-3 text-center">
+                  <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    10
+                  </span>
+                  <span className="text-[15px] text-blueGray-400">
+                    Date of Birth
+                  </span>
                 </div>
               </div>
             </div>
@@ -121,9 +95,7 @@ console.log(vendor,"vendor");
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
-                  <div
-                    className="font-normal text-pink-500"
-                  >
+                  <div className="font-normal text-pink-500">
                     <h6 onClick={handleLogout}>Logout</h6>
                   </div>
                 </div>
@@ -132,8 +104,9 @@ console.log(vendor,"vendor");
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    </>
   );
 };
 
-export default VendorProfilePage; 
+export default VendorProfilePage;

@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import AdminNavbar from '../../Components/Layouts/AdminNavbar';
-import { adminUserlist, blockUser, unblockUser } from '../../Api/AdminApi';
+import React, { useEffect, useState } from "react";
+import { adminVendorlist, blockVendor, unblockVendor } from "../../Api/AdminApi";
+import AdminNavbar from "../../Components/Layouts/AdminNavbar";
 
-function AdminUserList() {
-  const [userData, setUserData] = useState([]);
- 
+function AdminVendorList() {
+  const [VendorData, setVendorData] = useState([]);
 
   useEffect(() => {
-    adminUserlist()
+    adminVendorlist()
       .then((response) => {
-        const userData = response.data.userData;
-        setUserData(userData);
+        const VendorData = response.data.VendorData;
+        setVendorData(VendorData);
       })
       .catch((err) => console.log(err));
-    }, []);
-  
+  }, []);
 
-  const handleblock = async (userId) => {
+  const handleblock = async (vendorId) => {
     try {
-      const res = await blockUser(userId);
+      const res = await blockVendor(vendorId);
       // Handle the response if needed
-      if(res.data.status){
-        const newList = userData.map((user) => 
-          user._id === userId ? {...user, is_verified: false} : user
-        )
-        setUserData(newList)
+      if (res.data.status) {
+        const newList = VendorData.map((vendor) =>
+        vendor._id === vendorId ? { ...vendor, is_verified: false } : vendor
+        );
+        console.log("blocked");
+        setVendorData(newList);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
-  const handleUnblock = async (userId) => {
+  const handleUnblock = async (vendorId) => {
     try {
-      const res = await unblockUser(userId);
+      const res = await unblockVendor(vendorId);
       // Handle the response if needed
-      if(res.data.status){
-        const newList = userData.map((user) => 
-        user._id === userId ? {...user, is_verified: true} : user
-      )
-      setUserData(newList)
+      if (res.data.status) {
+        const newList = VendorData.map((vendor) =>
+        vendor._id === vendorId ? { ...vendor, is_verified: true } : vendor
+        );
+        console.log("unblocked");
+        setVendorData(newList);
       }
     } catch (error) {
       console.log(error.message);
@@ -53,7 +53,7 @@ function AdminUserList() {
           <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
             <div className="inline-block min-w-full py-6 sm:px-10 lg:px-12 m">
               <div className="overflow-hidden">
-                {userData.length > 0 ? (
+                {VendorData.length > 0 ? (
                   <table className="min-w-full text-left text-sm font-light border-2 border-black">
                     <thead className="border-b font-medium dark:border-neutral-500">
                       <tr>
@@ -73,7 +73,7 @@ function AdminUserList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {userData.map((value, index) => (
+                      {VendorData.map((value, index) => (
                         <tr
                           key={value._id}
                           className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
@@ -91,14 +91,13 @@ function AdminUserList() {
                             {value.number}
                           </td>
                           <td>
-                            { value.is_verified === true ?  (
+                            {value.is_verified === true ? (
                               <button
-                              className="mt-4 bg-green-700 text-white h-7 w-20 rounded-box"
-                              onClick={() => handleblock(value._id)}
-                            >
-                              Block
-                            </button>
-                              
+                                className="mt-4 bg-green-700 text-white h-7 w-20 rounded-box"
+                                onClick={() => handleblock(value._id)}
+                              >
+                                Block
+                              </button>
                             ) : (
                               <button
                                 className="mt-4 bg-red-700 text-white h-7 w-20 rounded-box"
@@ -113,7 +112,7 @@ function AdminUserList() {
                     </tbody>
                   </table>
                 ) : (
-                  <div>No user found</div>
+                  <div>No vendors found</div>
                 )}
               </div>
             </div>
@@ -124,4 +123,4 @@ function AdminUserList() {
   );
 }
 
-export default AdminUserList;
+export default AdminVendorList;

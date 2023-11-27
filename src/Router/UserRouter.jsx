@@ -3,16 +3,18 @@ import { Routes , Route } from "react-router-dom"
 import UserAuthPage from '../Pages/UserPages/UserAuthPage'
 import UserHomePage from '../Pages/UserPages/UserHomePage'
 import UserProfile from '../Pages/UserPages/UserProfilePage'
+import UserPublic from '../Components/PublicRouter/UserPublic'
+import UserProtector from '../Components/protectorRoute/UserProtector'
 
 
 function UserRouter() {
   return (
     <div>
       <Routes>
-        <Route path="/login" element={<UserAuthPage form={"login"} />}/>
-        <Route path='/signup' element={<UserAuthPage/>}/>
         <Route path="/" element={<UserHomePage/>}/>
-        <Route path="/profile" element={<UserProfile/>}/>
+        <Route path="/login" element={<UserPublic><UserAuthPage form={"login"} /></UserPublic>}/>
+        <Route path='/signup' element={<UserPublic><UserAuthPage/></UserPublic>}/>
+        <Route path="/profile" element={<UserProtector><UserProfile/></UserProtector>}/>
       </Routes>
     </div>
   )

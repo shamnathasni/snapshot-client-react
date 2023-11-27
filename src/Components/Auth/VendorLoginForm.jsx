@@ -26,10 +26,11 @@ function VendorLoginForm() {
           if (response.data.status) {
             localStorage.setItem("token",response.data.token)
             const { newVendor } = response.data
+            console.log(newVendor);
             dispatch(
               vendorDetails(newVendor)
             )
-            navigate("/vendor/profile")
+            navigate("/vendor/studio")
           } else {
             toast(response.data.alert)
           }

@@ -5,17 +5,23 @@ const initialState = {
 }
 
 const vendorSlice = createSlice({
-    name:"vendor",
+    name: "vendor",
     initialState,
-    reducers:{
-        vendorDetails:(state,action)=>{
-            state.vendor=action.payload
-        },
-        logoutDetails:(state)=>{
-            state.vendor=null
+    reducers: {
+      vendorDetails: (state, action) => {
+        state.vendor = action.payload;
+      },
+      logoutDetails: (state) => {
+        state.vendor = null;
+      },
+      updateVendorImage: (state, action) => {
+        // Update the user's image in the state
+        if (state.vendor) {
+          state.vendor.image = action.payload;
         }
-    }
-})
-
-export default vendorSlice.reducer
-export const { vendorDetails, logoutDetails } = vendorSlice.actions
+      },
+    },
+  });
+  
+  export default vendorSlice.reducer;
+  export const { vendorDetails, logoutDetails, updateVendorImage } = vendorSlice.actions;

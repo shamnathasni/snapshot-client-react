@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   IconButton,
@@ -16,6 +16,7 @@ import { logoutDetails } from "../../Redux/VendorSlice";
 function AdminNavbar() {
   const navigate = useNavigate();
     const dispatch = useDispatch()
+    const location = useLocation();
     const admin = useSelector(state => state.User.admin)
     console.log(admin,"aaa");
     const handleLogout = () => {
@@ -42,7 +43,10 @@ function AdminNavbar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal "
+        className={
+          location.pathname === "/admin/category"
+            ? "p-1 font-normal underline"
+            : "p-1 font-normal"}
       >
         <Link to={"/categorylist"} className="flex items-center">
           Category
@@ -51,8 +55,11 @@ function AdminNavbar() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
+        className={
+          location.pathname === "/admin/userlist"
+            ? "p-1 font-normal underline"
+            : "p-1 font-normal"
+        }
       >
         <Link to={"/admin/userlist"} className="flex items-center">
           Users
@@ -62,9 +69,12 @@ function AdminNavbar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className={
+          location.pathname === "/admin/vendorlist"
+            ? "p-1 font-normal underline"
+            : "p-1 font-normal"}
       >
-        <Link to={"/vendorlist"} className="flex items-center">
+        <Link to={"/admin/vendorlist"} className="flex items-center">
           Vendors
         </Link>
       </Typography>

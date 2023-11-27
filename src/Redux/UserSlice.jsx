@@ -13,9 +13,15 @@ const UserSlice = createSlice({
         },
         userLogout:(state)=>{
             state.user=null
-        }
+        },
+        updateUserImage: (state, action) => {
+            // Update the user's image in the state
+            if (state.user) {
+              state.user.image = action.payload;
+            }
     }
+}
 })
 
 export default UserSlice.reducer;
-export const { userDetails, userLogout } = UserSlice.actions;
+export const { userDetails, userLogout, updateUserImage } = UserSlice.actions;

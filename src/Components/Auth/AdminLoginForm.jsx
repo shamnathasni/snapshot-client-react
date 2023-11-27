@@ -28,7 +28,7 @@ function AdminLoginForm() {
         const{ newAdmin } = response.data
         console.log(newAdmin,"nnn");
         dispatch(
-          loginDetails({admin:newAdmin})
+          loginDetails(newAdmin)
         )
         navigate("/admin/dashboard")
       } else {
