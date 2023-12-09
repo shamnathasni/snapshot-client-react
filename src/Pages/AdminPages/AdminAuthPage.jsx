@@ -13,7 +13,8 @@ function AdminAuthPage() {
         </div>
         <div className='flex justify-center items-center flex-col'>
           <div>
-            <header className='font-bold text-3xl pb-5'>Sign in</header>
+            <span className='flex items-center justify-center font-MyFont text-[#872341] '>Admin</span>
+            <header className='font-bold text-3xl pb-5'>Sign In</header>
           </div>
             <AdminLoginForm />
         </div>

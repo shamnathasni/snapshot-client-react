@@ -19,10 +19,11 @@ function VendorAuthPage({form}) {
         </div>
         <div className='flex justify-center items-center flex-col'>
           <div>
-            <header className='font-bold text-3xl pb-5'>
+          <span className='flex items-center justify-center font-MyFont text-[#872341] '>Vendor</span>
+            <header className='font-bold font-serif text-3xl pb-5'>
              { form === "login"
-              ? "Sign in"
-              : "Sign up"}
+              ? "Sign In"
+              : "Sign Up"}
             </header>
           </div>
           {form === "login"

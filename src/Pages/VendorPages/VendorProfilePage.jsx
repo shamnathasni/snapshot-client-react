@@ -4,22 +4,30 @@ import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../Components/Upload/UploadWidget";
 import { logoutDetails, updateVendorImage } from "../../Redux/VendorSlice";
 import VendorNavbar from '../../Components/Layouts/VendorNavbar'
+import Modal from "../../Components/Modal";
+import { Button } from "@material-tailwind/react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 const VendorProfilePage = () => {
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vendor = useSelector((state => state.Vendor.vendor));
   console.log(vendor, "vendor");
   const{name,email,number,image} = vendor
-  const handleLogout = async () => {
-    localStorage.removeItem("token");
-  
-      dispatch(logoutDetails());
-      navigate("/vendor/login");
-    
-  };
+  const handleLogout=async()=>{
+    localStorage.removeItem("token")
+    dispatch(logoutDetails())
+    navigate("/vendor/login")
+    setShowModal(false)
+  }
+  const cancelLogout =()=>{
+    setShowModal(false)
+  }
+  const confirmLogout =()=>{
+    setShowModal(true)
+  }
 
   const handleImageUpload = (uploadedImageUrl) => {
     // Dispatch an action to update the image in the Redux store
@@ -96,7 +104,22 @@ const VendorProfilePage = () => {
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
                   <div className="font-normal text-pink-500">
-                    <h6 onClick={handleLogout}>Logout</h6>
+                    <span onClick={confirmLogout}>Logout</span>
+                    {showModal && (
+                      <Modal onClose={() => setShowModal(false)}>
+                        <div className="p-4">
+                          <p className="mb-4 text-black">Are you sure you want to logout?</p>
+                          <div className="flex justify-center">
+                            <Button variant="outlined" size="sm" className="ml-2 bg-[#872341] text-white"  onClick={cancelLogout}>
+                              Cancel
+                            </Button>
+                            <Button variant="outlined" size="sm" className="ml-2 bg-[#872341] text-white" onClick={handleLogout}>
+                              Confirm
+                            </Button>
+                          </div>
+                        </div>
+                      </Modal>
+                    )}
                   </div>
                 </div>
               </div>

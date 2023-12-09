@@ -2,6 +2,7 @@ import React from 'react'
 import VendorNavbar from '../../Components/Layouts/VendorNavbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 
 function VendorStudioPage() {
@@ -17,10 +18,14 @@ function VendorStudioPage() {
       </div>
       <div className="flex justify-center items-center h-[50vh]">
         <div className="h-30 flex flex-row items-center py-10">
-        <FontAwesomeIcon icon={faFolderPlus} className='text-3xl'  />
+        <Link to={"/vendor/createStudio"}>
+          <div className='flex flex-row'>
+        <FontAwesomeIcon icon={faFolderPlus} className='text-3xl py-2'  />
           <h3 className="font-bold text-4xl mx-3">
             Create studio
           </h3>
+          </div>
+        </Link>
         </div>
       </div>
     </>

@@ -38,16 +38,11 @@ function UserSingupForm() {
 
   const submitData = async(formData)=>{
     try {   
-    const{name, number, email, password } = formData
-    const response = await userSignup({name, number, email, password})
+    const{name,number,email,password} = formData
+    const response = await userSignup(formData)
     if (response.data.status) {
-      localStorage.setItem("token",response.data.token)
-
-      const {newUser} = response.data
-      dispatch(
-        userDetails(newUser)
-      )
-        navigate("/login")
+      toast(response.data.alert);
+        navigate("/getOtp",{state:{userData:formData}})
     } else {
       toast(response.data.alert);
     }
@@ -69,7 +64,7 @@ function UserSingupForm() {
        {errors.name && <span className='text-red-950'> {errors.name.message} </span>}
 
       <input
-        type='numberh' {...register("number")}
+        type='number' {...register("number")}
         placeholder='Enter your contact number'
         className='h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 placeholder:italic'
       />
@@ -104,7 +99,8 @@ function UserSingupForm() {
       </button>
     </form>
     <div className='flex-row justify-center text-center pt-3'>    
-        <Link to="/login"><p className='text-red-800' >already have an account</p></Link>
+        <p className='text-[#872341]' >already have an account</p>
+        <Link to="/login"><p className='text-[#872341] font-bold' >Sign In</p></Link>
     </div>
   </div>
   )

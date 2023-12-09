@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { adminVendorlist, blockVendor, unblockVendor } from "../../Api/AdminApi";
 import AdminNavbar from "../../Components/Layouts/AdminNavbar";
+import { Link } from "react-router-dom";
 
 function AdminVendorList() {
   const [VendorData, setVendorData] = useState([]);
@@ -55,7 +56,7 @@ function AdminVendorList() {
               <div className="overflow-hidden">
                 {VendorData.length > 0 ? (
                   <table className="min-w-full text-left text-sm font-light border-2 border-black">
-                    <thead className="border-b font-medium dark:border-neutral-500">
+                    <thead className="border-b font-medium dark:border-neutral-500 bg-[#dadada]">
                       <tr>
                         <th scope="col" className="px-6 py-4 font-bold">
                           #
@@ -69,6 +70,7 @@ function AdminVendorList() {
                         <th scope="col" className="px-6 py-4 font-bold">
                           Number
                         </th>
+                        <th scope="col" className="px-6 py-4 font-bold"></th>
                         <th scope="col" className="px-6 py-4 font-bold"></th>
                       </tr>
                     </thead>
@@ -90,22 +92,25 @@ function AdminVendorList() {
                           <td className="whitespace-nowrap px-6 py-4 font-medium">
                             {value.number}
                           </td>
-                          <td>
+                          <td className="">
                             {value.is_verified === true ? (
                               <button
-                                className="mt-4 bg-green-700 text-white h-7 w-20 rounded-box"
+                                className="font-medium bg-green-700 text-white w-24 text-center h-7 flex justify-center items-center rounded-sm "
                                 onClick={() => handleblock(value._id)}
                               >
                                 Block
                               </button>
                             ) : (
                               <button
-                                className="mt-4 bg-red-700 text-white h-7 w-20 rounded-box"
+                                className="font-medium bg-red-700 text-white w-24 text-center h-7 flex justify-center items-center rounded-sm"
                                 onClick={() => handleUnblock(value._id)}
                               >
                                 Unblock
                               </button>
                             )}
+                          </td>
+                          <td className="font-medium bg-[#22092C] text-white w-24 text-center h-7 flex justify-center rounded-sm mt-4">
+                            <button><Link to="/vendor/studio">View Studio</Link></button>
                           </td>
                         </tr>
                       ))}

@@ -5,6 +5,7 @@ import VendorProfilePage from '../Pages/VendorPages/VendorProfilePage'
 import VendorStudioPage from '../Pages/VendorPages/VendorStudioPage'
 import VendorPublic from '../Components/PublicRouter/VendorPublic'
 import VendorProtector from '../Components/protectorRoute/VendorProtector'
+import VendorCreateStudio from '../Pages/VendorPages/VendorCreateStudio'
 
 
 function VendorRouter() {
@@ -15,6 +16,7 @@ function VendorRouter() {
         <Route path='/signup' element={<VendorPublic><VendorAuthPage/></VendorPublic>} />
         <Route path='/profile' element={<VendorProtector><VendorProfilePage/></VendorProtector>}/>
         <Route path='/studio' element={<VendorProtector><VendorStudioPage/></VendorProtector>}/>
+        <Route path='/createStudio' element={<VendorProtector><VendorCreateStudio/></VendorProtector>}/>
       </Routes>
     </div>
   )

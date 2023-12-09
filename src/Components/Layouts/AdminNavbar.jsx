@@ -1,4 +1,5 @@
 import React from "react";
+import "../../index.css"
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -12,19 +13,20 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutDetails } from "../../Redux/VendorSlice";
+import { toast } from "react-toastify";
 
 function AdminNavbar() {
   const navigate = useNavigate();
     const dispatch = useDispatch()
     const location = useLocation();
     const admin = useSelector(state => state.User.admin)
-    console.log(admin,"aaa");
     const handleLogout = () => {
       console.log("Logging out...");
       localStorage.removeItem('token');
       dispatch(
             logoutDetails()
             );
+      toast("You have successfully logged out!")
       console.log("Dispatched logout action.");
       navigate('/admin/login');
     };
@@ -43,39 +45,46 @@ function AdminNavbar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className={
-          location.pathname === "/admin/category"
-            ? "p-1 font-normal underline"
-            : "p-1 font-normal"}
+        
       >
-        <Link to={"/categorylist"} className="flex items-center">
-          Category
+        <Link to={"/admin/categorylist"} className="flex items-center">
+        <h3 className={
+          location.pathname === "/admin/categorylist"
+            ? "p-1 text-xl font-semibold navlist"
+            : "p-1 font-normal"
+        }>
+            Category
+          </h3>
         </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        className={
-          location.pathname === "/admin/userlist"
-            ? "p-1 font-normal underline"
-            : "p-1 font-normal"
-        }
+        
       >
         <Link to={"/admin/userlist"} className="flex items-center">
+        <h3 className={
+          location.pathname === "/admin/userlist"
+            ? "p-1 text-xl font-semibold navlist "
+            : "p-1 font-normal"
+        }>
           Users
+        </h3>
         </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className={
-          location.pathname === "/admin/vendorlist"
-            ? "p-1 font-normal underline"
-            : "p-1 font-normal"}
       >
         <Link to={"/admin/vendorlist"} className="flex items-center">
+        <h3 className={
+          location.pathname === "/admin/vendorlist"
+            ? "p-1 text-xl font-semibold navlist "
+            : "p-1 font-normal"
+        }>
           Vendors
+        </h3>
         </Link>
       </Typography>
 

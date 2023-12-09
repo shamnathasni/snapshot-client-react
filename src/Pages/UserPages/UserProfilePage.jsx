@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserImage, userDetails, userLogout } from "../../Redux/UserSlice";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../Components/Upload/UploadWidget";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(userLogout());
+    toast("You have successfully logged out!")
     navigate("/");
   };
 

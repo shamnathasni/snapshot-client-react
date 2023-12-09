@@ -33,6 +33,7 @@ function UserLoginForm() {
         dispatch(
           userDetails(newUser)
         )
+        toast(response.data.alert)
         navigate("/")
       } else {
         toast(response.data.alert)
@@ -63,15 +64,15 @@ function UserLoginForm() {
         type='submit'
         className='h-8 w-full rounded-[4px] text-white bg-[#22092C] font-semibold shadow-md text-center mt-2 border border-slate-300'
         >
-            Register
+            Sign In
         </button>
       </form>
       <div className='flex-col justify-center items-center text-center py-2'>
               <div>
-                <Link to="/signup" className='text-[#F05941] px-2'>Don't have an account?</Link><Link className='text-[#F05941]'>Forget Password</Link>
+                <Link to="/signup" className='text-[#872341] px-2'>Don't have an account?</Link><Link className='text-[#872341]'>Forget Password</Link>
               </div>
               <div>
-                <p>Login as a <Link to="/vendor/login" className='text-[#F05941] font-semibold'>vendor</Link></p>
+                <p>Login as a <Link to="/vendor/login" className='text-[#872341] text-xl font-bold'>vendor</Link></p>
               </div>
             </div> 
     </div>

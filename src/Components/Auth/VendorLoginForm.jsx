@@ -30,6 +30,7 @@ function VendorLoginForm() {
             dispatch(
               vendorDetails(newVendor)
             )
+            toast(response.data.alert)
             navigate("/vendor/studio")
           } else {
             toast(response.data.alert)
@@ -60,12 +61,12 @@ function VendorLoginForm() {
             type='submit'
             className='h-8 w-full rounded-[4px] text-white bg-[#22092C] font-semibold shadow-md text-center mt-2 border border-slate-300'
             >
-                Register
+                Sign In
             </button>
           </form>
           <div className='flex-col justify-center items-center text-center py-2'>
                   <div>
-                    <Link to="/vendor/signup" className='text-[#F05941] px-2'>Don't have an account?</Link><Link className='text-[#F05941]'>Forget Password</Link>
+                    <Link to="/vendor/signup" className='text-[#872341] px-2'>Don't have an account?</Link><Link className='text-[#872341]'>Forget Password</Link>
                   </div>
                 </div> 
         </div>

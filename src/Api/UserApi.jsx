@@ -3,10 +3,29 @@ import axiosInstance from "../Api/Axios"
 export const userSignup = async (signupData) => {
     try {
         const data = await axiosInstance.post("/signup",signupData)
+        console.log(data);
         return data
     } catch (error) {
-      console.log(error);  
-    }
+      console.log(error.message);  
+     }
+}
+
+export const verifyOtp = async(otp, userData)=>{
+  try {
+    const data =await axiosInstance.post("/verifyOtp",{otp, userData})
+    return data
+  } catch (error) {
+    console.log(error.message); 
+  }
+}
+
+export const resendOTP = async(userData)=>{
+  try {
+    const data = await axiosInstance.post("/resendOtp",{userData})
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 export const userLogin = async (loginData) => {
@@ -14,15 +33,12 @@ export const userLogin = async (loginData) => {
     const data = await axiosInstance.post("/login",loginData)
     return data 
   } catch (error) {
-    console.log(error);  
+    console.log(error.message);  
   }
 }
-export const userImage = async (id,images) =>{
+export const userImage = async (image) =>{
   try {
-    const data = new FormData()
-    data.append('image',images)
-    data.append('userId',id)
-    const response = await axiosInstance.post('/profileImage',data)
+    const response = await axiosInstance.post('/profileImage',{image})
     return response;
   } catch (error) {
     console.log(error.message);

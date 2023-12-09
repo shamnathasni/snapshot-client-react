@@ -30,6 +30,7 @@ function AdminLoginForm() {
         dispatch(
           loginDetails(newAdmin)
         )
+        toast(response.data.alert)
         navigate("/admin/dashboard")
       } else {
         toast(response.data.alert)
@@ -60,11 +61,11 @@ function AdminLoginForm() {
         type='submit'
         className='h-8 w-full rounded-[4px] text-white bg-[#872341] font-semibold shadow-md text-center mt-2 border border-slate-300'
         >
-            Register
+            Sign In
         </button>
       </form> 
       <div className='py-4'>
-      <Link className='text-[#F05941]'>Forget Password</Link>
+      <Link className='text-[#872341]'>Forget Password</Link>
       </div>     
     </div>
   )

@@ -42,7 +42,8 @@ function VendorSignupForm() {
           dispatch(
             vendorDetails(newVendor)
           )
-            navigate("/vendor/login")
+          toast(response.data.alert)
+          navigate("/vendor/login")
         } else {
           toast(response.data.alert)
         }
@@ -96,7 +97,8 @@ function VendorSignupForm() {
           </button>
         </form>
         <div className='flex-row justify-center text-center pt-3'>    
-            <Link to="/vendor/login"><p className='text-red-800' >already have an account</p></Link>
+            <p className='text-[#872341]' >already have an account</p>
+            <Link to="/vendor/login"><p className='text-[#872341] font-bold' >SignIn</p></Link>
         </div>
       </div>
       )
