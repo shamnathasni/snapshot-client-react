@@ -44,3 +44,12 @@ export const userImage = async (image) =>{
     console.log(error.message);
   }
 }
+
+export const categoryList = async () => {
+  try {
+    const data = await axiosInstance.get("/categorylist")
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}

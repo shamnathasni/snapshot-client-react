@@ -69,6 +69,7 @@ function VendorLoginForm() {
                     <Link to="/vendor/signup" className='text-[#872341] px-2'>Don't have an account?</Link><Link className='text-[#872341]'>Forget Password</Link>
                   </div>
                 </div> 
+                <Link to={"/"}><h1>back to home page</h1></Link>
         </div>
       );
     }

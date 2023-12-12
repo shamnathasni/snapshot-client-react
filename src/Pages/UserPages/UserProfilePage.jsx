@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserImage, userDetails, userLogout } from "../../Redux/UserSlice";
+import {
+  updateUserImage,
+  userDetails,
+  userLogout,
+} from "../../Redux/UserSlice";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../Components/Upload/UploadWidget";
 import { toast } from "react-toastify";
-
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -17,7 +20,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(userLogout());
-    toast("You have successfully logged out!")
+    toast("You have successfully logged out!");
     navigate("/");
   };
 
@@ -36,7 +39,11 @@ const UserProfile = () => {
                 <div className="relative">
                   <label htmlFor="fileInput" className="cursor-pointer w-4/5">
                     <img
-                      src={image ? image : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"}
+                      src={
+                        image
+                          ? image
+                          : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
+                      }
                       alt="card-image"
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     />

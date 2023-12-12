@@ -1,27 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    vendor:null
-}
+  vendor: null,
+};
 
 const vendorSlice = createSlice({
-    name: "vendor",
-    initialState,
-    reducers: {
-      vendorDetails: (state, action) => {
-        state.vendor = action.payload;
-      },
-      logoutDetails: (state) => {
-        state.vendor = null;
-      },
-      updateVendorImage: (state, action) => {
-        // Update the user's image in the state
-        if (state.vendor) {
-          state.vendor.image = action.payload;
-        }
-      },
+  name: "vendor",
+  initialState,
+  reducers: {
+    vendorDetails: (state, action) => {
+      state.vendor = action.payload;
     },
-  });
-  
-  export default vendorSlice.reducer;
-  export const { vendorDetails, logoutDetails, updateVendorImage } = vendorSlice.actions;
+    logoutDetails: (state) => {
+      state.vendor = null;
+    },
+    updateVendorImage: (state, action) => {
+      // Update the user's image in the state
+      if (state.vendor) {
+        state.vendor.image = action.payload;
+      }
+    },
+  },
+});
+
+export default vendorSlice.reducer;
+export const { vendorDetails, logoutDetails, updateVendorImage } =
+  vendorSlice.actions;

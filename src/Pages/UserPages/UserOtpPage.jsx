@@ -1,50 +1,48 @@
-import React, { useState } from 'react';
-import { resendOTP, verifyOtp } from '../../Api/UserApi';
-import { useLocation } from 'react-router-dom';
-import {  useNavigate } from "react-router-dom"
-import { useDispatch } from 'react-redux'
-import { userDetails } from '../../Redux/UserSlice'
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { resendOTP, verifyOtp } from "../../Api/UserApi";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userDetails } from "../../Redux/UserSlice";
+import { toast } from "react-toastify";
 
 const EmailVerification = () => {
-  const [otp, setOtp] = useState('');
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const userData = location.state.userData
+  const [otp, setOtp] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userData = location.state.userData;
   const handleOtp = async (e) => {
     e.preventDefault();
     try {
       // Assuming verifyOtp takes the OTP as an argument
-      const response = await verifyOtp(otp,userData);
+      const response = await verifyOtp(otp, userData);
       if (response.data.status) {
-        localStorage.setItem("token",response.data.token)
-      const {newUser} = response.data
-      dispatch(
-        userDetails(newUser)
-      )
-      toast(response.data.alert)
-      navigate("/")
-    } else {
-        toast(response.data.alert)
-      }  
+        localStorage.setItem("token", response.data.token);
+        const { newUser } = response.data;
+        dispatch(userDetails(newUser));
+        toast(response.data.alert);
+        navigate("/");
+      } else {
+        toast(response.data.alert);
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const resendOtp = async()=>{
+  const resendOtp = async () => {
     try {
-      const response = await resendOTP(userData)
+      const response = await resendOTP(userData);
       if (response.data.status) {
-        toast(response.data.alert)
-      }else{
-        toast(response.data.alert)
+        toast(response.data.alert);
+      } else {
+        toast(response.data.alert);
       }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
@@ -86,7 +84,7 @@ const EmailVerification = () => {
                   </div>
 
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                    <p>Didn't receive code?</p>{' '}
+                    <p>Didn't receive code?</p>{" "}
                     <span
                       className="flex flex-row items-center text-blue-600 link-hover"
                       onClick={resendOtp}
@@ -105,4 +103,3 @@ const EmailVerification = () => {
 };
 
 export default EmailVerification;
-

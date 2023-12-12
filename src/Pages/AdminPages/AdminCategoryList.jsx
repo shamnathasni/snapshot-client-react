@@ -10,7 +10,11 @@ import {
   CardHeader,
   CardBody,
 } from "@material-tailwind/react";
-import { adminCategorylist, listCategory, unlistCategory } from "../../Api/AdminApi";
+import {
+  adminCategorylist,
+  listCategory,
+  unlistCategory,
+} from "../../Api/AdminApi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -48,7 +52,9 @@ function AdminCategoryList() {
         // Update the state using the functional form of setCategory
         setCategory((prevCategory) =>
           prevCategory.map((categoryItem) =>
-            categoryItem._id === id ? { ...categoryItem, is_Verified: false } : categoryItem
+            categoryItem._id === id
+              ? { ...categoryItem, is_Verified: false }
+              : categoryItem
           )
         );
         toast(response.data.alert);
@@ -57,17 +63,19 @@ function AdminCategoryList() {
       console.log(error.message);
     }
   };
-  
+
   const handleList = async (id) => {
     try {
       console.log("hi");
       const response = await listCategory(id);
-      console.log(response, 're');
+      console.log(response, "re");
       if (response.data) {
         // Update the state using the functional form of setCategory
         setCategory((prevCategory) =>
           prevCategory.map((categoryItem) =>
-            categoryItem._id === id ? { ...categoryItem, is_Verified: true } : categoryItem
+            categoryItem._id === id
+              ? { ...categoryItem, is_Verified: true }
+              : categoryItem
           )
         );
         toast(response.data.alert);
@@ -76,7 +84,7 @@ function AdminCategoryList() {
       console.log(error.message);
     }
   };
-  
+
   return (
     <>
       <AdminNavbar />

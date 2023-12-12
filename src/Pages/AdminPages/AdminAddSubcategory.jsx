@@ -6,7 +6,7 @@ import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { addsubCategory } from "../../Api/AdminApi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import UploadWidget from "../../Components/Upload/UploadWidget";
+
 
 function AdminAddSubcategory() {
   const [subName, setSubName] = useState("");
