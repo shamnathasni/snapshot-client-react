@@ -43,7 +43,7 @@ function VendorSignupForm() {
             vendorDetails(newVendor)
           )
           toast(response.data.alert)
-          navigate("/vendor/login")
+          navigate("/vendor/studio")
         } else {
           toast(response.data.alert)
         }

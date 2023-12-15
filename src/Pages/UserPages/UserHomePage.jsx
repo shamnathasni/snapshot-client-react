@@ -66,14 +66,15 @@ function UserHomePage() {
         <h6 className="text-[#872341] font-serif  text-[30px]">
           Plan your {value.name} 
         </h6>
-        {value.subcategory.map((e)=>
         <div className=" flex flex-row overflow-x-auto no-scrollbar py-8">
+        {value.subcategory.map((e)=>
           <CategoryCard
             category={e.name}
             imageurl={`${e.image}`}
+            
           />
-        </div>
           )}
+        </div>
         <hr className="mt-28 bg-slate-400 will-change-auto h-[2px] shadow-lg "></hr>
       </div>
 )}

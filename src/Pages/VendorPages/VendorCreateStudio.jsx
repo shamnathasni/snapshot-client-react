@@ -18,7 +18,7 @@ function VendorCreateStudio() {
             studio/studio venders
           </p>
           <h1 className="font-extrabold font-serif text-center px-4  text-5xl md:text-7gitxl  text-[#872341]">
-            create studio
+            Create Studio
           </h1>
         </div>
         <div className="w-full md:block hidden"></div>

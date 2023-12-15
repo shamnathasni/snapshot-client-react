@@ -14,8 +14,8 @@ function StudioForm() {
   const [subcategory, setSubcategory] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [subcategoryName, setSubcategoryName] = useState("");
-  console.log(subcategoryName,"subcategoryName");
-console.log(categoryName,"categoryName");
+  console.log(subcategoryName, "subcategoryName");
+  console.log(categoryName, "categoryName");
   const navigate = useNavigate();
   const vendorId = useSelector((state) => state.Vendor.vendor._id);
   console.log(vendorId, "vendorId");
@@ -23,6 +23,8 @@ console.log(categoryName,"categoryName");
     studioName: z.string().min(2, { message: "Studio name is too short" }),
     city: z.string().min(2, { message: "City name is too short" }),
     about: z.string().min(10, { message: "About text is too short" }),
+    category: z.array(z.string(),{message:"select category"}),
+    subcategory: z.array(z.string(),{message:"select subcategory"})
   });
 
   const {
@@ -51,14 +53,16 @@ console.log(categoryName,"categoryName");
     formData.append("subcategory", subcategoryName);
     formData.append("coverImage", coverImageFile);
     formData.append("galleryImage", galleryImageFile);
+    formData.append("vendorId", vendorId);
 
-    console.log(vendorId, "vendorId");
-    const response = await StudioFormApi(formData, vendorId);
+    const response = await StudioFormApi(formData);
     if (response.data.status) {
       toast(response.data.alert);
       navigate("/vendor/studio");
+      console.log("Form submitted!", data);
+    } else {
+      toast(response.data.alert);
     }
-    console.log("Form submitted!", data);
   };
 
   const cloudinary = useRef();
@@ -90,19 +94,20 @@ console.log(categoryName,"categoryName");
     });
   }, []);
 
-   const categoryHandler = async(e)=>{
-      const selectedName = e.target.value
-      setCategoryName(selectedName)
-      const selectedCategory = category.find((category)=> category.name === selectedName)
-      setSubcategory(selectedCategory.subcategory)
-      console.log(selectedCategory,"selectedCategory");
-      
-   }
+  const categoryHandler = async (e) => {
+    const selectedName = e.target.value;
+    setCategoryName(selectedName);
+    const selectedCategory = category.find(
+      (category) => category.name === selectedName
+    );
+    setSubcategory(selectedCategory.subcategory);
+    console.log(selectedCategory, "selectedCategory");
+  };
 
-   const subcategoryHandler = async(e)=>{
-    const selectedSubName = e.target.value
-    setSubcategoryName(selectedSubName)
-   }
+  const subcategoryHandler = async (e) => {
+    const selectedSubName = e.target.value;
+    setSubcategoryName(selectedSubName);
+  };
 
   return (
     <form
@@ -174,8 +179,11 @@ console.log(categoryName,"categoryName");
           id="category"
           {...register("category")}
           placeholder="select category"
-          onChange={(e)=>{categoryHandler(e)}}
+          onChange={(e) => {
+            categoryHandler(e);
+          }}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          multiple
         >
           <option>Select a category</option>
           {category.map((value, index) => (
@@ -185,27 +193,30 @@ console.log(categoryName,"categoryName");
           ))}
         </select>
         <div className="mb-5">
-        <label
-          htmlFor="base-input-1"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Sub Category
-        </label>
-        <select
-          type="select"
-          id="subcategory"
-          {...register("subcategory")}
-          placeholder="select category"
-          onChange={(e)=>{subcategoryHandler(e)}}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          <option>Select a subcategory</option>
-          {subcategory.map((value, index) => (
-            <option key={index} value={value.name}>
-              {value.name}
-            </option>
-          ))}
-        </select>
+          <label
+            htmlFor="base-input-1"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Sub Category
+          </label>
+          <select
+            type="select"
+            id="subcategory"
+            {...register("subcategory")}
+            placeholder="select category"
+            onChange={(e) => {
+              subcategoryHandler(e);
+            }}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            multiple
+          >
+            <option>Select a subcategory</option>
+            {subcategory.map((value, index) => (
+              <option key={index} value={value.name}>
+                {value.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className="mb-5 flex flex-row">

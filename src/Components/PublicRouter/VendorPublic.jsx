@@ -7,7 +7,7 @@ function VendorPublic(props) {
         if(token){
           return <Navigate to="/"/>
         }else{
-          <Navigate to="/Login"/>
+          <Navigate to="/vendor/Login"/>
           return props.children
         }
       } catch (error) {

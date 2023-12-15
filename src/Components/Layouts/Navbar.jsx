@@ -31,10 +31,11 @@ export function StickyNavbar() {
         variant="small"
         color="blue-gray"
         className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center font-semibold text-[#872341]">
+      ><Link to={"/userStudio" }>
+        <div className="flex items-center font-semibold text-[#872341]">
           Studios
-        </a>
+        </div>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -158,7 +159,7 @@ export function StickyNavbar() {
         <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="gradient" size="sm" className="">
+            <Button fullWidth variant="gradient" size="sm" clStickyNavbarassName="">
             {token?(            
                 <span className="text-[#872341]" onClick={handleLogout}>Log out</span>                
             ):(

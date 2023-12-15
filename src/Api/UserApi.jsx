@@ -53,3 +53,23 @@ export const categoryList = async () => {
     console.log(error.message);
   }
 }
+
+export const studioList = async () => {
+  try {
+    const data = await axiosInstance.get("/studiolist")
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export const singleStudio = async (studioId) => {
+  try {
+    console.log(studioId,"api");                               
+    const data  = await axiosInstance.get(`/singleStudio?id=${studioId}`)
+    console.log(data,"data");
+    return data
+  } catch (error) {
+    console.log(error.message); 
+  }
+}

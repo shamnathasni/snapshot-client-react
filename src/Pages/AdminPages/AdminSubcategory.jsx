@@ -50,7 +50,7 @@ function AdminSubcategory() {
     <>
       <AdminNavbar />
       <div className=" container mx-auto flex items-center justify-center py-5">
-        {subCategory.length > 0 ? (
+        {subCategory && subCategory.length > 0 ? (
           <Card className="h-full w-full bg-slate-50">
             <CardHeader floated={false} shadow={false} className="rounded-none">
               <div className="mb-8 flex items-center justify-between bg-slate-50 gap-8">
