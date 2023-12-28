@@ -66,3 +66,22 @@ export const vendorCategory = async()=>{
     console.log(error.message); 
   }
 }
+
+export const packageList = async () => {
+  try {
+    const data = await axiosInstance.get("/vendor/packageList");
+    console.log(data, "data");
+    return data  // Add this line
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+export const AddPackage = async (localState) => {
+  try {
+    const data = await axiosInstance.post("/vendor/addPackage", localState);
+    console.log(data, "datappp");
+    return data  // Add this line
+  } catch (error) {
+    console.error(error.message);
+  }
+};

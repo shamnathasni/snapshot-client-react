@@ -67,7 +67,18 @@ export const singleStudio = async (studioId) => {
   try {
     console.log(studioId,"api");                               
     const data  = await axiosInstance.get(`/singleStudio?id=${studioId}`)
-    console.log(data,"data");
+    console.log(data,"data1");
+    return data
+  } catch (error) {
+    console.log(error.message); 
+  }
+}
+
+export const bookingData = async (bookingType,selectedDate,id) => {
+  try {
+    const data = await axiosInstance.post("/bookingData",{...bookingType,date:selectedDate,Id:id})
+    console.log(bookingType,"bookingType");
+    console.log(data,"data1");
     return data
   } catch (error) {
     console.log(error.message); 

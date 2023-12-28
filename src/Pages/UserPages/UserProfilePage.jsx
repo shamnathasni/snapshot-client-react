@@ -45,14 +45,16 @@ const UserProfile = () => {
                           : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                       }
                       alt="card-image"
-                      className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      className=" rounded-full 
+                      shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]
+                      h-36 w-36  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     />
                   </label>
                 </div>
               </div>
-              <div className="w-full px-4 text-center mt-20">
+              <div className="w-full px-4 text-center mt-24">
                 {/* Include UploadWidget and pass the callback function */}
-                <UploadWidget onImageUpload={handleImageUpload} />
+                <UploadWidget isImage={image?true:false} onImageUpload={handleImageUpload} />
               </div>
             </div>
             <div className="w-full px-4 text-center mt-20">

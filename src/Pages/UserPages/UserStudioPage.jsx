@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 
 function UserStudioPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [studio, setStudio] = useState([]);
   useEffect(() => {
     studioList()
@@ -19,9 +19,9 @@ function UserStudioPage() {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleViewStudio = (Id) =>{
-    navigate("/viewstudio",{state:{id:Id}})
-  }
+  const handleViewStudio = (Id) => {
+    navigate("/viewstudio", { state: { id: Id } });
+  };
 
   return (
     <div className="h-[90vh] w-full md:w-full">
@@ -66,19 +66,30 @@ function UserStudioPage() {
                   </div>
                   <div className="font-medium">{value.city}</div>
                 </span>
-                <p className="text-center text-red-800 font-medium">
-                  no packages available
-                </p>
-              </div>
-              
-                {console.log(value._id,"_id")}
-                <div className="text-center font-serif text-[#22092C]">
-                  <Button
-                   className="text-[872341]"
-                   onClick={() => handleViewStudio(value._id)}
-                  > view studio</Button>
+                <div>
+                  {value.package && value.package.length > 0 ? (
+                    <p className="text-center text-green-900 font-medium">
+                      packages are available
+                    </p>
+                  ) : (
+                    <p className="text-center text-red-800 font-medium">
+                      no packages available
+                    </p>
+                  )}
                 </div>
-              
+              </div>
+
+              {console.log(value._id, "_id")}
+              <div className="text-center font-serif text-[#22092C]">
+                <Button
+                  className="text-[872341]"
+                  onClick={() => handleViewStudio(value._id)}
+                >
+                  {" "}
+                  view studio
+                </Button>
+              </div>
+
               {console.log(value._id, "value._id")}
             </div>
           </div>

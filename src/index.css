@@ -49,7 +49,7 @@
   1px 30px 60px rgba(16,16,16,0.4);
 }
 
-.modal {
+/* .modal {
   display: none;
 }
 
@@ -74,4 +74,15 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.package-card-container {
+  position: relative;
+
+}
+
+.modal-box {
+  position: absolute;
+  
+  z-index: 1000;
 }

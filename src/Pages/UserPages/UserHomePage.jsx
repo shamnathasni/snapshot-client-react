@@ -39,6 +39,7 @@ function UserHomePage() {
       </div>
       {/* body */}
       <div className="bg-slate-100 w-full h-full flex flex-col px-10">
+        
         <h2 className="text-[40px] font-bold px-3 text-[#872341]">
           Explore{" "}
           <span className="font-MyFont font-normal text-[#22092C] ">

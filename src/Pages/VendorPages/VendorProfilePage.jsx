@@ -79,6 +79,7 @@ const VendorProfilePage = () => {
                 </div>
               </div>
             </div>
+            
             <div className="text-center mt-12">
               <h3 className="text-xl font-semibold leading-normal  text-blueGray-700 mb-2">
                 {name}

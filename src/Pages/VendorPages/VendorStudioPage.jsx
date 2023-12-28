@@ -4,14 +4,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { studioList } from "../../Api/VendorApi";
+import { AddPackage, packageList, studioList } from "../../Api/VendorApi";
 import { useSelector } from "react-redux";
 import AddPackageModal from "../../Components/Modals/AddPackageModal"; // Adjust the path accordingly
+import { toast } from "react-toastify";
+import PackageCard from "../../Components/vendor/packageCard";
 
 function VendorStudioPage() {
   const [studio, setStudio] = useState([]);
+  const [packageState, setPackageState] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const vendorsId = useSelector((state) => state.Vendor.vendor._id);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await studioList(vendorsId);
+        console.log(response, "response.data");
+
+        if (response) {
+          const studioData = response.data.studio;
+          console.log(studioData, "studioData");
+          setStudio(studioData);
+        } else {
+          console.error("No data in response");
+        }
+      } catch (error) {
+        console.error("Error fetching studio data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // const navigate = useNavigate();
 
   // Function to open the modal
   const openModal = () => {
@@ -23,30 +49,34 @@ function VendorStudioPage() {
     setIsModalOpen(false);
   };
 
-  // Function to handle adding a package
-  const handleAddPackage = (packageDetails) => {
-    // Add logic to handle adding the package details
-    console.log("Adding package:", packageDetails);
+  useEffect(() => {
+    packageList()
+      .then((response) => {
+        setPackageState(response.data.packageData);
+      })
+      .catch((err) => console.log(err));
+  },[]);
+
+  const handleAddPackage = async (localState) => {
+    try {
+      console.log(localState, "pppstate");
+      const response = await AddPackage({
+        localState,
+      });
+
+      // Close the modal
+
+      // Display toast message
+      toast(response.data.alert);
+    } catch (error) {
+      console.error("Error adding package:", error);
+    }
   };
 
-  useEffect (() => {
-    const fetchData = async () => {
-      try {
-        const response = await studioList(vendorsId);
-        console.log(response, " response.data");
-        const studioData = response.data.studio;
-        console.log(response.data.studio, "studioData");
-        setStudio(studioData);
-      } catch (error) {
-        console.error("Error fetching studio data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   return (
-    <>
+    <div className="bg-slate-100 h-[90vh]  md:w-full  no-scrollbar">
       <VendorNavbar />
+
       <div
         className="h-[90vh] w-full grid justify-center items-center grid-cols-2"
         style={{
@@ -87,30 +117,51 @@ function VendorStudioPage() {
             </div>
             {/* ... other elements you want to display */}
           </div>
-          <div className="py-10 flex-col">
+          <div className="py-10 w-full">
             <h2 className="font-sans text-xl font-bold ">About</h2>
             <hr></hr>
-            <div className="py-3 font-medium">{studio.about}</div>
+            <p className="w-full py-3 font-medium">{studio.about}</p>
           </div>
           <div className="py-10 flex-col">
             <div className="flex justify-between">
               <h2 className="font-sans text-xl font-bold ">Packages</h2>
               <button
                 onClick={openModal}
-                className="bg-[#872341] text-white w-[50px] text-center rounded-sm mb-2"
+                className="bg-[#872341] text-white w-[60px] text-center rounded-[9px] mb-3 p-2"
               >
                 Add+
               </button>
               {/* ... */}
               {/* Render the AddPackageModal component */}
+
               <AddPackageModal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-                onAddPackage={handleAddPackage}
+                onAddPackage={(localState) => {
+                  handleAddPackage(localState);
+                }}
               />
             </div>
             <hr></hr>
-            <div className="py-3 font-medium">no packages available</div>
+            <div className="grid grid-cols-2 md:grid-cols-6 ">
+              {packageState && packageState.length > 0 ? (
+                // <div>{studio.package.video}</div>
+                packageState.map((value, index) => (
+                  <div key={index}>
+                    <PackageCard
+                      subcategory={value.subcategory}
+                      camera={value.camera}
+                      Video={value.video}
+                      Both={value.both}
+                      imageurl={"/Cards/haldi.jpg"}
+                      id={value._id}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="py-3 font-medium">no packages available</div>
+              )}
+            </div>
           </div>
           <div className="py-10 flex-col">
             <h2 className="font-sans text-xl font-bold ">Gallery</h2>
@@ -138,7 +189,7 @@ function VendorStudioPage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

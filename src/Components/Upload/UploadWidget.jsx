@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {userImage} from "../../Api/UserApi"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudUpload } from '@fortawesome/free-solid-svg-icons';
 
 function UploadWidget({ onImageUpload, isImage }) {
   const cloudinary = useRef();
@@ -31,8 +33,9 @@ function UploadWidget({ onImageUpload, isImage }) {
   }, [onImageUpload]);
 
   return (
-    <div>
-      <button onClick={() => widget.current.open()}>{isImage ? "Edit image" : "Upload image"}</button>
+    <div className='flex justify-center items-center gap-2'>
+      <button className='font-semibold' onClick={() => widget.current.open()}>{isImage ? "Edit Image" : "Upload Image"}</button>
+      <FontAwesomeIcon icon={faCloudUpload}/>
     </div>
   );
 }
