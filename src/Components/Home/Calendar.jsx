@@ -11,7 +11,7 @@ const Calendar = ({ selected, onSelect }) => {
   ref.current = selected;
 
   return (
-    <Popover placement="bottom">
+    <Popover  placement="bottom-start">
       <PopoverHandler>
         <Input
           label="Select a Date"

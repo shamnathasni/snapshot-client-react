@@ -9,6 +9,8 @@ import EmailVerification from '../Pages/UserPages/UserOtpPage'
 import UserStudioPage from '../Pages/UserPages/UserStudioPage'
 import UserViewStudioPage from '../Pages/UserPages/UserViewStudioPage'
 import UserBookingPage from '../Pages/UserPages/UserBookingPage'
+import Success from '../Pages/UserPages/success'
+import Cancel from '../Pages/UserPages/cancel'
 
 
 
@@ -25,6 +27,8 @@ function UserRouter() {
         <Route path="/userStudio" element={<UserProtector><UserStudioPage/></UserProtector>}/>
         <Route path="/viewstudio" element={<UserProtector><UserViewStudioPage/></UserProtector>}/>
         <Route path="/booking" element={<UserProtector><UserBookingPage/></UserProtector>}/>
+        <Route path="/success" element={<UserProtector><Success/></UserProtector>}/>
+        <Route path="/cancel" element={<UserProtector><Cancel/></UserProtector>}/>
       </Routes>
     </div>
   )

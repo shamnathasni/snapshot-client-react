@@ -152,14 +152,14 @@ console.log(selectedDate,"selectedDate");
                 </form>
                 <div className="modal-action">
                   <button 
-                  className="btn text-green-800  font-bold"
+                  className="btn btn-success text-white  font-bold"
                   onClick={handleBooking}
                   >
                     Book
                   </button>
                   <label
                     htmlFor="my_modal_6"
-                    className="btn text-red-900  font-bold"
+                    className="btn bg-red-700 text-white font-bold"
                   >
                     Close!
                   </label>
