@@ -11,7 +11,11 @@ import UserViewStudioPage from '../Pages/UserPages/UserViewStudioPage'
 import UserBookingPage from '../Pages/UserPages/UserBookingPage'
 import Success from '../Pages/UserPages/success'
 import Cancel from '../Pages/UserPages/cancel'
+import BookingDetailsPage from '../Pages/UserPages/bookingDetailsPage'
+import UserChatPage from '../Pages/UserPages/UserChatPage'
+// import {io} from 'socket.io-client';
 
+// const socket = io('http://localhost:4000');
 
 
 function UserRouter() {
@@ -29,6 +33,9 @@ function UserRouter() {
         <Route path="/booking" element={<UserProtector><UserBookingPage/></UserProtector>}/>
         <Route path="/success" element={<UserProtector><Success/></UserProtector>}/>
         <Route path="/cancel" element={<UserProtector><Cancel/></UserProtector>}/>
+        <Route path="/bookingDetails/:userId" element={<UserProtector><BookingDetailsPage/></UserProtector>}/>
+        <Route path="/chat/:vendorId" element={<UserProtector><UserChatPage /></UserProtector>}/>
+        {/* <Route path="/chat" element={<UserProtector><UserChatPage socket={socket} /></UserProtector>}/> */}
       </Routes>
     </div>
   )

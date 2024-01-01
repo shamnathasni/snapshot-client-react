@@ -5,9 +5,11 @@ import {
   userDetails,
   userLogout,
 } from "../../Redux/UserSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UploadWidget from "../../Components/Upload/UploadWidget";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckToSlot } from "@fortawesome/free-solid-svg-icons";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -15,8 +17,8 @@ const UserProfile = () => {
   const user = useSelector((state) => state.User.user);
 
   // Destructure the properties after defining 'user'
-  const { name, number, email, image } = user;
-
+  const { name, number, email, image , _id } = user;
+console.log(_id,"user");
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(userLogout());
@@ -89,14 +91,16 @@ const UserProfile = () => {
                 <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
                 {number}
               </div>
-              <div className="mb-2 text-blueGray-600 mt-10">
-                <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                Solution Manager - Creative Tim Officer
+              <div className="mb-2 mt-10 font-bold">
+                <i className=" mr-2 text-lg  text-blueGray-400"></i>
+                <Link to={`/bookingDetails/${_id}`}>
+                <FontAwesomeIcon  icon={faCheckToSlot} /> Bookings
+                </Link>
               </div>
-              <div className="mb-2 text-blueGray-600">
+              {/* <div className="mb-2 text-blueGray-600">
                 <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
                 University of Computer Science
-              </div>
+              </div> */}
             </div>
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
