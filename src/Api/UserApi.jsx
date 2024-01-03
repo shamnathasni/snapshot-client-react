@@ -138,3 +138,12 @@ export const BookingDetails = async (userId) => {
     console.log(error.message);
   }
 }
+
+export const chatDetails = async (bookingId) => {
+  try {
+    const data = await axiosInstance.get(`/chatdetails?id=${bookingId}`)
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}

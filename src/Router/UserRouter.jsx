@@ -34,7 +34,7 @@ function UserRouter() {
         <Route path="/success" element={<UserProtector><Success/></UserProtector>}/>
         <Route path="/cancel" element={<UserProtector><Cancel/></UserProtector>}/>
         <Route path="/bookingDetails/:userId" element={<UserProtector><BookingDetailsPage/></UserProtector>}/>
-        <Route path="/chat/:vendorId" element={<UserProtector><UserChatPage /></UserProtector>}/>
+        <Route path="/chat/:vendorId/:bookingId" element={<UserProtector><UserChatPage /></UserProtector>}/>
         {/* <Route path="/chat" element={<UserProtector><UserChatPage socket={socket} /></UserProtector>}/> */}
       </Routes>
     </div>

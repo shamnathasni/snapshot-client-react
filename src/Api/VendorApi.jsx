@@ -50,8 +50,9 @@ export const StudioFormApi = async (formData)=>{
 
 export const studioList = async(vendorsId)=>{
   try {
+    console.log(vendorsId,"vendorsId");
     const data = await axiosInstance.get(`/vendor/studio?id=${vendorsId}`)
-    console.log(data,"data");
+    console.log(data,"data75675");
     return data
   } catch (error) {
     console.log(error.message); 
@@ -76,6 +77,7 @@ export const packageList = async () => {
     console.error(error.message);
   }
 };
+
 export const AddPackage = async (localState) => {
   try {
     const data = await axiosInstance.post("/vendor/addPackage", localState);
@@ -85,3 +87,24 @@ export const AddPackage = async (localState) => {
     console.error(error.message);
   }
 };
+
+export const bookingDetails = async (id) => {
+  try {
+    console.log(id,"_id");
+    const data = await axiosInstance.get(`/vendor/bookingdetails?Id=${id}`);
+    console.log(data, "datappp")
+    return data  // Add this line
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const VendorChat = async (bookingId)=>{
+  try {
+    const data = await axiosInstance.get(`/vendor/vendorchat?Id=${bookingId}`);
+    console.log(data, "datappp")
+    return data
+  } catch (error) {
+    
+  }
+}

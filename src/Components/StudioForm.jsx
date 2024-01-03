@@ -27,7 +27,7 @@ function StudioForm() {
   } = useForm({ resolver: zodResolver(schema) });
 
   const [coverImageFile, setCoverImageFile] = useState("");
-  const [galleryImageFile, setGalleryImageFile] = useState("");
+  const [galleryImageFile, setGalleryImageFile] = useState([]);
 
   const handleImage = (file, type) => {
     if (type === "cover") {
@@ -50,7 +50,7 @@ function StudioForm() {
     if (response.data.status) {
       toast(response.data.alert);
       navigate("/vendor/studio");
-      console.log("Form submitted!", data);
+      console.log("Form submitted!", formData);
     }else{
       toast(response.data.alert);
     }
@@ -135,6 +135,9 @@ function StudioForm() {
         {errors.about && <span className="text-red">errors.about.message</span>}
       </div>
       <div className="mb-5 flex flex-row">
+        {/* <div>
+          <button onClick={() => widget.current.open()}>upload</button>
+        </div> */}
         <label
           htmlFor="cover-image-input"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -143,7 +146,7 @@ function StudioForm() {
         </label>
         <div className="flex items-center">
           <input
-            type="file"
+           type="file"
             id="cover-image-input"
             {...register("coverImage")}
             onChange={() => widget.current.open()}

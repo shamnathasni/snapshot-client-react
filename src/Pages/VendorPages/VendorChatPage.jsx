@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
-import { chatDetails } from "../../Api/UserApi";
+import { VendorChat } from "../../Api/VendorApi";
+// ... (imports)
 
-function UserChatPage() {
-  const { vendorId, bookingId } = useParams();
+function VendorChatPage() {
+  const { bookingId } = useParams();
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [socket, setSocket] = useState(null);
@@ -14,14 +15,14 @@ function UserChatPage() {
     const newSocket = io("http://localhost:4000");
     setSocket(newSocket);
 
-    if (bookingId && vendorId) {
-      newSocket.emit("join-chat", { bookingId, vendorId });
+    if (bookingId) {
+      newSocket.emit("join-chat", { bookingId });
     }
 
     newSocket.on("messageResponse", (data) => {
       setChatMessages((prevMessages) => [
         ...prevMessages,
-        { from: "user", message: data.message, chatId: bookingId },
+        { from: "vendor", message: data.message, chatId: bookingId },
       ]);
     });
 
@@ -30,21 +31,28 @@ function UserChatPage() {
         newSocket.disconnect();
       }
     };
-  }, [bookingId, vendorId]);
+  }, [bookingId]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   const sendMessage = () => {
     if (socket) {
-      socket.emit("sendMessage", { from: "user", message, chatId: bookingId });
+      socket.emit("sendMessage", {
+        from: "vendor",
+        message,
+        chatId: bookingId,
+      });
       setMessage("");
     }
   };
 
   useEffect(() => {
-    chatDetails(bookingId)
+    VendorChat(bookingId)
       .then((res) => {
-        const chatData = res.data.chatData;
-        console.log(res, "chatData");
-        setChatMessages(chatData.chat);
+        const chatData = res.data.chat.chat;
+        setChatMessages(chatData);
         scrollToBottom();
       })
       .catch((err) => console.log(err.message));
@@ -54,24 +62,20 @@ function UserChatPage() {
     scrollToBottom();
   }, [chatMessages]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div className="flex flex-col h-screen  items-center p-6 py-5">
-      <h2>Chatting with Vendor ID: {vendorId}</h2>
-      <div className="w-full h-5/6  bg-slate-50 my-2 p-4 overflow-auto">
+    <div className="flex flex-col h-screen items-center p-6 py-5">
+      <h2>Chatting with User ID: {bookingId}</h2>
+      <div className="w-full h-5/6 bg-slate-50 my-2 p-4 overflow-auto">
         {chatMessages.map((msg, index) => (
           <div
             key={index}
             className={`flex ${
-              msg.from === "user" ? "justify-end" : "justify-start"
+              msg.from === "vendor" ? "justify-end" : "justify-start"
             }`}
           >
             <div
               className={`bg-white text-xl m-3 p-4 rounded-md ${
-                msg.from === "user" ? "from-vendor" : "from-user"
+                msg.from === "vendor" ? "from-user" : "from-vendor"
               }`}
             >
               {msg.message}
@@ -99,4 +103,4 @@ function UserChatPage() {
   );
 }
 
-export default UserChatPage;
+export default VendorChatPage;

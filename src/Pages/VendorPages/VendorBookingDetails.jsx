@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
-import { BookingDetails } from "../../Api/UserApi";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 
-function BookingDetailsPage() {
-  const { userId } = useParams();
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+import { bookingDetails } from "../../Api/VendorApi";
+
+function VendorBookingDetails() {
+  const { id } = useParams();
+  console.log(id);
   const [bookingData, setBookingData] = useState("");
-  const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState([]);
-  const [socket, setSocket] = useState(null);
+ 
   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await BookingDetails(userId);
+        const response = await bookingDetails(id);
         if (response.data.status) {
-          const details = response.data.bookingdetails;
+          const details = response.data.bookings;
+          console.log(details,"details");
           setBookingData(details);
         }
       } catch (error) {
@@ -27,7 +28,7 @@ function BookingDetailsPage() {
     };
 
     fetchData();
-  }, [userId]);
+  }, [id]);
 
  
   return (
@@ -57,15 +58,7 @@ function BookingDetailsPage() {
                       Type
                     </Typography>
                   </th>
-                  <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 ">
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className=" text-base  font-serif leading-noneopacity-95 text-black font-bold  uppercase"
-                    >
-                      Studio
-                    </Typography>
-                  </th>
+
                   <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
                       variant="small"
@@ -94,7 +87,7 @@ function BookingDetailsPage() {
                 </tr>
               </thead>
               <tbody>
-                {bookingData.booking.map((value) => (
+                {bookingData.map((value) => (
                   <tr key={value._id}>
                     <td className="">
                       <Typography
@@ -114,16 +107,8 @@ function BookingDetailsPage() {
                         {value.type}
                       </Typography>
                     </td>
-                    <td className=" ">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {value.studio.studioName}
-                      </Typography>
-                    </td>
-                    <td className=" bg-blue-gray-50/50">
+                  
+                    <td className="">
                       <Typography
                         variant="small"
                         color="blue-gray"
@@ -133,7 +118,7 @@ function BookingDetailsPage() {
                         {value.date}
                       </Typography>
                     </td>
-                    <td className=" ">
+                    <td className="bg-blue-gray-50/50 ">
                       <Typography
                         variant="small"
                         color="blue-gray"
@@ -142,18 +127,18 @@ function BookingDetailsPage() {
                         {value.amount}
                       </Typography>
                     </td>
-                    <td className=" bg-blue-gray-50/50 py-2">
+                    <td className=" ">
                       <Typography
                         as="a"
                         href="#"
                         variant="small"
                         color="blue-gray"
-                        className=" btn btn-success text-center text-white py-3 font-medium"
+                        className=" btn btn-success text-center m-2 text-white py-3 font-medium"
                        
                         >
-                            {console.log(value.studio.vendorId,"value.studio.vendorId")}
+                        {console.log(value._id,"user999")}
                         {/* <FontAwesomeIcon icon={ChatBubbleBottomCenterTextIcon}/> */}
-                       <Link to={`/chat/${value.studio.vendorId}/${value._id}`} >Message Studio</Link>
+                       <Link to={`/vendor/chat/${value._id}`} >Message User</Link>
                       </Typography>
                     </td>
                   </tr>
@@ -169,4 +154,4 @@ function BookingDetailsPage() {
   );
 }
 
-export default BookingDetailsPage;
+export default VendorBookingDetails;

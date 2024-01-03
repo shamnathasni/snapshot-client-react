@@ -15,6 +15,7 @@ function VendorStudioPage() {
   const [packageState, setPackageState] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const vendorsId = useSelector((state) => state.Vendor.vendor._id);
+  console.log(vendorsId,"vendorsId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,9 +25,10 @@ function VendorStudioPage() {
 
         if (response) {
           const studioData = response.data.studio;
-          console.log(studioData, "studioData");
+      
           setStudio(studioData);
         } else {
+          console.log(error.message);
           console.error("No data in response");
         }
       } catch (error) {
@@ -53,6 +55,7 @@ function VendorStudioPage() {
     packageList()
       .then((response) => {
         setPackageState(response.data.packageData);
+        // setPackageState(response.data.packageData);
       })
       .catch((err) => console.log(err));
   },[]);
@@ -94,8 +97,8 @@ function VendorStudioPage() {
           </h1>
         </div>
       </div>
-
-      {studio && studio.vendorId === vendorsId ? (
+        
+      {studio && studio.length>0 && studio.vendorId === vendorsId ? (
         <div className="py-20 px-10">
           <div className="grid grid-cols-1 md:grid-cols-4">
             <div>
