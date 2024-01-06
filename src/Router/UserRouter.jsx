@@ -13,6 +13,7 @@ import Success from '../Pages/UserPages/success'
 import Cancel from '../Pages/UserPages/cancel'
 import BookingDetailsPage from '../Pages/UserPages/bookingDetailsPage'
 import UserChatPage from '../Pages/UserPages/UserChatPage'
+import CategoryStudioPage from '../Pages/UserPages/CategoryStudioPage'
 // import {io} from 'socket.io-client';
 
 // const socket = io('http://localhost:4000');
@@ -29,6 +30,7 @@ function UserRouter() {
         <Route path="/getOtp" element={<EmailVerification/>}/>
         <Route path="/profile" element={<UserProtector><UserProfile/></UserProtector>}/>
         <Route path="/userStudio" element={<UserProtector><UserStudioPage/></UserProtector>}/>
+        <Route path="/categoryStudio/:subCategory" element={<UserProtector><CategoryStudioPage/></UserProtector>}/>
         <Route path="/viewstudio" element={<UserProtector><UserViewStudioPage/></UserProtector>}/>
         <Route path="/booking" element={<UserProtector><UserBookingPage/></UserProtector>}/>
         <Route path="/success" element={<UserProtector><Success/></UserProtector>}/>

@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { confirmPayment } from "../../Api/UserApi";
+import { confirmPayment, submitRating } from "../../Api/UserApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { configureBooking } from "../../Api/AdminApi";
 
 function Success() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const packageId = queryParams.get("packageId");
 
-  console.log(packageId, "packageId");
+  const [rating, setRating] = useState(0);
+
+  const handleRatingClick = (selectedRating) => {
+    setRating(selectedRating);
+  };
+
+  const handleRatingSubmit = () => {
+    submitRating(packageId, rating);
+    // You may want to handle the response from the API or add additional logic here
+  };
+
   const response = confirmPayment(packageId);
+  const AdminResponse = configureBooking(packageId)
+
+  const stars = Array.from({ length: 5 }, (_, index) => (
+    <FontAwesomeIcon
+      key={index}
+      icon={faStar}
+      color={index + 1 <= rating ? "gold" : "gray"}
+      onClick={() => handleRatingClick(index + 1)}
+      style={{ cursor: "pointer", marginRight: "5px" }}
+    />
+  ));
+
   return (
     <div className="bg-gray-100 h-screen">
       <div className="bg-white p-6  md:mx-auto">
@@ -28,8 +53,18 @@ function Success() {
           <p className="text-gray-600 my-2">
             Thank you for completing your secure online payment.
           </p>
-          <p> Have a great day! </p>
-          <div className="py-10 text-center">
+          <p>Have a great day!</p>
+          <div className="py-4">
+            <p className="text-gray-600 my-2">Rate the studio:</p>
+            <div>{stars}</div>
+            <button
+              onClick={handleRatingSubmit}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold mt-2"
+            >
+              Submit Rating
+            </button>
+          </div>
+          <div className="py-6 text-center">
             <Link
               to={"/"}
               className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"

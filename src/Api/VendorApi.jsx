@@ -32,6 +32,7 @@ export const VendorImage = async (id,images) =>{
   }
 
 export const StudioFormApi = async (formData)=>{
+  console.log(formData.get("galleryImage"),"formData");
     try {
       
         const config = {
@@ -44,7 +45,7 @@ export const StudioFormApi = async (formData)=>{
        console.log(data,"data");
        return data
     } catch (error) {
-      console.log(error.message); 
+      console.log(error, "err"); 
     }
 }
 

@@ -63,6 +63,16 @@ export const studioList = async () => {
   }
 };
 
+export const categoryStudioList = async(subCategory) => {
+  try {
+    console.log(subCategory,"subCategory");
+    const data = await axiosInstance.get(`/categoryStudioList?subCategory=${subCategory}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export const singleStudio = async (studioId) => {
   try {
     console.log(studioId, "api");
@@ -77,7 +87,7 @@ export const singleStudio = async (studioId) => {
 export const studioPackages = async (studioIds) => {
   try {
     const data = await axiosInstance.get(`/studioPackages?id=${studioIds}`);
-    console.log(data, "data2");
+  
     return data;
   } catch (error) {
     console.log(error.message);
@@ -142,6 +152,26 @@ export const BookingDetails = async (userId) => {
 export const chatDetails = async (bookingId) => {
   try {
     const data = await axiosInstance.get(`/chatdetails?id=${bookingId}`)
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+
+export const searchStudio = async (searchQuery) => {
+  try {
+    const data = await axiosInstance.get(`/search?data=${searchQuery}`)
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export const submitRating = async (packageId, rating) => {
+  try {
+    console.log(rating,"rating");
+    const data = await axiosInstance.post("/rating",{packageId, rating})
     return data
   } catch (error) {
     console.log(error.message);

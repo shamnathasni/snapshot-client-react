@@ -10,10 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function StudioForm() {
-
   const navigate = useNavigate();
   const vendorId = useSelector((state) => state.Vendor.vendor._id);
-  console.log(vendorId, "vendorId");
   const schema = z.object({
     studioName: z.string().min(2, { message: "Studio name is too short" }),
     city: z.string().min(2, { message: "City name is too short" }),
@@ -27,15 +25,7 @@ function StudioForm() {
   } = useForm({ resolver: zodResolver(schema) });
 
   const [coverImageFile, setCoverImageFile] = useState("");
-  const [galleryImageFile, setGalleryImageFile] = useState([]);
-
-  const handleImage = (file, type) => {
-    if (type === "cover") {
-      setCoverImageFile(file);
-    } else if (type === "gallery") {
-      setGalleryImageFile(file);
-    }
-  };
+  const [galleryImageFiles, setGalleryImageFiles] = useState([]);
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -43,7 +33,12 @@ function StudioForm() {
     formData.append("city", data.city);
     formData.append("about", data.about);
     formData.append("coverImage", coverImageFile);
-    formData.append("galleryImage", galleryImageFile);
+    
+    // Append gallery images to FormData
+    galleryImageFiles.forEach((file, index) => {
+      formData.append(`galleryImage[${index}]`, file);
+    });
+    
     formData.append("vendorId", vendorId);
 
     const response = await StudioFormApi(formData);
@@ -51,7 +46,7 @@ function StudioForm() {
       toast(response.data.alert);
       navigate("/vendor/studio");
       console.log("Form submitted!", formData);
-    }else{
+    } else {
       toast(response.data.alert);
     }
   };
@@ -68,14 +63,32 @@ function StudioForm() {
       },
       function (error, result) {
         if (!error && result && result.event === "success") {
-          handleImage(result.info.secure_url, "cover");
+          setCoverImageFile(result.info.secure_url);
           console.log(result.info.secure_url, "result.info.files");
-          handleImage(result.info.secure_url, "gallery");
         }
       }
     );
   }, []);
 
+  const cloudinary1 = useRef();
+  const widget1 = useRef();
+
+  useEffect(() => {
+    cloudinary1.current = window.cloudinary;
+    widget1.current = cloudinary1.current.createUploadWidget(
+      {
+        cloudName: "ddaksct8s",
+        uploadPreset: "ro65vieu",
+        multiple:true
+      },
+      function (error, result) {
+        if (!error && result && result.event === "success") {
+          setGalleryImageFiles((prevFiles) => [...prevFiles, result.info.secure_url]);
+          console.log(result.info.secure_url, "result.info.files");
+        }
+      }
+    );
+  }, []);
   
   return (
     <form
@@ -148,7 +161,7 @@ function StudioForm() {
           <input
            type="file"
             id="cover-image-input"
-            {...register("coverImage")}
+           
             onChange={() => widget.current.open()}
             className="hidden"
           />
@@ -156,9 +169,7 @@ function StudioForm() {
             <FontAwesomeIcon icon={faFileUpload} size="1x" />
           </label>
         </div>
-        {errors.coverImage && (
-          <span className="text-red">{errors.coverImage.message}</span>
-        )}
+     
       </div>
       {/* ... other form inputs ... */}
       <div className="mb-5  flex flex-row">
@@ -172,17 +183,15 @@ function StudioForm() {
           <input
             type="file"
             id="gallery-image-input"
-            {...register("galleryImage")}
-            onChange={() => widget.current.open()}
+          multiple
+            onChange={() => widget1.current.open()}
             className="hidden"
           />
           <label htmlFor="gallery-image-upload" className="ml-2 cursor-pointer">
             <FontAwesomeIcon icon={faFileUpload} size="1x" />
           </label>
         </div>
-        {errors.galleryImage && (
-          <span className="text-red">{errors.galleryImage.message}</span>
-        )}
+        
       </div>
       <div className="flex justify-center items-center">
         <button

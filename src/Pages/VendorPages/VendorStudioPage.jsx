@@ -15,7 +15,7 @@ function VendorStudioPage() {
   const [packageState, setPackageState] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const vendorsId = useSelector((state) => state.Vendor.vendor._id);
-  console.log(vendorsId,"vendorsId");
+  console.log(vendorsId, "vendorsId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,7 @@ function VendorStudioPage() {
 
         if (response) {
           const studioData = response.data.studio;
-      
+
           setStudio(studioData);
         } else {
           console.log(error.message);
@@ -58,7 +58,7 @@ function VendorStudioPage() {
         // setPackageState(response.data.packageData);
       })
       .catch((err) => console.log(err));
-  },[]);
+  }, []);
 
   const handleAddPackage = async (localState) => {
     try {
@@ -97,8 +97,8 @@ function VendorStudioPage() {
           </h1>
         </div>
       </div>
-        
-      {studio && studio.length>0 && studio.vendorId === vendorsId ? (
+
+      {studio && studio.vendorId === vendorsId ? (
         <div className="py-20 px-10">
           <div className="grid grid-cols-1 md:grid-cols-4">
             <div>
@@ -169,12 +169,16 @@ function VendorStudioPage() {
           <div className="py-10 flex-col">
             <h2 className="font-sans text-xl font-bold ">Gallery</h2>
             <hr></hr>
-            <div className="py-3 flex flex-row">
-              <img
-                className="box-border w-1/2 md:w-1/6 "
-                src={`${studio.galleryImage}`}
-              />
+              {studio.galleryImage.map((value, index) => (
+            <div className="flex flex-col w-1/2 md:w-1/6">
+                <img
+                  key={index}
+                  className="box-border "
+                  src={`${value}`}
+                  alt={`Gallery Image ${index}`}
+                />
             </div>
+                ))}
           </div>
         </div>
       ) : (

@@ -119,9 +119,22 @@ export const addsubCategory = async ({formData, categoryId}) => {
         console.log(error.message); 
     }
   }
+
   export const listCategory = async(id)=>{
     try {
         const data = await axiosInstance.patch(`/admin/categorylist?Id=${id}`)
+        return data
+    } catch (error) {
+        console.log(error.message); 
+    }
+  }
+
+
+  export const configureBooking = async(packageId)=>{
+    try {
+        console.log(packageId,"packageId000");
+        const data = await axiosInstance.post("/configureBooking",packageId)
+        console.log(data,"dta");
         return data
     } catch (error) {
         console.log(error.message); 
