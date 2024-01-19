@@ -13,7 +13,7 @@ import UserChatPage from "../Pages/UserPages/UserChatPage";
 import CategoryStudioPage from "../Pages/UserPages/CategoryStudioPage";
 import Success from "../Pages/UserPages/Success";
 import Cancel from "../Pages/UserPages/Cancel";
-import BookingDetailsPage from "../Pages/UserPages/bookingDetailsPage";
+import BookingDetailsPage from "../Pages/UserPages/BookingDetailsPage";
 
 
 function UserRouter() {
