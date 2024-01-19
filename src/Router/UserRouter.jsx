@@ -9,11 +9,11 @@ import EmailVerification from '../Pages/UserPages/UserOtpPage'
 import UserStudioPage from '../Pages/UserPages/UserStudioPage'
 import UserViewStudioPage from '../Pages/UserPages/UserViewStudioPage'
 import UserBookingPage from '../Pages/UserPages/UserBookingPage'
-import Success from '../Pages/UserPages/success'
-import Cancel from '../Pages/UserPages/cancel'
 import BookingDetailsPage from '../Pages/UserPages/bookingDetailsPage'
 import UserChatPage from '../Pages/UserPages/UserChatPage'
 import CategoryStudioPage from '../Pages/UserPages/CategoryStudioPage'
+import Success from '../Pages/UserPages/Success'
+import Cancel from '../Pages/UserPages/Cancel'
 // import {io} from 'socket.io-client';
 
 // const socket = io('http://localhost:4000');
