@@ -140,3 +140,13 @@ export const addsubCategory = async ({formData, categoryId}) => {
         console.log(error.message); 
     }
   }
+  export const MonthlyGraph = async()=>{
+    try {
+     
+        const data = await axiosInstance.post("/admin/bookings-by-month")
+        console.log(data,"dta23");
+        return data
+    } catch (error) {
+        console.log(error.message); 
+    }
+  }

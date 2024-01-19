@@ -145,6 +145,7 @@ function BookingCard(props) {
                         studioId={studioId}
                         selected={selectedDate}
                         onSelect={handleDateSelect}
+                        subcategory={subcategory}
                       />
                     </div>
                   </div>

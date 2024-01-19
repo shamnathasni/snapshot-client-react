@@ -47,6 +47,22 @@ function AdminNavbar() {
         color="blue-gray"
         
       >
+        <Link to={"/admin/dashboard"} className="flex items-center">
+        <h3 className={
+          location.pathname === "/admin/dashboard"
+            ? "p-1 text-xl font-semibold navlist"
+            : "p-1 font-normal"
+        }>
+            Dashboard
+          </h3>
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        
+      >
         <Link to={"/admin/categorylist"} className="flex items-center">
         <h3 className={
           location.pathname === "/admin/categorylist"

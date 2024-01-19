@@ -2,70 +2,71 @@ import React, { useEffect, useState } from "react";
 import { vendorCategory } from "../../Api/VendorApi";
 
 const AddPackageModal = ({ isOpen, onClose, onAddPackage }) => {
-    const [localState, setLocalState] = useState({
-        camera: "",
-        video: "",
-        both: "",
-        categoryName: "",
-        subCategoryName: "",
-      });
-    
-      const [category, setCategory] = useState([]);
-      const [subcategory, setSubcategory] = useState([]);
-    
-      const { camera, video, both, categoryName, subCategoryName } = localState;
-    
-      const handleAddPackage = async () => {
-        try {
-          // Pass the local state to the onAddPackage function
-          onAddPackage(localState);
-          onClose();
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setLocalState((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-      };
-    
-      useEffect(() => {
-        vendorCategory().then((response) => {
-          const vendorCategory = response.data.vendorCategory;
-          setCategory(vendorCategory);
-        });
-      }, []);
-    
-      const categoryHandler = (e) => {
-        const selectedName = e.target.value;
-        setLocalState((prevState) => ({
-          ...prevState,
-          categoryName: selectedName,
-        }));
-        const selectedCategory = category.find(
-          (category) => category.name === selectedName
-        );
-        setSubcategory(selectedCategory.subcategory);
-      };
-    
-      const subcategoryHandler = (e) => {
-        const selectedSubName = e.target.value;
-        setLocalState((prevState) => ({
-          ...prevState,
-          subCategoryName: selectedSubName,
-        }));
-      }
+  const [localState, setLocalState] = useState({
+    camera: "",
+    video: "",
+    both: "",
+    categoryName: "",
+    subCategoryName: "",
+  });
+
+  const [category, setCategory] = useState([]);
+  const [subcategory, setSubcategory] = useState([]);
+
+  const { camera, video, both, categoryName, subCategoryName } = localState;
+
+  const handleAddPackage = async () => {
+    try {
+      // Pass the local state to the onAddPackage function
+      onAddPackage(localState);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLocalState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    vendorCategory().then((response) => {
+      const vendorCategory = response.data.vendorCategory;
+      setCategory(vendorCategory);
+    });
+  }, []);
+
+  const categoryHandler = (e) => {
+    const selectedName = e.target.value;
+    setLocalState((prevState) => ({
+      ...prevState,
+      categoryName: selectedName,
+    }));
+    const selectedCategory = category.find(
+      (category) => category.name === selectedName
+    );
+    setSubcategory(selectedCategory.subcategory);
+  };
+
+  const subcategoryHandler = (e) => {
+    const selectedSubName = e.target.value;
+    setLocalState((prevState) => ({
+      ...prevState,
+      subCategoryName: selectedSubName,
+    }));
+  };
 
   return (
     <div
-      className={`${isOpen ? "block" : "hidden"} fixed inset-0 overflow-y-auto`}
+      className={`${isOpen ? "block" : "hidden"} fixed inset-0 overflow-y-auto z-40`}
+     
     >
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0" >
+        <div className="fixed inset-0 transition-opacity" aria-hidden="true" >
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span
@@ -74,12 +75,7 @@ const AddPackageModal = ({ isOpen, onClose, onAddPackage }) => {
         >
           &#8203;
         </span>
-        <div
-          className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
-        >
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start">
               {/* Content goes here */}

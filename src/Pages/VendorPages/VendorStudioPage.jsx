@@ -66,15 +66,25 @@ function VendorStudioPage() {
       const response = await AddPackage({
         localState,
       });
-
-      // Close the modal
-
+  
       // Display toast message
       toast(response.data.alert);
+  
+      // Wait for the state to be updated, then fetch the updated package list
+      await 
+      setPackageState((prevPackages) => [...prevPackages, response.data.packageData]);
+  
+      // Fetch the updated package list
+      const updatedPackages = await packageList();
+  
+      // Update the packageState with the fetched list
+      setPackageState(updatedPackages.data.packageData);
     } catch (error) {
       console.error("Error adding package:", error);
     }
   };
+  
+  
 
   return (
     <div className="bg-slate-100 h-[90vh]  md:w-full  no-scrollbar">
@@ -146,18 +156,18 @@ function VendorStudioPage() {
               />
             </div>
             <hr></hr>
-            <div className="grid grid-cols-2 md:grid-cols-6 ">
+            <div className="grid grid-cols-1 md:grid-cols-4 ">
               {packageState && packageState.length > 0 ? (
                 // <div>{studio.package.video}</div>
                 packageState.map((value, index) => (
-                  <div key={index}>
+                  <div className="py-6" key={index}>
                     <PackageCard
-                      subcategory={value.subcategory}
-                      camera={value.camera}
-                      Video={value.video}
-                      Both={value.both}
+                      subcategory={value?.subcategory  }
+                      camera={value?.camera}
+                      Video={value?.video}
+                      Both={value?.both}
                       imageurl={"/Cards/haldi.jpg"}
-                      id={value._id}
+                      id={value?._id}
                     />
                   </div>
                 ))

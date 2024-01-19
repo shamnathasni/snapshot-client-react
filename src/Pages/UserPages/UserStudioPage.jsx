@@ -3,7 +3,7 @@ import { StickyNavbar } from "../../Components/Layouts/Navbar";
 import Footer from "../../Components/Layouts/Footer";
 import { searchStudio, studioList } from "../../Api/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot,faStar } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 
@@ -39,6 +39,15 @@ function UserStudioPage() {
     navigate("/viewstudio", { state: { id: Id } });
   };
 
+  const calculateAverageRating = (ratings) => {
+    if (!ratings || ratings.length === 0) {
+      return 0;
+    }
+
+    const sumOfRatings = ratings.reduce((acc, num) => acc + num, 0);
+    return sumOfRatings / ratings.length;
+  };
+
   return (
     <div className="h-[90vh] w-full md:w-full">
       <StickyNavbar />
@@ -54,7 +63,7 @@ function UserStudioPage() {
             search for the available packages
           </p>
           <h1 className="font-extrabold font-serif text-center px-4  text-5xl md:text-7gitxl  text-[#872341]">
-             Studios
+            Studios
           </h1>
         </div>
         <div className="w-[50vw] p-3">
@@ -131,13 +140,21 @@ function UserStudioPage() {
                     </div>
                     <div className="font-medium">{value.city}</div>
                   </span>
-                  <div className=" flex flex-row justify-center items-center">
-                  {value.rating === 0?(
-                    <h1 className="text-black font-semibold">No Stars</h1>
-                  ):(
-                    Array.from({length:Math.floor(value.rating)},(_,index)=>(
-                      <span className="" key={index}><FontAwesomeIcon icon={faStar} color="gold"/></span>
-                    ))
+                  <div className="flex flex-row justify-center items-center">
+                    {value.rating === 0 ? (
+                      <h1 className="text-black font-semibold">No Stars</h1>
+                    ) : (
+                      Array.from(
+                        {
+                          length: 5,
+                        },
+                        (_, index) => (
+                          <span  className=""
+                          key={index}>
+                            <FontAwesomeIcon icon={faStar} color={indexgit < Math.floor(calculateAverageRating(value.rating)) ? "gold" : "gray"} />
+                          </span>
+                        )
+                      )
                     )}
                   </div>
                   <div>

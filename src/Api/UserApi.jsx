@@ -110,20 +110,20 @@ export const bookingData = async (bookingType, selectedDate, id, studioId) => {
   }
 };
 
-export const isBookedDate = async (formattedDate) => {
+export const isBookedDate = async (formattedDate,studioId,subcategory) => {
   try {
-    console.log(formattedDate,"f");
-    const data = await axiosInstance.get(`/isBookedDate?date=${formattedDate}`)
+    console.log(formattedDate,studioId,subcategory,"f");
+    const data = await axiosInstance.post("/isBookedDate",{formattedDate,studioId,subcategory})
     return data
   } catch (error) {
     console.log(error.message);
   }
 }
 
-export const bookedDates = async (studioId) => {
+export const bookedDates = async (studioId,subcategory) => {
   try {
     console.log(studioId,"studioId");
-    const data = await axiosInstance.get(`/bookedates?id=${studioId}`)
+    const data = await axiosInstance.post("/bookedates",{studioId,subcategory})
     return data
   } catch (error) {
     console.log(error.message);
