@@ -26,7 +26,7 @@ function AdminLoginForm() {
       if (response.data.status) {
         localStorage.setItem("token",response.data.token)
         const{ newAdmin } = response.data
-        console.log(newAdmin,"nnn");
+       
         dispatch(
           loginDetails(newAdmin)
         )

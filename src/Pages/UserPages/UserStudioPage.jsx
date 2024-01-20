@@ -151,7 +151,7 @@ function UserStudioPage() {
                         (_, index) => (
                           <span  className=""
                           key={index}>
-                            <FontAwesomeIcon icon={faStar} color={indexgit < Math.floor(calculateAverageRating(value.rating)) ? "gold" : "gray"} />
+                            <FontAwesomeIcon icon={faStar} color={index < Math.floor(calculateAverageRating(value.rating)) ? "gold" : "gray"} />
                           </span>
                         )
                       )
@@ -170,7 +170,7 @@ function UserStudioPage() {
                   </div>
                 </div>
 
-                {console.log(value._id, "_id")}
+               
                 <div className="text-center font-serif text-[#22092C]">
                   <Button
                     className="text-[872341]"
