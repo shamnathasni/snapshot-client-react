@@ -179,16 +179,19 @@ function VendorStudioPage() {
           <div className="py-10 flex-col">
             <h2 className="font-sans text-xl font-bold ">Gallery</h2>
             <hr></hr>
+            <div className="flex flex-row gap-2">
+
               {studio.galleryImage.map((value, index) => (
-            <div className="flex flex-col w-1/2 md:w-1/6">
+                <div className="flex flex-row w-1/2 md:w-1/6">
                 <img
                   key={index}
                   className="box-border "
                   src={`${value}`}
                   alt={`Gallery Image ${index}`}
-                />
+                  />
             </div>
                 ))}
+                </div>
           </div>
         </div>
       ) : (

@@ -10,6 +10,7 @@ import VendorBookingDetails from '../Pages/VendorPages/VendorBookingDetails'
 import VendorChatPage from '../Pages/VendorPages/VendorChatPage'
 
 
+
 function VendorRouter() {
   return (
     <div>
@@ -24,6 +25,6 @@ function VendorRouter() {
       </Routes>
     </div>
   )
-}
+} 
 
 export default VendorRouter

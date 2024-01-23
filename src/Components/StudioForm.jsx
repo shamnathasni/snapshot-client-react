@@ -40,9 +40,9 @@ function StudioForm() {
     });
     
     formData.append("vendorId", vendorId);
-
+console.log("formData", formData);
     const response = await StudioFormApi(formData);
-    if (response.data.status) {
+    if (response) {
       toast(response.data.alert);
       navigate("/vendor/studio");
       console.log("Form submitted!", formData);

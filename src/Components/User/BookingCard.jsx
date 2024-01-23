@@ -33,11 +33,10 @@ function BookingCard(props) {
     try {
       const response = await bookingData(bookingType, selectedDate, id,studioId);
       if (response) {
-        const bookingData = response.data.bookingData;
-        toast(response.data.alert);
-        navigate("/booking", { state: { data: bookingData } });
+      toast(response.data.alert)
+      navigate("/")
       }
-      console.log(bookingType, selectedDate, "dataaaa");
+ 
     } catch (error) {
       console.log(error.message);
     }
@@ -145,7 +144,6 @@ function BookingCard(props) {
                         studioId={studioId}
                         selected={selectedDate}
                         onSelect={handleDateSelect}
-                        subcategory={subcategory}
                       />
                     </div>
                   </div>

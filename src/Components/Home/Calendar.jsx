@@ -25,9 +25,6 @@ const Calendar = (props) => {
     bookedDates(studioId)
       .then((response) => {
         const dates = response.data.bookingdates;
-        // const bookedDates = ()=>{
-          //   const 
-          // }
           const dateArray = []
           for(let i  of dates){
             dateArray.push(new Date(i.date))

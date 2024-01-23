@@ -121,7 +121,7 @@ function UserViewStudioPage() {
               for booking the packages you should pay 30% of amount in advance{" "}
             </p>
             <hr></hr>
-            <div className="grid grid-cols-1 md:grid-cols-4 px-2 md:px-5">
+            <div className=" grid grid-cols-1 md:grid-cols-4 px-2 md:px-5">
               {console.log(packages, "pac")}
 
               {packages && packages.length > 0 ? (

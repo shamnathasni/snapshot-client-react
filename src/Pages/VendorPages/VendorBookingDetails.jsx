@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Card, Typography } from "@material-tailwind/react";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
-
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { bookingDetails, confirmBooking, rejectBooking } from "../../Api/VendorApi";
+import Modal from "../../Components/Modal";
+import {toSentenceCase} from "alter-case"
 
-import { bookingDetails } from "../../Api/VendorApi";
 
 function VendorBookingDetails() {
   const { id } = useParams();
-  console.log(id);
   const [bookingData, setBookingData] = useState("");
- 
-  
+  const [showModal, setShowModal] = useState(false);
+  console.log(bookingData,"bookingData");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +19,7 @@ function VendorBookingDetails() {
         const response = await bookingDetails(id);
         if (response.data.status) {
           const details = response.data.bookings;
-          console.log(details,"details");
+          console.log(details, "details");
           setBookingData(details);
         }
       } catch (error) {
@@ -30,7 +30,53 @@ function VendorBookingDetails() {
     fetchData();
   }, [id]);
 
- 
+  const confirmReject = () => {
+    setShowModal(true);
+  };
+
+  const cancelReject = () => {
+    // Cancel the logout action
+    setShowModal(false);
+  };
+
+
+  const handleConfirm = async (Id) =>{
+    try {
+      
+      const response = confirmBooking(Id)
+      if(response){
+        const newBooking = bookingData.map((value)=>
+          value._id === Id ? {...value, status: "confirm"}:value
+        )
+        setBookingData(newBooking)
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const handleReject = async (Id) =>{
+    try {
+      
+      const response = rejectBooking(Id)
+      if(response){
+        console.log(response,"res");
+        
+        const newBooking = bookingData.map((value)=> {
+
+          value._id === Id ? {...value, status : "reject"}:value
+        }
+          )
+        setBookingData(newBooking)
+       { console.log(bookingData,"ppp");}
+      }
+      setShowModal(false);
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <div>
       <StickyNavbar />
@@ -84,6 +130,7 @@ function VendorBookingDetails() {
                       className="text-base  font-serif leading-none opacity-95 text-black font-bold uppercase "
                     ></Typography>
                   </th>
+                 
                 </tr>
               </thead>
               <tbody>
@@ -96,6 +143,7 @@ function VendorBookingDetails() {
                         className="font-normal"
                       >
                         {value.package.subcategory}
+                        {console.log(toSentenceCase(value.studio.about))}
                       </Typography>
                     </td>
                     <td className=" bg-blue-gray-50/50">
@@ -107,7 +155,7 @@ function VendorBookingDetails() {
                         {value.type}
                       </Typography>
                     </td>
-                  
+
                     <td className="">
                       <Typography
                         variant="small"
@@ -133,13 +181,74 @@ function VendorBookingDetails() {
                         href="#"
                         variant="small"
                         color="blue-gray"
-                        className=" btn btn-success text-center m-2 text-white py-3 font-medium"
-                       
-                        >
-                        {console.log(value._id,"user999")}
-                        {/* <FontAwesomeIcon icon={ChatBubbleBottomCenterTextIcon}/> */}
-                       <Link to={`/vendor/chat/${value._id}`} >Message User</Link>
+                        className="font-normal"
+                      >
+                        {value.status === "pending" && (
+                          <>
+                            <button
+                              className="btn btn-success opacity-30 hover:scale-105 ease-in-out duration-300 text-center m-2 text-white  py-3 font-medium"
+                              onClick={() => handleConfirm(value._id)}
+                            >
+                              Confirm
+                            </button>
+                            <button
+                              className="btn bg-red-300 hover:scale-105 ease-in-out duration-300 text-center  m-2 text-white py-3 font-medium"
+                              onClick={confirmReject}
+                            >
+                              Reject
+                            </button>
+                            {showModal && (
+                              <Modal onClose={() => setShowModal(false)}>
+                                <div className="p-4">
+                                  <p className="mb-4 text-black">
+                                    Are you sure,do you need to reject?
+                                  </p>
+                                  <div className="flex justify-center">
+                                    <Button
+                                      variant="outlined"
+                                      size="sm"
+                                      className="ml-2 bg-[#872341] text-white"
+                                      onClick={cancelReject}
+                                    >
+                                      Cancel
+                                    </Button>
+                                    <Button
+                                      variant="outlined"
+                                      size="sm"
+                                      className="ml-2 bg-[#872341] text-white"
+                                      onClick={()=>handleReject(value._id)}
+                                    >
+                                      Confirm
+                                    </Button>
+                                  </div>
+                                </div>
+                              </Modal>
+                            )}
+                          </>
+                        )}
+                        {value.status !== "pending" && (
+                          <span className={value.status ==="reject"&&"font-sans text-red-500 p-8 font-medium text-lg"} >
+                            {value.status === "reject"&&"rejected"}  
+                          
+                          </span>
+                        )}
+                      
+                    {value.status === "confirm"&&(
+                    <td className=" ">
+                      <Typography
+                        as="a"
+                        href="#"
+                        variant="small"
+                        color="blue-gray"
+                        className=" btn hover:scale-105 ease-in-out duration-300 bg-blue-500 text-center m-2 text-white py-3 font-medium"
+                      >
+                        <Link to={`/vendor/chat/${value._id}`}>
+                          Message User
+                        </Link>
                       </Typography>
+                    </td>
+                    )}
+                    </Typography>
                     </td>
                   </tr>
                 ))}
@@ -151,6 +260,7 @@ function VendorBookingDetails() {
         </Card>
       </div>
     </div>
+    
   );
 }
 

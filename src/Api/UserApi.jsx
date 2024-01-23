@@ -94,13 +94,14 @@ export const studioPackages = async (studioIds) => {
   }
 };
 
-export const bookingData = async (bookingType, selectedDate, id, studioId) => {
+export const bookingData = async ( bookingType, selectedDate, id, studioId) => {
   try {
     const data = await axiosInstance.post("/bookingData", {
       ...bookingType,
       date: selectedDate,
       Id: id,
-      studioId:studioId
+      studioId:studioId,
+      
     });
     console.log(bookingType, "bookingType");
     console.log(data, "data1");
@@ -109,6 +110,8 @@ export const bookingData = async (bookingType, selectedDate, id, studioId) => {
     console.log(error.message);
   }
 };
+
+
 
 export const isBookedDate = async (formattedDate,studioId,subcategory) => {
   try {

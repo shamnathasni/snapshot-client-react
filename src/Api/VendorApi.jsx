@@ -32,7 +32,7 @@ export const VendorImage = async (id,images) =>{
   }
 
 export const StudioFormApi = async (formData)=>{
-  console.log(formData.get("galleryImage"),"formData");
+  console.log(formData.get("vendorId"),"formData");
     try {
       
         const config = {
@@ -88,6 +88,30 @@ export const AddPackage = async (localState) => {
     console.error(error.message);
   }
 };
+
+
+
+export const confirmBooking = async (Id) => {
+  try {
+    console.log(Id,"id");
+    const data = await axiosInstance.post(`/vendor/confirmbooking?bookingId=${Id}`)
+    console.log(data,"data");
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const rejectBooking = async (Id) => {
+  try {
+    
+    const data = await axiosInstance.post(`/vendor/rejectbooking?bookingId=${Id}`)
+    console.log(data,"data");
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 export const bookingDetails = async (id) => {
   try {

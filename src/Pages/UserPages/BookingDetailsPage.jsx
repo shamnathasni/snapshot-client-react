@@ -3,15 +3,11 @@ import { Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
 import { BookingDetails } from "../../Api/UserApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
+
 
 function BookingDetailsPage() {
   const { userId } = useParams();
   const [bookingData, setBookingData] = useState("");
-  const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState([]);
-  const [socket, setSocket] = useState(null);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +15,7 @@ function BookingDetailsPage() {
         const response = await BookingDetails(userId);
         if (response.data.status) {
           const details = response.data.bookingdetails;
+          console.log(details,"details");
           setBookingData(details);
         }
       } catch (error) {
@@ -28,7 +25,7 @@ function BookingDetailsPage() {
 
     fetchData();
   }, [userId]);
-
+console.log(bookingData.booking,"bd");
  
   return (
     <div>
@@ -83,7 +80,7 @@ function BookingDetailsPage() {
                     >
                       Amount
                     </Typography>
-                  </th>
+                  </th>               
                   <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
                       variant="small"
@@ -142,7 +139,29 @@ function BookingDetailsPage() {
                         {value.amount}
                       </Typography>
                     </td>
-                    <td className=" bg-blue-gray-50/50 py-2">
+                    <td className=" bg-blue-gray-50/50">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {value.status === "pending"&&(
+                         "pending...."
+                        )}
+                        {value.is_Verified===true&&(
+                          <button className="w-32 h-7 rounded-md bg-green-500  text-white m-2"><Link to={`/chat/${value.studio.vendorId}/${value._id}`} >Message Studio</Link></button>
+                        )}
+                        
+                        {value.status==="confirm"&&(
+                          <button className="w-32 h-7 rounded-md bg-blue-700  text-white m-2"><Link to={"/booking"} >complete booking</Link></button>
+                        )}
+                        
+                        {value.status==="reject"&&(
+                          <button className="w-32 h-7 rounded-md bg-red-700 text-white m-2"><Link to={"/userStudio"} >booking rejected</Link></button>
+                        )}
+                      </Typography>
+                    </td>
+                    {/* <td className=" py-2">
                       <Typography
                         as="a"
                         href="#"
@@ -152,10 +171,10 @@ function BookingDetailsPage() {
                        
                         >
                             {console.log(value.studio.vendorId,"value.studio.vendorId")}
-                        {/* <FontAwesomeIcon icon={ChatBubbleBottomCenterTextIcon}/> */}
+                        
                        <Link to={`/chat/${value.studio.vendorId}/${value._id}`} >Message Studio</Link>
                       </Typography>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
