@@ -7,6 +7,7 @@ import { userLogin } from "../../Api/UserApi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { userDetails } from "../../Redux/UserSlice";
+import Oauth from "../../Firebase/Oauth";
 
 function UserLoginForm() {
   const schema = z.object({
@@ -43,6 +44,8 @@ function UserLoginForm() {
     }
   };
 
+ 
+
   return (
     <div className="w-full flex  flex-col justify-center items-center py-2">
       <form
@@ -67,7 +70,7 @@ function UserLoginForm() {
         )}
         <button
           type="submit"
-          className="h-8 w-full rounded-[4px] text-white bg-[#22092C] font-semibold shadow-md text-center mt-2 border border-slate-300"
+          className="h-9 w-full rounded-[4px] text-white bg-[#22092C] font-semibold shadow-md text-center mt-2 border border-slate-300"
         >
           Sign In
         </button>
@@ -77,18 +80,20 @@ function UserLoginForm() {
           <Link to="/signup" className="text-[#872341] px-2">
             Don't have an account?
           </Link>
-          <Link className="text-[#872341]">Forget Password</Link>
         </div>
+        OR
+        {/* <div className="w-[28vw]">
+          <button onClick={google} className="h-9 w-full rounded-[4px] text-white bg-red-700 font-semibold shadow-md text-center mt-2 border border-slate-300">
+            Sign In With GOOGLE
+          </button>
+        </div> */}
+          <Oauth/>
         <div>
-          <p>
-            Login as a{" "}
-            <Link
-              to="/vendor/login"
-              className="text-[#872341] text-xl font-bold"
-            >
-              vendor
-            </Link>
-          </p>
+          <Link to="/vendor/login">
+            <button className="h-9 w-full rounded-[4px] text-white bg-blue-800 font-semibold shadow-md text-center mt-2 border border-slate-300">
+              SignIn As VENDOR
+            </button>
+          </Link>
         </div>
       </div>
     </div>

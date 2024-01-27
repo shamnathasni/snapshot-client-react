@@ -10,6 +10,8 @@ import AdminCategoryList from '../Pages/AdminPages/AdminCategoryList'
 import AdminAddCategory from '../Pages/AdminPages/AdminAddCategory'
 import AdminAddSubcategory from '../Pages/AdminPages/AdminAddSubcategory'
 import AdminSubcategory from '../Pages/AdminPages/AdminSubcategory'
+import AdminStudioList from '../Pages/AdminPages/AdminStudioList'
+import AdminBookingList from '../Pages/AdminPages/AdnminBookingList'
 
 function AdminRouter() {
   return (
@@ -19,6 +21,8 @@ function AdminRouter() {
         <Route path="/dashboard" element={<AdminProtector><AdminDashboard/></AdminProtector>}/>
         <Route path="/userlist" element={<AdminProtector><AdminUserList/></AdminProtector>}/>
         <Route path="/vendorlist" element={<AdminProtector><AdminVendorList/></AdminProtector>}/>
+        <Route path="/studiolist" element={<AdminProtector><AdminStudioList/></AdminProtector>}/>
+        <Route path="/bookinglist/:studioId" element={<AdminProtector><AdminBookingList/></AdminProtector>}/>
         <Route path="/categorylist" element={<AdminProtector><AdminCategoryList/></AdminProtector>}/>
         <Route path="/subcategorylist" element={<AdminSubcategory/>}/>
         <Route path="/addCategory" element={<AdminAddCategory/>}/>

@@ -226,28 +226,32 @@ function VendorBookingDetails() {
                             )}
                           </>
                         )}
-                        {value.status !== "pending" && (
-                          <span className={value.status ==="reject"&&"font-sans text-red-500 p-8 font-medium text-lg"} >
-                            {value.status === "reject"&&"rejected"}  
+                        {value.is_verified === false? (
+                        value.status !== "pending" && (
+                          <span className={value.status ==="reject"?"font-sans text-red-500 p-8 font-medium text-lg":"font-sans text-blue-500 p-8 font-medium text-lg"} >
+                            {value.status === "reject"&&"rejected booking"}  
+                            {value.status === "confirm"&&"incomplete payment"}  
                           
                           </span>
-                        )}
+                        )
                       
-                    {value.status === "confirm"&&(
+                        ):( 
+                    value.status === "confirm"&&value.is_verified === true&&(
                     <td className=" ">
                       <Typography
                         as="a"
                         href="#"
                         variant="small"
                         color="blue-gray"
-                        className=" btn hover:scale-105 ease-in-out duration-300 bg-blue-500 text-center m-2 text-white py-3 font-medium"
+                        className=" btn hover:scale-105 ease-in-out duration-300 bg-green-600 text-center m-2 text-white py-3 font-medium"
                       >
                         <Link to={`/vendor/chat/${value._id}`}>
                           Message User
                         </Link>
                       </Typography>
                     </td>
-                    )}
+                    )
+                        )}
                     </Typography>
                     </td>
                   </tr>

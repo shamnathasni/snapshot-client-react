@@ -36,6 +36,26 @@ export const unblockUser = async (userId)=>{
 }
 
 
+export const adminStudiolist = async()=>{
+    try {
+        const data = axiosInstance.post("/admin/studiolist");
+        return data;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const BookingDetails = async(studioId)=>{
+    try {
+        const data = axiosInstance.get(`/admin/bookinglist?studioid=${studioId}`);
+        console.log(data,"data");
+        return data;
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const adminVendorlist = async()=>{
     try {
         const data = axiosInstance.post("/admin/vendorlist");
@@ -44,6 +64,7 @@ export const adminVendorlist = async()=>{
         console.log(error.message);
     }
 }
+
 export const blockVendor = async (vendorId)=>{
     try {
         const data = axiosInstance.patch(`admin/blockvendor?id=${vendorId}`)
@@ -140,10 +161,35 @@ export const addsubCategory = async ({formData, categoryId}) => {
         console.log(error.message); 
     }
   }
+
+
   export const MonthlyGraph = async()=>{
     try {
      
         const data = await axiosInstance.post("/admin/bookings-by-month")
+        console.log(data,"dta23");
+        return data
+    } catch (error) {
+        console.log(error.message); 
+    }
+  }
+
+
+  export const VendorGraphData = async()=>{
+    try {
+     
+        const data = await axiosInstance.post("/admin/vendorgraph")
+        console.log(data,"dta23");
+        return data
+    } catch (error) {
+        console.log(error.message); 
+    }
+  }
+
+  export const userGraphData = async()=>{
+    try {
+     
+        const data = await axiosInstance.post("/admin/usergraph")
         console.log(data,"dta23");
         return data
     } catch (error) {

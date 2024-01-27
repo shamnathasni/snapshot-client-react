@@ -72,7 +72,7 @@ function UserRouter() {
           }
         />
         <Route
-          path="/booking"
+          path="/booking/:bookingId"
           element={
             <UserProtector>
               <UserBookingPage />

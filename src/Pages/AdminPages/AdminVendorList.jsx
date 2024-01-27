@@ -50,6 +50,10 @@ function AdminVendorList() {
     <>
       <AdminNavbar />
       <div>
+        <div className="flex justify-end pr-9">
+
+        <button className="bg-blue-900 rounded-md h-10 text-white p-2" ><Link to={"/admin/studiolist"}>View Studiolist</Link></button>
+        </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
             <div className="inline-block min-w-full py-6 sm:px-10 lg:px-12 m">
@@ -71,7 +75,7 @@ function AdminVendorList() {
                           Number
                         </th>
                         <th scope="col" className="px-6 py-4 font-bold"></th>
-                        <th scope="col" className="px-6 py-4 font-bold"></th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -109,9 +113,7 @@ function AdminVendorList() {
                               </button>
                             )}
                           </td>
-                          <td className="font-medium bg-[#22092C] text-white w-24 text-center h-7 flex justify-center rounded-sm mt-4">
-                            <button><Link to="/vendor/studio">View Studio</Link></button>
-                          </td>
+                          
                         </tr>
                       ))}
                     </tbody>

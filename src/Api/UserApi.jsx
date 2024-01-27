@@ -10,6 +10,22 @@ export const userSignup = async (signupData) => {
   }
 };
 
+export const googleAuth = async (authResult) => {
+  try {
+    const { uid, displayName, email, photoURL } = authResult.user;
+    const data = await axiosInstance.post("/google", {
+      uid,
+      displayName,
+      email,
+      photoURL,
+    });
+    return data;
+  } catch (error) {
+    console.error("Error during Google authentication:", error);
+    throw error;
+  }
+};
+
 export const verifyOtp = async (otp, userData) => {
   try {
     const data = await axiosInstance.post("/verifyOtp", { otp, userData });
@@ -111,7 +127,15 @@ export const bookingData = async ( bookingType, selectedDate, id, studioId) => {
   }
 };
 
-
+export const detailsForPayment = async (bookingId)=>{
+  try {
+    const data = await axiosInstance.get(`/detailsforpayment?bookingId=${bookingId}`)
+    console.log(data,"dsdsw");
+    return data
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 export const isBookedDate = async (formattedDate,studioId,subcategory) => {
   try {

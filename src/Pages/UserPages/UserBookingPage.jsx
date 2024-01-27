@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { useLocation } from "react-router-dom";
+import {  useParams } from "react-router-dom";
+import { detailsForPayment } from "../../Api/UserApi"
+
 
 function UserBookingPage() {
-  const location = useLocation();
-  const bookingData = location.state.data;
+  const { bookingId } = useParams()
+  console.log(bookingId,"bookingId");
+  const [bookingData,setBookingData] = useState("")
+  useEffect(()=>{
+    detailsForPayment(bookingId)
+    .then((response)=>{
+      const bookingDetails = response.data.booking
+      console.log(bookingDetails,"bookingDetails");
+      setBookingData(bookingDetails)
+    
+    })
+     .catch((err)=>console.log(err.message))
+  },[])
   const handlepayment = async () => {
     const stripe = await loadStripe(
       "pk_test_51OSCi8SIZzPXrKvEDrV8xUanWEKraQc40vPmXqfPlxZ2HWdoNRIjYbgUvDKNcwT5cLgfCh05dTk0kLNLFoR0SJkm00Z6CkZcq1"

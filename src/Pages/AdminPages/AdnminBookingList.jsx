@@ -2,40 +2,50 @@ import React, { useEffect, useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
 
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { BookingDetails } from "../../Api/UserApi";
+import { useParams } from "react-router-dom";
+import { BookingDetails } from "../../Api/AdminApi";
+import AdminNavbar from "../../Components/Layouts/AdminNavbar";
 
-function BookingDetailsPage() {
-  const { userId } = useParams();
-  const [bookingData, setBookingData] = useState("");
+
+function AdminBookingList() {
+  const { studioId } = useParams();
+  console.log(studioId,"studioId");
+  const [bookingData, setBookingData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await BookingDetails(userId);
-        if (response.data.status) {
-          const details = response.data.bookingdetails;
+        BookingDetails(studioId)
+        .then((response)=>{
+          const details = response.data.bookingData;
           console.log(details, "details");
           setBookingData(details);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+        })
+      .catch((err)=>console.log(err.message))
+       
+      
 
-    fetchData();
-  }, [userId]);
-  console.log(bookingData.booking, "bd");
+
+ 
+  }, [studioId]);
+  console.log(bookingData, "bd");
 
   return (
     <div>
-      <StickyNavbar />
-      <div className="p-9">
+     <AdminNavbar/>
+      <div className="p-9 bg-slate-50">
         <Card className="h-full w-full overflow-scroll flex justify-center items-center p-4 ">
-          {bookingData ? (
+          {bookingData.length>0 ? (
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
+                    <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className=" text-base font-serif leading-none opacity-95 text-black font-bold uppercase "
+                    >
+                      
+                    </Typography>  
+                    </th>
                   <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
                       variant="small"
@@ -86,13 +96,21 @@ function BookingDetailsPage() {
                       variant="small"
                       color="blue-gray"
                       className="text-base  font-serif leading-none opacity-95 text-black font-bold uppercase "
+                    >Status</Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="text-base  font-serif leading-none opacity-95 text-black font-bold uppercase "
                     ></Typography>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {bookingData.booking.map((value) => (
-                  <tr key={value._id}>
+                {bookingData.map((value,index) => (
+                  <tr key={index}>
+                    <td>{index+1}</td>
                     <td className="">
                       <Typography
                         variant="small"
@@ -142,36 +160,19 @@ function BookingDetailsPage() {
                     <td className=" bg-blue-gray-50/50">
                       <Typography
                         variant="small"
-                        color="blue-gray"
-                        className="font-normal"
+                            color={value.status === "reject"  ? "red" : "balck"}
+                        // className={value.status === "reject"  ?`font-normal text-red` :`font-normal text-black` }
                       >
-                        {value.is_verified === true && (
-                          <button className="w-32 h-7 rounded-md bg-green-500  text-white m-2">
-                            <Link
-                              to={`/chat/${value.studio.vendorId}/${value._id}`}
-                            >
-                              Message Studio
-                            </Link>
-                          </button>
-                        )}
-                        {value.is_verified === false && (
-                          <span>
-                            {value.status === "pending" && "pending...."}
-                            {value.status === "confirm" && (
-                              <button className="w-32 h-7 rounded-md bg-blue-700  text-white m-2">
-                                <Link to={`/booking/${value._id}`}>
-                                  request for payment
-                                </Link>
-                              </button>
-                            )}
-
-                            {value.status === "reject" && (
-                              <button className="w-32 h-7 rounded-md bg-red-700 text-white m-2">
-                                <Link to={"/userStudio"}>booking rejected</Link>
-                              </button>
-                            )}
-                          </span>
-                        )}
+                        {value.status}
+                      </Typography>
+                    </td>
+                    <td className="">
+                      <Typography
+                        variant="small"
+                        color={value.is_verified===false?"red":"blue-gray"}
+                        className="font-medium"
+                      >
+                        {value.is_verified===true?"booked":"not booked"}
                       </Typography>
                     </td>
                   </tr>
@@ -187,4 +188,4 @@ function BookingDetailsPage() {
   );
 }
 
-export default BookingDetailsPage;
+export default AdminBookingList;
