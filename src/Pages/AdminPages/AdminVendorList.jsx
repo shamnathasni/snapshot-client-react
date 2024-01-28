@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { adminVendorlist, blockVendor, unblockVendor } from "../../Api/AdminApi";
+import {
+  adminVendorlist,
+  blockVendor,
+  unblockVendor,
+} from "../../Api/AdminApi";
 import AdminNavbar from "../../Components/Layouts/AdminNavbar";
 import { Link } from "react-router-dom";
 
@@ -21,9 +25,8 @@ function AdminVendorList() {
       // Handle the response if needed
       if (res.data.status) {
         const newList = VendorData.map((vendor) =>
-        vendor._id === vendorId ? { ...vendor, is_verified: false } : vendor
+          vendor._id === vendorId ? { ...vendor, is_verified: false } : vendor
         );
-        console.log("blocked");
         setVendorData(newList);
       }
     } catch (error) {
@@ -36,9 +39,8 @@ function AdminVendorList() {
       // Handle the response if needed
       if (res.data.status) {
         const newList = VendorData.map((vendor) =>
-        vendor._id === vendorId ? { ...vendor, is_verified: true } : vendor
+          vendor._id === vendorId ? { ...vendor, is_verified: true } : vendor
         );
-        console.log("unblocked");
         setVendorData(newList);
       }
     } catch (error) {
@@ -51,8 +53,9 @@ function AdminVendorList() {
       <AdminNavbar />
       <div>
         <div className="flex justify-end pr-9">
-
-        <button className="bg-blue-900 rounded-md h-10 text-white p-2" ><Link to={"/admin/studiolist"}>View Studiolist</Link></button>
+          <button className="bg-blue-900 rounded-md h-10 text-white p-2">
+            <Link to={"/admin/studiolist"}>View Studiolist</Link>
+          </button>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
@@ -75,7 +78,6 @@ function AdminVendorList() {
                           Number
                         </th>
                         <th scope="col" className="px-6 py-4 font-bold"></th>
-                        
                       </tr>
                     </thead>
                     <tbody>
@@ -113,7 +115,6 @@ function AdminVendorList() {
                               </button>
                             )}
                           </td>
-                          
                         </tr>
                       ))}
                     </tbody>

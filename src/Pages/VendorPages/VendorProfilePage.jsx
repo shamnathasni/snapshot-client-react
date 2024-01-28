@@ -9,13 +9,11 @@ import { Button } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckToSlot } from "@fortawesome/free-solid-svg-icons";
 
-
 const VendorProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vendor = useSelector((state) => state.Vendor.vendor);
-  console.log(vendor, "vendor");
   const { name, email, number, image, _id } = vendor;
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -34,7 +32,6 @@ const VendorProfilePage = () => {
     // Dispatch an action to update the image in the Redux store
     dispatch(updateVendorImage(uploadedImageUrl));
   };
-
 
   return (
     <>
@@ -103,9 +100,9 @@ const VendorProfilePage = () => {
                 </div>
                 <div className="mb-2 mt-10 font-bold">
                   <i className=" mr-2 text-lg  text-blueGray-400"></i>
-                 <Link to={`/vendor/bookings/${_id}`}>
+                  <Link to={`/vendor/bookings/${_id}`}>
                     <FontAwesomeIcon icon={faCheckToSlot} /> Bookings
-                    </Link>
+                  </Link>
                 </div>
               </div>
               <div className="mt-10 py-10 border-t border-blueGray-200 text-center">

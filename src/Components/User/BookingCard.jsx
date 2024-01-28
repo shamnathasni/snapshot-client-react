@@ -6,16 +6,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function BookingCard(props) {
-  const { subcategory, camera, Video, Both, imageurl, id ,studioId} = props;
-  // State to manage the selected booking type and date
-  console.log(props, "propsbooking");
+  const { subcategory, camera, Video, Both, imageurl, id, studioId } = props;
   const [bookingType, setBookingType] = useState(); // 'camera', 'video', 'both'
   const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
   // Function to handle date selection
   const handleDateSelect = (date) => {
     setSelectedDate(date);
-    console.log(date, "date");
   };
 
   const handlechange = (e, type) => {
@@ -26,17 +23,19 @@ function BookingCard(props) {
       type: type,
     }));
   };
-  console.log(bookingType, "bookingType");
 
-  console.log(selectedDate, "selectedDate");
   const handleBooking = async () => {
     try {
-      const response = await bookingData(bookingType, selectedDate, id,studioId);
+      const response = await bookingData(
+        bookingType,
+        selectedDate,
+        id,
+        studioId
+      );
       if (response) {
-      toast(response.data.alert)
-      navigate("/")
+        toast(response.data.alert);
+        navigate("/");
       }
- 
     } catch (error) {
       console.log(error.message);
     }

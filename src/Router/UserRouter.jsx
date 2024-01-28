@@ -15,7 +15,6 @@ import Success from "../Pages/UserPages/Success";
 import Cancel from "../Pages/UserPages/Cancel";
 import BookingDetailsPage from "../Pages/UserPages/BookingDetailsPage";
 
-
 function UserRouter() {
   return (
     <div>
@@ -47,30 +46,12 @@ function UserRouter() {
             </UserProtector>
           }
         />
-        <Route
-          path="/userStudio"
-          element={
-            <UserProtector>
-              <UserStudioPage />
-            </UserProtector>
-          }
-        />
+        <Route path="/userStudio" element={<UserStudioPage />} />
         <Route
           path="/categoryStudio/:subCategory"
-          element={
-            <UserProtector>
-              <CategoryStudioPage />
-            </UserProtector>
-          }
+          element={<CategoryStudioPage />}
         />
-        <Route
-          path="/viewstudio"
-          element={
-            <UserProtector>
-              <UserViewStudioPage />
-            </UserProtector>
-          }
-        />
+        <Route path="/viewstudio" element={<UserViewStudioPage />} />
         <Route
           path="/booking/:bookingId"
           element={
@@ -111,7 +92,6 @@ function UserRouter() {
             </UserProtector>
           }
         />
-        {/* <Route path="/chat" element={<UserProtector><UserChatPage socket={socket} /></UserProtector>}/> */}
       </Routes>
     </div>
   );

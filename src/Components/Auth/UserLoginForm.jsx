@@ -44,8 +44,6 @@ function UserLoginForm() {
     }
   };
 
- 
-
   return (
     <div className="w-full flex  flex-col justify-center items-center py-2">
       <form
@@ -82,12 +80,7 @@ function UserLoginForm() {
           </Link>
         </div>
         OR
-        {/* <div className="w-[28vw]">
-          <button onClick={google} className="h-9 w-full rounded-[4px] text-white bg-red-700 font-semibold shadow-md text-center mt-2 border border-slate-300">
-            Sign In With GOOGLE
-          </button>
-        </div> */}
-          <Oauth/>
+        <Oauth />
         <div>
           <Link to="/vendor/login">
             <button className="h-9 w-full rounded-[4px] text-white bg-blue-800 font-semibold shadow-md text-center mt-2 border border-slate-300">

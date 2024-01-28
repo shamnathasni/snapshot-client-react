@@ -23,9 +23,7 @@ function AdminSubcategory() {
   const navigate = useNavigate();
   const location = useLocation();
   const categoryId = location.state.Id;
-  console.log(location.state.Id, "ccci");
   const categoryName = location.state.categoryName;
-  console.log(location.state.categoryName, "cccn");
 
   const [subCategory, setSubcategory] = useState("");
   useEffect(() => {

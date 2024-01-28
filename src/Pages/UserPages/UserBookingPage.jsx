@@ -1,23 +1,19 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import {  useParams } from "react-router-dom";
-import { detailsForPayment } from "../../Api/UserApi"
-
+import { useParams } from "react-router-dom";
+import { detailsForPayment } from "../../Api/UserApi";
 
 function UserBookingPage() {
-  const { bookingId } = useParams()
-  console.log(bookingId,"bookingId");
-  const [bookingData,setBookingData] = useState("")
-  useEffect(()=>{
+  const { bookingId } = useParams();
+  const [bookingData, setBookingData] = useState("");
+  useEffect(() => {
     detailsForPayment(bookingId)
-    .then((response)=>{
-      const bookingDetails = response.data.booking
-      console.log(bookingDetails,"bookingDetails");
-      setBookingData(bookingDetails)
-    
-    })
-     .catch((err)=>console.log(err.message))
-  },[])
+      .then((response) => {
+        const bookingDetails = response.data.booking;
+        setBookingData(bookingDetails);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
   const handlepayment = async () => {
     const stripe = await loadStripe(
       "pk_test_51OSCi8SIZzPXrKvEDrV8xUanWEKraQc40vPmXqfPlxZ2HWdoNRIjYbgUvDKNcwT5cLgfCh05dTk0kLNLFoR0SJkm00Z6CkZcq1"

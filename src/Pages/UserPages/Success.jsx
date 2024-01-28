@@ -22,7 +22,7 @@ function Success() {
   };
 
   const response = confirmPayment(packageId);
-  const AdminResponse = configureBooking(packageId)
+  const AdminResponse = configureBooking(packageId);
 
   const stars = Array.from({ length: 5 }, (_, index) => (
     <FontAwesomeIcon

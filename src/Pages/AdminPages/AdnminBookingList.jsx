@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
-import { StickyNavbar } from "../../Components/Layouts/Navbar";
-
 import { useParams } from "react-router-dom";
 import { BookingDetails } from "../../Api/AdminApi";
 import AdminNavbar from "../../Components/Layouts/AdminNavbar";
 
-
 function AdminBookingList() {
   const { studioId } = useParams();
-  console.log(studioId,"studioId");
   const [bookingData, setBookingData] = useState([]);
 
   useEffect(() => {
-        BookingDetails(studioId)
-        .then((response)=>{
-          const details = response.data.bookingData;
-          console.log(details, "details");
-          setBookingData(details);
-        })
-      .catch((err)=>console.log(err.message))
-       
-      
-
-
- 
+    BookingDetails(studioId)
+      .then((response) => {
+        const details = response.data.bookingData;
+        setBookingData(details);
+      })
+      .catch((err) => console.log(err.message));
   }, [studioId]);
-  console.log(bookingData, "bd");
 
   return (
     <div>
-     <AdminNavbar/>
+      <AdminNavbar />
       <div className="p-9 bg-slate-50">
         <Card className="h-full w-full overflow-scroll flex justify-center items-center p-4 ">
-          {bookingData.length>0 ? (
+          {bookingData.length > 0 ? (
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
-                    <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className=" text-base font-serif leading-none opacity-95 text-black font-bold uppercase "
-                    >
-                      
-                    </Typography>  
-                    </th>
+                    ></Typography>
+                  </th>
                   <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
                       variant="small"
@@ -96,7 +83,9 @@ function AdminBookingList() {
                       variant="small"
                       color="blue-gray"
                       className="text-base  font-serif leading-none opacity-95 text-black font-bold uppercase "
-                    >Status</Typography>
+                    >
+                      Status
+                    </Typography>
                   </th>
                   <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                     <Typography
@@ -108,9 +97,9 @@ function AdminBookingList() {
                 </tr>
               </thead>
               <tbody>
-                {bookingData.map((value,index) => (
+                {bookingData.map((value, index) => (
                   <tr key={index}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td className="">
                       <Typography
                         variant="small"
@@ -160,8 +149,7 @@ function AdminBookingList() {
                     <td className=" bg-blue-gray-50/50">
                       <Typography
                         variant="small"
-                            color={value.status === "reject"  ? "red" : "balck"}
-                        // className={value.status === "reject"  ?`font-normal text-red` :`font-normal text-black` }
+                        color={value.status === "reject" ? "red" : "balck"}
                       >
                         {value.status}
                       </Typography>
@@ -169,10 +157,12 @@ function AdminBookingList() {
                     <td className="">
                       <Typography
                         variant="small"
-                        color={value.is_verified===false?"red":"blue-gray"}
+                        color={
+                          value.is_verified === false ? "red" : "blue-gray"
+                        }
                         className="font-medium"
                       >
-                        {value.is_verified===true?"booked":"not booked"}
+                        {value.is_verified === true ? "booked" : "not booked"}
                       </Typography>
                     </td>
                   </tr>

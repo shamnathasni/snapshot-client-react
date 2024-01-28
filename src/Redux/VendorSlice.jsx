@@ -15,7 +15,6 @@ const vendorSlice = createSlice({
       state.vendor = null;
     },
     updateVendorImage: (state, action) => {
-      // Update the user's image in the state
       if (state.vendor) {
         state.vendor.image = action.payload;
       }

@@ -9,7 +9,7 @@ import {
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-import {  isBookedDate, bookedDates } from "../../Api/UserApi";
+import { isBookedDate, bookedDates } from "../../Api/UserApi";
 import { toast } from "react-toastify";
 
 const Calendar = (props) => {
@@ -19,18 +19,16 @@ const Calendar = (props) => {
   const ref = useRef();
 
   ref.current = selected;
-  
 
   useEffect(() => {
     bookedDates(studioId)
       .then((response) => {
         const dates = response.data.bookingdates;
-          const dateArray = []
-          for(let i  of dates){
-            dateArray.push(new Date(i.date))
-          }
-           setBookingDates(dates);
-        console.log(dateArray, "bookingDates");
+        const dateArray = [];
+        for (let i of dates) {
+          dateArray.push(new Date(i.date));
+        }
+        setBookingDates(dates);
       })
       .catch((err) => console.log(err.message));
   }, [studioId]);
@@ -58,11 +56,9 @@ const Calendar = (props) => {
             mode="single"
             selected={date}
             modifiersStyles={modifiersStyles}
-            // hidden={bookingDates.map(bookingDate => new Date(bookingDate.date))}
-            // modifiers={{
-            //   disabled: (day) => isBookedDate(day),
-            // }}
-            disabled={bookingDates.map(bookingDate => new Date(bookingDate.date))}
+            disabled={bookingDates.map(
+              (bookingDate) => new Date(bookingDate.date)
+            )}
             onSelect={async (newDate) => {
               const formattedDate = format(newDate, "yyyy-MM-dd");
               const response = await isBookedDate(formattedDate);

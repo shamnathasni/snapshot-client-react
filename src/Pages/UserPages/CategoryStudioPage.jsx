@@ -8,8 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 
 function CategoryStudioPage() {
-  const { subCategory } = useParams()
-  console.log(subCategory, "esub");
+  const { subCategory } = useParams();
   const navigate = useNavigate();
   const [studio, setStudio] = useState([]);
   useEffect(() => {
@@ -80,8 +79,6 @@ function CategoryStudioPage() {
                   )}
                 </div>
               </div>
-
-              {console.log(value._id, "_id")}
               <div className="text-center font-serif text-[#22092C]">
                 <Button
                   className="text-[872341]"
@@ -91,8 +88,6 @@ function CategoryStudioPage() {
                   view studio
                 </Button>
               </div>
-
-              {console.log(value._id, "value._id")}
             </div>
           </div>
         ))}

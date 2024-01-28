@@ -17,7 +17,6 @@ function UserChatPage() {
       return state.User.vendor;
     }
   });
-  console.log(vendor, "vvv");
 
   useEffect(() => {
     const newSocket = io("http://localhost:4000");
@@ -52,7 +51,6 @@ function UserChatPage() {
     chatDetails(bookingId)
       .then((res) => {
         const chatData = res.data.chatData;
-        console.log(res, "chatData");
         setChatMessages(chatData.chat);
         scrollToBottom();
       })
@@ -71,14 +69,14 @@ function UserChatPage() {
     <>
       <StickyNavbar />
       <div className="flex flex-col h-screen  items-center p-6 py-5">
-      <div className="flex flex-row items-center gap-3 border-b w-full p-4">
-      <img
-        src={vendor.image}
-        alt={vendor}
-        className="w-12 h-12 rounded-full shadow-xl"
-      />
-      <h2 className="font-semibold text-lg">{vendor.name}</h2>
-    </div>
+        <div className="flex flex-row items-center gap-3 border-b w-full p-4">
+          <img
+            src={vendor.image}
+            alt={vendor}
+            className="w-12 h-12 rounded-full shadow-xl"
+          />
+          <h2 className="font-semibold text-lg">{vendor.name}</h2>
+        </div>
         <div className="w-full h-5/6  bg-green-50 my-2 p-4 overflow-auto">
           {chatMessages.map((msg, index) => (
             <div

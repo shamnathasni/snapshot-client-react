@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import AdminNavbar from '../../Components/Layouts/AdminNavbar';
-import { adminUserlist, blockUser, unblockUser } from '../../Api/AdminApi';
+import React, { useEffect, useState } from "react";
+import AdminNavbar from "../../Components/Layouts/AdminNavbar";
+import { adminUserlist, blockUser, unblockUser } from "../../Api/AdminApi";
 
 function AdminUserList() {
   const [userData, setUserData] = useState([]);
- 
 
   useEffect(() => {
     adminUserlist()
@@ -13,18 +12,17 @@ function AdminUserList() {
         setUserData(userData);
       })
       .catch((err) => console.log(err));
-    }, []);
-  
+  }, []);
 
   const handleblock = async (userId) => {
     try {
       const res = await blockUser(userId);
       // Handle the response if needed
-      if(res.data.status){
-        const newList = userData.map((user) => 
-          user._id === userId ? {...user, is_verified: false} : user
-        )
-        setUserData(newList)
+      if (res.data.status) {
+        const newList = userData.map((user) =>
+          user._id === userId ? { ...user, is_verified: false } : user
+        );
+        setUserData(newList);
       }
     } catch (error) {
       console.log(error.message);
@@ -34,11 +32,11 @@ function AdminUserList() {
     try {
       const res = await unblockUser(userId);
       // Handle the response if needed
-      if(res.data.status){
-        const newList = userData.map((user) => 
-        user._id === userId ? {...user, is_verified: true} : user
-      )
-      setUserData(newList)
+      if (res.data.status) {
+        const newList = userData.map((user) =>
+          user._id === userId ? { ...user, is_verified: true } : user
+        );
+        setUserData(newList);
       }
     } catch (error) {
       console.log(error.message);
@@ -91,14 +89,13 @@ function AdminUserList() {
                             {value.number}
                           </td>
                           <td>
-                            { value.is_verified === true ?  (
+                            {value.is_verified === true ? (
                               <button
-                              className="mt-4 bg-green-700 text-white h-7 w-20 rounded-box"
-                              onClick={() => handleblock(value._id)}
-                            >
-                              Block
-                            </button>
-                              
+                                className="mt-4 bg-green-700 text-white h-7 w-20 rounded-box"
+                                onClick={() => handleblock(value._id)}
+                              >
+                                Block
+                              </button>
                             ) : (
                               <button
                                 className="mt-4 bg-red-700 text-white h-7 w-20 rounded-box"

@@ -79,21 +79,22 @@ export const studioList = async () => {
   }
 };
 
-export const categoryStudioList = async(subCategory) => {
+export const categoryStudioList = async (subCategory) => {
   try {
-    console.log(subCategory,"subCategory");
-    const data = await axiosInstance.get(`/categoryStudioList?subCategory=${subCategory}`);
+    console.log(subCategory, "subCategory");
+    const data = await axiosInstance.get(
+      `/categoryStudioList?subCategory=${subCategory}`
+    );
     return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
 export const singleStudio = async (studioId) => {
   try {
-    console.log(studioId, "api");
     const data = await axiosInstance.get(`/singleStudio?id=${studioId}`);
-    console.log(data, "data1");
+
     return data;
   } catch (error) {
     console.log(error.message);
@@ -103,104 +104,106 @@ export const singleStudio = async (studioId) => {
 export const studioPackages = async (studioIds) => {
   try {
     const data = await axiosInstance.get(`/studioPackages?id=${studioIds}`);
-  
+
     return data;
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const bookingData = async ( bookingType, selectedDate, id, studioId) => {
+export const bookingData = async (bookingType, selectedDate, id, studioId) => {
   try {
     const data = await axiosInstance.post("/bookingData", {
       ...bookingType,
       date: selectedDate,
       Id: id,
-      studioId:studioId,
-      
+      studioId: studioId,
     });
-    console.log(bookingType, "bookingType");
-    console.log(data, "data1");
+
     return data;
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const detailsForPayment = async (bookingId)=>{
+export const detailsForPayment = async (bookingId) => {
   try {
-    const data = await axiosInstance.get(`/detailsforpayment?bookingId=${bookingId}`)
-    console.log(data,"dsdsw");
-    return data
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+    const data = await axiosInstance.get(
+      `/detailsforpayment?bookingId=${bookingId}`
+    );
 
-export const isBookedDate = async (formattedDate,studioId,subcategory) => {
-  try {
-    console.log(formattedDate,studioId,subcategory,"f");
-    const data = await axiosInstance.post("/isBookedDate",{formattedDate,studioId,subcategory})
-    return data
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
-export const bookedDates = async (studioId,subcategory) => {
+export const isBookedDate = async (formattedDate, studioId, subcategory) => {
   try {
-    console.log(studioId,"studioId");
-    const data = await axiosInstance.post("/bookedates",{studioId,subcategory})
-    return data
+    const data = await axiosInstance.post("/isBookedDate", {
+      formattedDate,
+      studioId,
+      subcategory,
+    });
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
+
+export const bookedDates = async (studioId, subcategory) => {
+  try {
+    const data = await axiosInstance.post("/bookedates", {
+      studioId,
+      subcategory,
+    });
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const confirmPayment = async (packageId) => {
   try {
-    console.log(packageId,"packageId");
-    const data = await axiosInstance.get(`/confirmpayment?id=${packageId}`)
-    return data
+    const data = await axiosInstance.get(`/confirmpayment?id=${packageId}`);
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
 export const BookingDetails = async (userId) => {
   try {
-    const data = await axiosInstance.get(`/bookingdetails?id=${userId}`)
-    return data
+    const data = await axiosInstance.get(`/bookingdetails?id=${userId}`);
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
 export const chatDetails = async (bookingId) => {
   try {
-    const data = await axiosInstance.get(`/chatdetails?id=${bookingId}`)
-    return data
+    const data = await axiosInstance.get(`/chatdetails?id=${bookingId}`);
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
-
+};
 
 export const searchStudio = async (searchQuery) => {
   try {
-    const data = await axiosInstance.get(`/search?data=${searchQuery}`)
-    return data
+    const data = await axiosInstance.get(`/search?data=${searchQuery}`);
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
 export const submitRating = async (packageId, rating) => {
   try {
-    console.log(rating,"rating");
-    const data = await axiosInstance.post("/rating",{packageId, rating})
-    return data
+    const data = await axiosInstance.post("/rating", { packageId, rating });
+    return data;
   } catch (error) {
     console.log(error.message);
   }
-}
+};

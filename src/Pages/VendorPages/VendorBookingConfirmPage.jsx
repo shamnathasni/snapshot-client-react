@@ -1,19 +1,18 @@
 import React from "react";
 
 import { cancel, success } from "../../Api/UserApi";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function VendorBookingConfirmPage() {
-    const navigate = useNavigate()
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const bookingData = searchParams.get("bookingInfo");
-console.log(bookingData,"bookingData");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const bookingData = searchParams.get("bookingInfo");
 
   const handleConfirm = async () => {
     try {
       success(bookingData);
-      navigate("vendor/login")
+      navigate("vendor/login");
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +20,7 @@ console.log(bookingData,"bookingData");
   const handleCancel = async () => {
     try {
       cancel();
-      navigate("vendor/login")
+      navigate("vendor/login");
     } catch (error) {
       console.log(error);
     }

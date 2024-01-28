@@ -31,7 +31,6 @@ function AdminCategoryList() {
   };
 
   const [category, setCategory] = useState([]);
-  console.log(category);
   useEffect(() => {
     adminCategorylist()
       .then((response) => {
@@ -43,11 +42,9 @@ function AdminCategoryList() {
 
   //.........................unlist.............................//
 
-  // const [categorylist, setCategorylist] = useState([]);
   const handleUnlist = async (id) => {
     try {
       const response = await unlistCategory(id);
-      console.log(response);
       if (response.data) {
         // Update the state using the functional form of setCategory
         setCategory((prevCategory) =>
@@ -66,9 +63,7 @@ function AdminCategoryList() {
 
   const handleList = async (id) => {
     try {
-      console.log("hi");
-      const response = await listCategory(id);
-      console.log(response, "re");
+      const response = await listCategory(id)
       if (response.data) {
         // Update the state using the functional form of setCategory
         setCategory((prevCategory) =>

@@ -7,16 +7,13 @@ import { addsubCategory } from "../../Api/AdminApi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 function AdminAddSubcategory() {
   const [subName, setSubName] = useState("");
   const [subImage, setSubImage] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
   const categoryId = location.state.Id;
-  console.log(categoryId, "categoryId");
   const categoryName = location.state.name;
 
   const handleSubcategory = async (e) => {
@@ -26,8 +23,7 @@ function AdminAddSubcategory() {
       const formData = new FormData();
       formData.append("name", subName);
       formData.append("image", subImage);
-      console.log(categoryId, "categoryId2");
-      // Log formData for debugging purposes
+
       for (var key of formData.entries()) {
         console.log(key[0] + ", " + key[1]);
       }
@@ -42,10 +38,6 @@ function AdminAddSubcategory() {
       console.log(error.message);
     }
   };
-
-  // const handleImage = (e) => {
-  //   setSubImage(e.target.files[0]);
-  // };
 
   //.................image uploading........................//
 
@@ -81,7 +73,12 @@ function AdminAddSubcategory() {
           <h2 className="text-2xl font-semibold mb-4 text-center font-serif text-[#22092C]">
             Add Subcategory for {categoryName}
           </h2>
-          <form action="/admin/addsubcategory" method="post" enctype="multipart/form-data" className="py-5">
+          <form
+            action="/admin/addsubcategory"
+            method="post"
+            enctype="multipart/form-data"
+            className="py-5"
+          >
             {/* <!--E-mail input--> */}
             <input
               type="text"

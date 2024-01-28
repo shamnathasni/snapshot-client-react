@@ -15,20 +15,16 @@ function VendorStudioPage() {
   const [packageState, setPackageState] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const vendorsId = useSelector((state) => state.Vendor.vendor._id);
-  console.log(vendorsId, "vendorsId");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await studioList(vendorsId);
-        console.log(response, "response.data");
-
         if (response) {
           const studioData = response.data.studio;
 
           setStudio(studioData);
         } else {
-          console.log(error.message);
           console.error("No data in response");
         }
       } catch (error) {
@@ -62,29 +58,28 @@ function VendorStudioPage() {
 
   const handleAddPackage = async (localState) => {
     try {
-      console.log(localState, "pppstate");
       const response = await AddPackage({
         localState,
       });
-  
+
       // Display toast message
       toast(response.data.alert);
-  
+
       // Wait for the state to be updated, then fetch the updated package list
-      await 
-      setPackageState((prevPackages) => [...prevPackages, response.data.packageData]);
-  
+      await setPackageState((prevPackages) => [
+        ...prevPackages,
+        response.data.packageData,
+      ]);
+
       // Fetch the updated package list
       const updatedPackages = await packageList();
-  
+
       // Update the packageState with the fetched list
       setPackageState(updatedPackages.data.packageData);
     } catch (error) {
       console.error("Error adding package:", error);
     }
   };
-  
-  
 
   return (
     <div className="bg-slate-100 h-[90vh]  md:w-full  no-scrollbar">
@@ -144,8 +139,6 @@ function VendorStudioPage() {
               >
                 Add+
               </button>
-              {/* ... */}
-              {/* Render the AddPackageModal component */}
 
               <AddPackageModal
                 isOpen={isModalOpen}
@@ -158,11 +151,10 @@ function VendorStudioPage() {
             <hr></hr>
             <div className="grid grid-cols-1 md:grid-cols-4 ">
               {packageState && packageState.length > 0 ? (
-                // <div>{studio.package.video}</div>
                 packageState.map((value, index) => (
                   <div className="py-6" key={index}>
                     <PackageCard
-                      subcategory={value?.subcategory  }
+                      subcategory={value?.subcategory}
                       camera={value?.camera}
                       Video={value?.video}
                       Both={value?.both}
@@ -180,18 +172,17 @@ function VendorStudioPage() {
             <h2 className="font-sans text-xl font-bold ">Gallery</h2>
             <hr></hr>
             <div className="flex flex-row gap-2">
-
               {studio.galleryImage.map((value, index) => (
                 <div className="flex flex-row w-1/2 md:w-1/6">
-                <img
-                  key={index}
-                  className="box-border "
-                  src={`${value}`}
-                  alt={`Gallery Image ${index}`}
+                  <img
+                    key={index}
+                    className="box-border "
+                    src={`${value}`}
+                    alt={`Gallery Image ${index}`}
                   />
-            </div>
-                ))}
                 </div>
+              ))}
+            </div>
           </div>
         </div>
       ) : (

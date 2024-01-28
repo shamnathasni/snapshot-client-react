@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 import { MonthlyGraph } from "../../Api/AdminApi";
 
 export default function Graph() {
@@ -84,7 +84,9 @@ export default function Graph() {
               <h6 className=" text-blueGray-100  text-xs text-black font-semibold ">
                 Sales Overview
               </h6>
-              <h2 className="text-white text-xl font-semibold">Booking value</h2>
+              <h2 className="text-white text-xl font-semibold">
+                Booking value
+              </h2>
             </div>
           </div>
         </div>

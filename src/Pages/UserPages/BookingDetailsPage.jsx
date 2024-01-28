@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
-
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BookingDetails } from "../../Api/UserApi";
 
 function BookingDetailsPage() {
@@ -15,7 +14,6 @@ function BookingDetailsPage() {
         const response = await BookingDetails(userId);
         if (response.data.status) {
           const details = response.data.bookingdetails;
-          console.log(details, "details");
           setBookingData(details);
         }
       } catch (error) {
@@ -25,7 +23,6 @@ function BookingDetailsPage() {
 
     fetchData();
   }, [userId]);
-  console.log(bookingData.booking, "bd");
 
   return (
     <div>

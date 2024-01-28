@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { bookingDetails, confirmBooking, rejectBooking } from "../../Api/VendorApi";
+import { Link, useParams } from "react-router-dom";
+import {
+  bookingDetails,
+  confirmBooking,
+  rejectBooking,
+} from "../../Api/VendorApi";
 import Modal from "../../Components/Modal";
-import {toSentenceCase} from "alter-case"
-
 
 function VendorBookingDetails() {
   const { id } = useParams();
   const [bookingData, setBookingData] = useState("");
   const [showModal, setShowModal] = useState(false);
-  console.log(bookingData,"bookingData");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +20,6 @@ function VendorBookingDetails() {
         const response = await bookingDetails(id);
         if (response.data.status) {
           const details = response.data.bookings;
-          console.log(details, "details");
           setBookingData(details);
         }
       } catch (error) {
@@ -39,43 +39,34 @@ function VendorBookingDetails() {
     setShowModal(false);
   };
 
-
-  const handleConfirm = async (Id) =>{
+  const handleConfirm = async (Id) => {
     try {
-      
-      const response = confirmBooking(Id)
-      if(response){
-        const newBooking = bookingData.map((value)=>
-          value._id === Id ? {...value, status: "confirm"}:value
-        )
-        setBookingData(newBooking)
+      const response = confirmBooking(Id);
+      if (response) {
+        const newBooking = bookingData.map((value) =>
+          value._id === Id ? { ...value, status: "confirm" } : value
+        );
+        setBookingData(newBooking);
       }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
-  const handleReject = async (Id) =>{
+  const handleReject = async (Id) => {
     try {
-      
-      const response = rejectBooking(Id)
-      if(response){
-        console.log(response,"res");
-        
-        const newBooking = bookingData.map((value)=> {
-
-          value._id === Id ? {...value, status : "reject"}:value
-        }
-          )
-        setBookingData(newBooking)
-       { console.log(bookingData,"ppp");}
+      const response = rejectBooking(Id);
+      if (response) {
+        const newBooking = bookingData.map((value) => {
+          value._id === Id ? { ...value, status: "reject" } : value;
+        });
+        setBookingData(newBooking);
       }
       setShowModal(false);
-      
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -130,7 +121,6 @@ function VendorBookingDetails() {
                       className="text-base  font-serif leading-none opacity-95 text-black font-bold uppercase "
                     ></Typography>
                   </th>
-                 
                 </tr>
               </thead>
               <tbody>
@@ -143,7 +133,6 @@ function VendorBookingDetails() {
                         className="font-normal"
                       >
                         {value.package.subcategory}
-                        {console.log(toSentenceCase(value.studio.about))}
                       </Typography>
                     </td>
                     <td className=" bg-blue-gray-50/50">
@@ -216,7 +205,7 @@ function VendorBookingDetails() {
                                       variant="outlined"
                                       size="sm"
                                       className="ml-2 bg-[#872341] text-white"
-                                      onClick={()=>handleReject(value._id)}
+                                      onClick={() => handleReject(value._id)}
                                     >
                                       Confirm
                                     </Button>
@@ -226,33 +215,38 @@ function VendorBookingDetails() {
                             )}
                           </>
                         )}
-                        {value.is_verified === false? (
-                        value.status !== "pending" && (
-                          <span className={value.status ==="reject"?"font-sans text-red-500 p-8 font-medium text-lg":"font-sans text-blue-500 p-8 font-medium text-lg"} >
-                            {value.status === "reject"&&"rejected booking"}  
-                            {value.status === "confirm"&&"incomplete payment"}  
-                          
-                          </span>
-                        )
-                      
-                        ):( 
-                    value.status === "confirm"&&value.is_verified === true&&(
-                    <td className=" ">
-                      <Typography
-                        as="a"
-                        href="#"
-                        variant="small"
-                        color="blue-gray"
-                        className=" btn hover:scale-105 ease-in-out duration-300 bg-green-600 text-center m-2 text-white py-3 font-medium"
-                      >
-                        <Link to={`/vendor/chat/${value._id}`}>
-                          Message User
-                        </Link>
+                        {value.is_verified === false
+                          ? value.status !== "pending" && (
+                              <span
+                                className={
+                                  value.status === "reject"
+                                    ? "font-sans text-red-500 p-8 font-medium text-lg"
+                                    : "font-sans text-blue-500 p-8 font-medium text-lg"
+                                }
+                              >
+                                {value.status === "reject" &&
+                                  "rejected booking"}
+                                {value.status === "confirm" &&
+                                  "incomplete payment"}
+                              </span>
+                            )
+                          : value.status === "confirm" &&
+                            value.is_verified === true && (
+                              <td className=" ">
+                                <Typography
+                                  as="a"
+                                  href="#"
+                                  variant="small"
+                                  color="blue-gray"
+                                  className=" btn hover:scale-105 ease-in-out duration-300 bg-green-600 text-center m-2 text-white py-3 font-medium"
+                                >
+                                  <Link to={`/vendor/chat/${value._id}`}>
+                                    Message User
+                                  </Link>
+                                </Typography>
+                              </td>
+                            )}
                       </Typography>
-                    </td>
-                    )
-                        )}
-                    </Typography>
                     </td>
                   </tr>
                 ))}
@@ -264,7 +258,6 @@ function VendorBookingDetails() {
         </Card>
       </div>
     </div>
-    
   );
 }
 

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Cancel() {
-  return (
-    <div>
-      your payment cancelled
-    </div>
-  )
+  return <div>your payment cancelled</div>;
 }
 
-export default Cancel
+export default Cancel;

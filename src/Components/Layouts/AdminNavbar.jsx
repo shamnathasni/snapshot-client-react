@@ -1,5 +1,5 @@
 import React from "react";
-import "../../index.css"
+import "../../index.css";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -17,19 +17,16 @@ import { toast } from "react-toastify";
 
 function AdminNavbar() {
   const navigate = useNavigate();
-    const dispatch = useDispatch()
-    const location = useLocation();
-    const admin = useSelector(state => state.User.admin)
-    const handleLogout = () => {
-      console.log("Logging out...");
-      localStorage.removeItem('token');
-      dispatch(
-            logoutDetails()
-            );
-      toast("You have successfully logged out!")
-      console.log("Dispatched logout action.");
-      navigate('/admin/login');
-    };
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const admin = useSelector((state) => state.User.admin);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutDetails());
+    toast("You have successfully logged out!");
+    console.log("Dispatched logout action.");
+    navigate("/admin/login");
+  };
 
   const [openNav, setOpenNav] = React.useState(false);
 
@@ -41,66 +38,56 @@ function AdminNavbar() {
   }, []);
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        
-      >
+      <Typography as="li" variant="small" color="blue-gray">
         <Link to={"/admin/dashboard"} className="flex items-center">
-        <h3 className={
-          location.pathname === "/admin/dashboard"
-            ? "p-1 text-xl font-semibold navlist"
-            : "p-1 font-normal"
-        }>
+          <h3
+            className={
+              location.pathname === "/admin/dashboard"
+                ? "p-1 text-xl font-semibold navlist"
+                : "p-1 font-normal"
+            }
+          >
             Dashboard
           </h3>
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        
-      >
+      <Typography as="li" variant="small" color="blue-gray">
         <Link to={"/admin/categorylist"} className="flex items-center">
-        <h3 className={
-          location.pathname === "/admin/categorylist"
-            ? "p-1 text-xl font-semibold navlist"
-            : "p-1 font-normal"
-        }>
+          <h3
+            className={
+              location.pathname === "/admin/categorylist"
+                ? "p-1 text-xl font-semibold navlist"
+                : "p-1 font-normal"
+            }
+          >
             Category
           </h3>
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        
-      >
+      <Typography as="li" variant="small">
         <Link to={"/admin/userlist"} className="flex items-center">
-        <h3 className={
-          location.pathname === "/admin/userlist"
-            ? "p-1 text-xl font-semibold navlist "
-            : "p-1 font-normal"
-        }>
-          Users
-        </h3>
+          <h3
+            className={
+              location.pathname === "/admin/userlist"
+                ? "p-1 text-xl font-semibold navlist "
+                : "p-1 font-normal"
+            }
+          >
+            Users
+          </h3>
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-      >
+      <Typography as="li" variant="small" color="blue-gray">
         <Link to={"/admin/vendorlist"} className="flex items-center">
-        <h3 className={
-          location.pathname === "/admin/vendorlist"
-            ? "p-1 text-xl font-semibold navlist "
-            : "p-1 font-normal"
-        }>
-          Vendors
-        </h3>
+          <h3
+            className={
+              location.pathname === "/admin/vendorlist"
+                ? "p-1 text-xl font-semibold navlist "
+                : "p-1 font-normal"
+            }
+          >
+            Vendors
+          </h3>
         </Link>
       </Typography>
 
@@ -170,8 +157,13 @@ function AdminNavbar() {
         </div>
         <Collapse open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2"
-          onClick={handleLogout}>
+          <Button
+            variant="gradient"
+            size="sm"
+            fullWidth
+            className="mb-2"
+            onClick={handleLogout}
+          >
             <span>Logout</span>
           </Button>
         </Collapse>

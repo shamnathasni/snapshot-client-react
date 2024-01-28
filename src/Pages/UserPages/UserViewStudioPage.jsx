@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { faLocationDot, faStar , faForward , faBackward } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faStar,
+  faForward,
+  faBackward,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from "react-responsive-modal";
 import Slider from "react-slick";
@@ -14,7 +19,7 @@ import Footer from "../../Components/Layouts/Footer";
 
 function UserViewStudioPage() {
   const location = useLocation();
-  const sliderRef = useRef(null)
+  const sliderRef = useRef(null);
   const studioId = location.state.id;
   const studioIds = location.state.id;
   const [studio, setSingleStudio] = useState(null);
@@ -42,6 +47,9 @@ function UserViewStudioPage() {
       });
   }, [studioIds]);
 
+  useEffect(() => {
+    rating();
+  });
 
   const prevSlide = () => {
     if (sliderRef.current) {
@@ -122,12 +130,9 @@ function UserViewStudioPage() {
             </p>
             <hr></hr>
             <div className=" grid grid-cols-1 md:grid-cols-4 px-2 md:px-5">
-              {console.log(packages, "pac")}
-
               {packages && packages.length > 0 ? (
                 packages.map((value, index) => (
                   <div key={index} className=" w-fit py-8">
-                    {console.log(value.studioId, "pac.studioId")}
                     <BookingCard
                       subcategory={value.subcategory}
                       camera={value.camera}
@@ -165,24 +170,40 @@ function UserViewStudioPage() {
             </div>
             {/* Image Modal */}
             <Modal open={modalOpen} onClose={closeModal} center>
-          <Slider ref={(slider) => (sliderRef.current = slider)} {...settings} initialSlide={selectedImageIndex}>
-            {studio.galleryImage.map((value, index) => (
-              <img
-                key={index}
-                sizes=""
-                className="h-fit w-fit"
-                src={`${value}`}
-                alt={`Gallery Image ${index}`}
-              />
-            ))}
-          </Slider>
-          <div className="absolute top-1/2 left-4 cursor-pointer" onClick={prevSlide}>
-           <FontAwesomeIcon className="h-10 w-10 text-white" icon={faBackward}/>
-          </div>
-          <div className="absolute top-1/2 right-4 cursor-pointer" onClick={nextSlide}>
-          <FontAwesomeIcon  className="h-10 w-10 text-white" icon={faForward}/>
-          </div>
-        </Modal>
+              <Slider
+                ref={(slider) => (sliderRef.current = slider)}
+                {...settings}
+                initialSlide={selectedImageIndex}
+              >
+                {studio.galleryImage.map((value, index) => (
+                  <img
+                    key={index}
+                    sizes=""
+                    className="h-fit w-fit"
+                    src={`${value}`}
+                    alt={`Gallery Image ${index}`}
+                  />
+                ))}
+              </Slider>
+              <div
+                className="absolute top-1/2 left-4 cursor-pointer"
+                onClick={prevSlide}
+              >
+                <FontAwesomeIcon
+                  className="h-10 w-10 text-white"
+                  icon={faBackward}
+                />
+              </div>
+              <div
+                className="absolute top-1/2 right-4 cursor-pointer"
+                onClick={nextSlide}
+              >
+                <FontAwesomeIcon
+                  className="h-10 w-10 text-white"
+                  icon={faForward}
+                />
+              </div>
+            </Modal>
           </div>
         </div>
       ) : (

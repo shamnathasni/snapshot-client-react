@@ -50,9 +50,7 @@ function AdminStudioList() {
                       <th scope="col" className="px-6 py-4 font-bold">
                         Packages
                       </th>
-                      <th scope="col" className="px-6 py-4 font-bold">
-                        
-                      </th>
+                      <th scope="col" className="px-6 py-4 font-bold"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,7 +72,10 @@ function AdminStudioList() {
                           <TooltipCustomStyles paragraph={value.about} />
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium max-w-28 align-middle ">
-                          <span className="text-red-900 text-lg font-semibold">{value.rating}</span> out of 5 
+                          <span className="text-red-900 text-lg font-semibold">
+                            {value.rating}
+                          </span>{" "}
+                          out of 5
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium">
                           {value.package && value.package.length > 0 ? (
@@ -96,12 +97,16 @@ function AdminStudioList() {
                               </div>
                             ))
                           ) : (
-                            <div className="p-5 text-red-600">No packages..</div>
+                            <div className="p-5 text-red-600">
+                              No packages..
+                            </div>
                           )}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4  ">
                           <button className="mb-5 pt-2 font-medium bg-[#22092C] text-white w-28 text-center h-10 flex justify-center rounded-md shadow-md">
-                            <Link to={`/admin/bookinglist/${value._id}`}>View Bookings</Link>
+                            <Link to={`/admin/bookinglist/${value._id}`}>
+                              View Bookings
+                            </Link>
                           </button>
                         </td>
                       </tr>

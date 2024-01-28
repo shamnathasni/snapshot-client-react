@@ -15,7 +15,6 @@ const UserProfile = () => {
 
   // Destructure the properties after defining 'user'
   const { name, number, email, image, _id } = user;
-  console.log(_id, "user");
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(userLogout());

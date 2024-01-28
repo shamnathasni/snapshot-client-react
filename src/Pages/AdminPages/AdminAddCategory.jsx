@@ -12,8 +12,7 @@ function AdminAddCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await addCategory( {category} );
-      console.log(response, "rrrr");
+      const response = await addCategory({ category });
 
       if (response.data.status) {
         navigate("/admin/categorylist");

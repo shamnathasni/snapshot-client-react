@@ -12,12 +12,10 @@ function UserHomePage() {
   const searchParams = new URLSearchParams(location.search);
   const message = searchParams.get("message");
   const [category, setCategory] = useState([]);
-  console.log(category, "category");
   useEffect(() => {
     categoryList()
       .then((response) => {
         const categoryData = response.data.categoryData;
-        console.log(categoryData);
         setCategory(categoryData);
       })
       .catch((err) => console.log(err.message));

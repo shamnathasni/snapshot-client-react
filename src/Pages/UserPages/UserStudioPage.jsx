@@ -119,7 +119,10 @@ function UserStudioPage() {
           </div>
         ) : (
           studio.map((value, index) => (
-            <div key={index} className="hover:scale-105 ease-in-out duration-300 py-10 md:py-20  h-1/3 ">
+            <div
+              key={index}
+              className="hover:scale-105 ease-in-out duration-300 py-10 md:py-20  h-1/3 "
+            >
               <div className=" h-[65vh] bg-[#f8f3f5]  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                   <img
@@ -149,9 +152,16 @@ function UserStudioPage() {
                           length: 5,
                         },
                         (_, index) => (
-                          <span  className=""
-                          key={index}>
-                            <FontAwesomeIcon icon={faStar} color={index < Math.floor(calculateAverageRating(value.rating)) ? "gold" : "gray"} />
+                          <span className="" key={index}>
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              color={
+                                index <
+                                Math.floor(calculateAverageRating(value.rating))
+                                  ? "gold"
+                                  : "gray"
+                              }
+                            />
                           </span>
                         )
                       )
@@ -170,7 +180,6 @@ function UserStudioPage() {
                   </div>
                 </div>
 
-               
                 <div className="text-center font-serif text-[#22092C]">
                   <Button
                     className="text-[872341] hover:scale-105 ease-in-out duration-300"
@@ -180,8 +189,6 @@ function UserStudioPage() {
                     view studio
                   </Button>
                 </div>
-
-                {console.log(value._id, "value._id")}
               </div>
             </div>
           ))

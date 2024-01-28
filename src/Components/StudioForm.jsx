@@ -33,19 +33,17 @@ function StudioForm() {
     formData.append("city", data.city);
     formData.append("about", data.about);
     formData.append("coverImage", coverImageFile);
-    
+
     // Append gallery images to FormData
     galleryImageFiles.forEach((file, index) => {
       formData.append(`galleryImage[${index}]`, file);
     });
-    
+
     formData.append("vendorId", vendorId);
-console.log("formData", formData);
     const response = await StudioFormApi(formData);
     if (response) {
       toast(response.data.alert);
       navigate("/vendor/studio");
-      console.log("Form submitted!", formData);
     } else {
       toast(response.data.alert);
     }
@@ -63,8 +61,7 @@ console.log("formData", formData);
       },
       function (error, result) {
         if (!error && result && result.event === "success") {
-          setCoverImageFile(result.info.secure_url);
-          console.log(result.info.secure_url, "result.info.files");
+          setCoverImageFile(result.info.secure_url)
         }
       }
     );
@@ -79,17 +76,19 @@ console.log("formData", formData);
       {
         cloudName: "ddaksct8s",
         uploadPreset: "ro65vieu",
-        multiple:true
+        multiple: true,
       },
       function (error, result) {
         if (!error && result && result.event === "success") {
-          setGalleryImageFiles((prevFiles) => [...prevFiles, result.info.secure_url]);
-          console.log(result.info.secure_url, "result.info.files");
+          setGalleryImageFiles((prevFiles) => [
+            ...prevFiles,
+            result.info.secure_url,
+          ]);
         }
       }
     );
   }, []);
-  
+
   return (
     <form
       className="w-2/5 mx-auto"
@@ -159,9 +158,8 @@ console.log("formData", formData);
         </label>
         <div className="flex items-center">
           <input
-           type="file"
+            type="file"
             id="cover-image-input"
-           
             onChange={() => widget.current.open()}
             className="hidden"
           />
@@ -169,9 +167,7 @@ console.log("formData", formData);
             <FontAwesomeIcon icon={faFileUpload} size="1x" />
           </label>
         </div>
-     
       </div>
-      {/* ... other form inputs ... */}
       <div className="mb-5  flex flex-row">
         <label
           htmlFor="gallery-image-input"
@@ -183,7 +179,7 @@ console.log("formData", formData);
           <input
             type="file"
             id="gallery-image-input"
-          multiple
+            multiple
             onChange={() => widget1.current.open()}
             className="hidden"
           />
@@ -191,7 +187,6 @@ console.log("formData", formData);
             <FontAwesomeIcon icon={faFileUpload} size="1x" />
           </label>
         </div>
-        
       </div>
       <div className="flex justify-center items-center">
         <button
