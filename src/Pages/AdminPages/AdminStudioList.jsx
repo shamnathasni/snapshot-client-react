@@ -21,6 +21,15 @@ function AdminStudioList() {
       .catch((err) => console.log(err));
   }, []);
 
+  const calculateAverageRating = (ratings) => {
+    if (!ratings || ratings.length === 0) {
+      return 0;
+    }
+
+    const sumOfRatings = ratings.reduce((acc, num) => acc + num, 0);
+    return sumOfRatings / ratings.length;
+  };
+
   return (
     <>
       <AdminNavbar />
@@ -72,10 +81,28 @@ function AdminStudioList() {
                           <TooltipCustomStyles paragraph={value.about} />
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium max-w-28 align-middle ">
-                          <span className="text-red-900 text-lg font-semibold">
-                            {value.rating}
-                          </span>{" "}
-                          out of 5
+                        {value.rating === 0 ? (
+                      <h1 className="text-black font-semibold">No Stars</h1>
+                    ) : (
+                      Array.from(
+                        {
+                          length: 5,
+                        },
+                        (_, index) => (
+                          <span className="" key={index}>
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              color={
+                                index <
+                                Math.floor(calculateAverageRating(value.rating))
+                                  ? "gold"
+                                  : "gray"
+                              }
+                            />
+                          </span>
+                        )
+                      )
+                    )}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium">
                           {value.package && value.package.length > 0 ? (
