@@ -77,6 +77,16 @@ function UserViewStudioPage() {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  const calculateAverageRating = (ratings) => {
+    if (!ratings || ratings.length === 0) {
+      return 0;
+    }
+
+    const sumOfRatings = ratings.reduce((acc, num) => acc + num, 0);
+    return sumOfRatings / ratings.length;
+  };
+  
   return (
     <div className="w-full h-[90vh]">
       <StickyNavbar />
@@ -100,19 +110,28 @@ function UserViewStudioPage() {
                 <p>{studio.city}</p>
               </div>
               <div className="flex flex-row justify-center items-center gap-2 py-1">
-                {Array.from(
-                  { length: Math.floor(studio.rating) },
-                  (_, index) => (
-                    <span className="" key={index}>
-                      <FontAwesomeIcon icon={faStar} color="gold" />
-                    </span>
-                  )
-                )}
-                {studio.rating === 0 ? (
-                  <h1 className=" font-MyFont">No Stars</h1>
-                ) : (
-                  <div className=" font-MyFont">{studio.rating}stars</div>
-                )}
+              {studio.rating === 0 ? (
+                      <h1 className="text-black font-semibold">No Stars</h1>
+                    ) : (
+                      Array.from(
+                        {
+                          length: 5,
+                        },
+                        (_, index) => (
+                          <span className="" key={index}>
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              color={
+                                index <
+                                Math.floor(calculateAverageRating(studio.rating))
+                                  ? "gold"
+                                  : "gray"
+                              }
+                            />
+                          </span>
+                        )
+                      )
+                    )}
               </div>
               <div className="text-center font-MyFont font-extralight px-3 py-8 ">
                 {studio.about}
