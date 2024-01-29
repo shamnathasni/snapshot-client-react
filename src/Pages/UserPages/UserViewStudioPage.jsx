@@ -47,9 +47,7 @@ function UserViewStudioPage() {
       });
   }, [studioIds]);
 
-  useEffect(() => {
-    rating();
-  });
+
 
   const prevSlide = () => {
     if (sliderRef.current) {
