@@ -253,7 +253,10 @@ function VendorBookingDetails() {
               </tbody>
             </table>
           ) : (
-            <div>no bookings found</div>
+            <div className="flex items-center justify-center h-full">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#872341]"></div>
+              <div>no bookings found</div>
+            </div>
           )}
         </Card>
       </div>
