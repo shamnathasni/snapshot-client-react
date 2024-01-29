@@ -8,6 +8,8 @@ import {
 import AdminNavbar from "../../Components/Layouts/AdminNavbar";
 import { Link } from "react-router-dom";
 import { TooltipCustomStyles } from "../../Components/Admin/Tooltip";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 function AdminStudioList() {
   const [studioData, setStudioData] = useState([]);
@@ -146,7 +148,7 @@ function AdminStudioList() {
                 </table>
               ) : (
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#872341]">
-                  No Studios found
+                
                 </div>
               )}
             </div>
