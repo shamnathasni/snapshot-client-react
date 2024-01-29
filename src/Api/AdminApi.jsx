@@ -148,15 +148,6 @@ export const listCategory = async (id) => {
   }
 };
 
-export const configureBooking = async (packageId) => {
-  try {
-    const data = await axiosInstance.post("/configureBooking", packageId);
-
-    return data;
-  } catch (error) {
-    error.message;
-  }
-};
 
 export const MonthlyGraph = async () => {
   try {

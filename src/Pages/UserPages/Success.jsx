@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { confirmPayment, submitRating } from "../../Api/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { configureBooking } from "../../Api/AdminApi";
 
 function Success() {
   const location = useLocation();
@@ -22,7 +21,6 @@ function Success() {
   };
 
   const response = confirmPayment(packageId);
-  const AdminResponse = configureBooking(packageId);
 
   const stars = Array.from({ length: 5 }, (_, index) => (
     <FontAwesomeIcon
