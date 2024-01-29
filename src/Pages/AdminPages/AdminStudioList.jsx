@@ -81,28 +81,32 @@ function AdminStudioList() {
                           <TooltipCustomStyles paragraph={value.about} />
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium max-w-28 align-middle ">
-                        {value.rating === 0 ? (
-                      <h1 className="text-black font-semibold">No Stars</h1>
-                    ) : (
-                      Array.from(
-                        {
-                          length: 5,
-                        },
-                        (_, index) => (
-                          <span className="" key={index}>
-                            <FontAwesomeIcon
-                              icon={faStar}
-                              color={
-                                index <
-                                Math.floor(calculateAverageRating(value.rating))
-                                  ? "gold"
-                                  : "gray"
-                              }
-                            />
-                          </span>
-                        )
-                      )
-                    )}
+                          {value.rating === 0 ? (
+                            <h1 className="text-black font-semibold">
+                              No Stars
+                            </h1>
+                          ) : (
+                            Array.from(
+                              {
+                                length: 5,
+                              },
+                              (_, index) => (
+                                <span className="" key={index}>
+                                  <FontAwesomeIcon
+                                    icon={faStar}
+                                    color={
+                                      index <
+                                      Math.floor(
+                                        calculateAverageRating(value.rating)
+                                      )
+                                        ? "gold"
+                                        : "gray"
+                                    }
+                                  />
+                                </span>
+                              )
+                            )
+                          )}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 font-medium">
                           {value.package && value.package.length > 0 ? (
@@ -141,7 +145,9 @@ function AdminStudioList() {
                   </tbody>
                 </table>
               ) : (
-                <div>No studios found</div>
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#872341]">
+                  No Studios found
+                </div>
               )}
             </div>
           </div>

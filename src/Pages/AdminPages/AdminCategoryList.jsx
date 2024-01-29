@@ -63,7 +63,7 @@ function AdminCategoryList() {
 
   const handleList = async (id) => {
     try {
-      const response = await listCategory(id)
+      const response = await listCategory(id);
       if (response.data) {
         // Update the state using the functional form of setCategory
         setCategory((prevCategory) =>
@@ -201,7 +201,6 @@ function AdminCategoryList() {
       ) : (
         <div className="flex  flex-col justify-center items-center py-5">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#872341]"></div>
-         
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row py-4">
             <Link to={"/admin/addCategory"}>
               <Button
