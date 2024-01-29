@@ -135,7 +135,7 @@ const AddPackageModal = ({ isOpen, onClose, onAddPackage }) => {
                     <option value="" disabled>
                       Select Subcategory
                     </option>
-                    <option>Select a subcategory</option>
+                   
                     {subcategory.map((value, index) => (
                       <option key={index} value={value.name}>
                         {value.name}
