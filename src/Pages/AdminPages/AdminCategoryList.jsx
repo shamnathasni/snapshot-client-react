@@ -200,6 +200,7 @@ function AdminCategoryList() {
         </div>
       ) : (
         <div className="flex  flex-col justify-center items-center py-5">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#872341]"></div>
           <h3>No Categories found</h3>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row py-4">
             <Link to={"/admin/addCategory"}>

@@ -51,7 +51,7 @@ function UserRouter() {
           path="/categoryStudio/:subCategory"
           element={<CategoryStudioPage />}
         />
-        <Route path="/viewstudio" element={<UserViewStudioPage />} />
+        <Route path="/viewstudio" element={<UserProtector><UserViewStudioPage /></UserProtector>} />
         <Route
           path="/booking/:bookingId"
           element={

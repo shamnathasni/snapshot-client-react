@@ -143,7 +143,7 @@ function UserViewStudioPage() {
               PACKAGES
             </h4>
             <p className="pb-2 font-serif font-extralight">
-              for booking the packages you should pay 30% of amount in advance{" "}
+              for booking the packages you should pay 15% of amount in advance{" "}
             </p>
             <hr></hr>
             <div className=" grid grid-cols-1 md:grid-cols-4 px-2 md:px-5">
