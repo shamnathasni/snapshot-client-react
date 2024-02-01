@@ -1,22 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
-import { chatDetails } from "../../Api/UserApi";
-import { useSelector } from "react-redux";
+import { chatDetails, getVendorDetails } from "../../Api/UserApi";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
 
 function UserChatPage() {
   const { vendorId, bookingId } = useParams();
+  const [vendorData, setVendorData] = useState([]);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [socket, setSocket] = useState(null);
   const messagesEndRef = useRef(null);
-
-  const vendor = useSelector((state) => {
-    if (state.User.vendor._id === vendorId) {
-      return state.User.vendor;
-    }
-  });
+console.log(vendorData,"ven");
 
   useEffect(() => {
     const newSocket = io("http://localhost:4000");
@@ -65,18 +60,27 @@ function UserChatPage() {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(()=>{
+    getVendorDetails(vendorId)
+    .then((res)=>{
+      const vendorDetails = res.data.vendorData 
+      setVendorData(vendorDetails)
+    })
+    .catch((err)=>console.log(err.message))
+  },[])
+
   return (
     <>
       <StickyNavbar />
       <div className="flex flex-col h-screen  items-center p-6 py-5">
-        <div className="flex flex-row items-center gap-3 border-b w-full p-4">
-          <img
-            src={vendor.image}
-            alt={vendor}
-            className="w-12 h-12 rounded-full shadow-xl"
-          />
-          <h2 className="font-semibold text-lg">{vendor.name}</h2>
-        </div>
+          <div className="flex flex-row items-center gap-3 border-b w-full p-4">
+            <img
+              src={vendorData.image}
+              alt="!"
+              className="w-12 h-12 rounded-full shadow-xl"
+            />
+            <h2 className="font-semibold text-lg">{vendorData.name}</h2>
+          </div>
         <div className="w-full h-5/6  bg-green-50 my-2 p-4 overflow-auto">
           {chatMessages.map((msg, index) => (
             <div

@@ -112,13 +112,14 @@ export const studioPackages = async (studioIds) => {
   }
 };
 
-export const bookingData = async (bookingType, selectedDate, id, studioId) => {
+export const bookingData = async (bookingType, selectedDate, id, studioId, userId) => {
   try {
     const data = await axiosInstance.post("/bookingData", {
       ...bookingType,
       date: selectedDate,
       Id: id,
       studioId: studioId,
+      userId: userId,
     });
 
     return data;
@@ -164,9 +165,9 @@ export const bookedDates = async (studioId, subcategory) => {
   }
 };
 
-export const confirmPayment = async (packageId) => {
+export const confirmPayment = async (packageId,userId) => {
   try {
-    const data = await axiosInstance.get(`/confirmpayment?id=${packageId}`);
+    const data = await axiosInstance.get(`/confirmpayment?bookingId=${packageId}&&userId=${userId}`);
     return data;
   } catch (error) {
     console.log(error.message);
@@ -190,6 +191,16 @@ export const chatDetails = async (bookingId) => {
     console.log(error.message);
   }
 };
+
+export const getVendorDetails = async (vendorId) => {
+  try {
+    const data = await axiosInstance.get(`/getVendorDetails?vendorId=${vendorId}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 
 export const searchStudio = async (searchQuery) => {
   try {

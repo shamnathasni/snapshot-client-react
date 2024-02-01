@@ -46,10 +46,10 @@ function UserRouter() {
             </UserProtector>
           }
         />
-        <Route path="/userStudio" element={<UserStudioPage />} />
+        <Route path="/userStudio" element={<UserProtector><UserStudioPage /></UserProtector>} />
         <Route
           path="/categoryStudio/:subCategory"
-          element={<CategoryStudioPage />}
+          element={<UserProtector><CategoryStudioPage /></UserProtector>}
         />
         <Route path="/viewstudio" element={<UserProtector><UserViewStudioPage /></UserProtector>} />
         <Route

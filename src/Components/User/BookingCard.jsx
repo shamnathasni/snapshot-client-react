@@ -4,12 +4,15 @@ import Calendar from "../Home/Calendar";
 import { bookingData } from "../../Api/UserApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function BookingCard(props) {
   const { subcategory, camera, Video, Both, imageurl, id, studioId } = props;
   const [bookingType, setBookingType] = useState(); // 'camera', 'video', 'both'
   const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
+
+  const userId = useSelector((state)=>state.User.user._id)
   // Function to handle date selection
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -30,7 +33,8 @@ function BookingCard(props) {
         bookingType,
         selectedDate,
         id,
-        studioId
+        studioId,
+        userId
       );
       if (response) {
         toast(response.data.alert);

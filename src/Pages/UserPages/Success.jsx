@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { confirmPayment, submitRating } from "../../Api/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 function Success() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const packageId = queryParams.get("packageId");
+
+  const userId = useSelector((state)=>state.User.user._id)
 
   const [rating, setRating] = useState(0);
 
@@ -20,7 +23,10 @@ function Success() {
     // You may want to handle the response from the API or add additional logic here
   };
 
-  const response = confirmPayment(packageId);
+  useEffect(()=>{
+  confirmPayment(packageId,userId)
+  .catch((err)=>console.log(err.message))
+  },[])
 
   const stars = Array.from({ length: 5 }, (_, index) => (
     <FontAwesomeIcon

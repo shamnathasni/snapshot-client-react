@@ -6,7 +6,7 @@ function UserProtector(props) {
   if (token) {
     return props.children;
   } else {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 }
 

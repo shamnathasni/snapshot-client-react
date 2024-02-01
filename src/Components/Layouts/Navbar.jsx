@@ -83,7 +83,7 @@ export function StickyNavbar() {
             </Link>
           </Typography>
           <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
+            <div className="mr-4 hidden lg:block text-[#872341]">{navList}</div>
             <div className="flex items-center gap-x-1">
               <Button
                 variant="gradient"
@@ -133,7 +133,7 @@ export function StickyNavbar() {
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="bg-[#872341] text-[#872341] ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
               onClick={() => setOpenNav(!openNav)}
             >

@@ -3,7 +3,7 @@ import { StickyNavbar } from "../../Components/Layouts/Navbar";
 import Footer from "../../Components/Layouts/Footer";
 import { searchStudio, studioList } from "../../Api/UserApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faExclamation, faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 
@@ -114,16 +114,17 @@ function UserStudioPage() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-10  ">
         {searchQuery.trim() !== "" && studio.length === 0 ? (
-          <div className="col-span-4 text-center text-red-800 font-medium">
-            No matched results for "{searchQuery}"
-          </div>
+          <div className="col-span-4 h-52 flex  flex-col justify-center items-center text-center text-red-800 font-medium">
+          <p>No matched results for "{searchQuery}"</p>
+          <div className="text-4xl"><FontAwesomeIcon icon={faExclamation}/></div>
+        </div>
         ) : (
           studio.map((value, index) => (
             <div
               key={index}
               className="hover:scale-105 ease-in-out duration-300 py-10 md:py-20  h-1/3 "
             >
-              <div className=" h-[65vh] bg-[#f8f3f5]  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div className=" h-[68vh] bg-[#f8f3f5]  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                   <img
                     className="rounded-t-lg h-[30vh] w-full"
