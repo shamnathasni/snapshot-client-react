@@ -12,9 +12,9 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.User.user);
+console.log(user,"user");
+ 
 
-  // Destructure the properties after defining 'user'
-  const { name, number, email, image, _id } = user;
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(userLogout());
@@ -40,8 +40,8 @@ const UserProfile = () => {
                     <label htmlFor="fileInput" className="cursor-pointer w-4/5">
                       <img
                         src={
-                          image
-                            ? image
+                          user.image
+                            ? user.image
                             : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                         }
                         alt="card-image"
@@ -55,7 +55,7 @@ const UserProfile = () => {
                 <div className="w-full px-4 text-center mt-24">
                   {/* Include UploadWidget and pass the callback function */}
                   <UploadWidget
-                    isImage={image ? true : false}
+                    isImage={user.image ? true : false}
                     onImageUpload={handleImageUpload}
                   />
                 </div>
@@ -82,19 +82,19 @@ const UserProfile = () => {
               </div>
               <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal  text-blueGray-700 mb-2">
-                  {name}
+                  {user.name}
                 </h3>
                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  {email}
+                  {user.email}
                 </div>
                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  {number}
+                  {user.number}
                 </div>
                 <div className="mb-2 mt-10 font-bold">
                   <i className=" mr-2 text-lg  text-blueGray-400"></i>
-                  <Link to={`/bookingDetails/${_id}`}>
+                  <Link to={`/bookingDetails/${user._id}`}>
                     <FontAwesomeIcon icon={faCheckToSlot} /> Bookings
                   </Link>
                 </div>

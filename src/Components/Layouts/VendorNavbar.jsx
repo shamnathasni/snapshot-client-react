@@ -42,11 +42,13 @@ export default function VendorNavbar() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
+          <Link to={"/"}>
           <a href="#" className="-m-1.5 p-1.5">
             <span className="font-MyFont text-[#872341] text-3xl font-bold">
               SnapShot
             </span>
           </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button

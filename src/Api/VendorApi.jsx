@@ -81,20 +81,18 @@ export const vendorCategory = async () => {
   }
 };
 
-export const packageList = async () => {
+export const packageList = async (vendorsId) => {
   try {
-    const data = await axiosInstance.get("/vendor/packageList");
-
+    const data = await axiosInstance.get(`/vendor/packageList?vendorId=${vendorsId}`);
     return data; // Add this line
   } catch (error) {
     console.error(error.message);
   }
 };
 
-export const AddPackage = async (localState) => {
+export const AddPackage = async (localState,vendorsId) => {
   try {
-    const data = await axiosInstance.post("/vendor/addPackage", localState);
-
+    const data = await axiosInstance.post("/vendor/addPackage", {localState,vendorsId});
     return data; // Add this line
   } catch (error) {
     console.error(error.message);

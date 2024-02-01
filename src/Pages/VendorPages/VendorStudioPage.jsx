@@ -49,7 +49,7 @@ function VendorStudioPage() {
   };
 
   useEffect(() => {
-    packageList()
+    packageList(vendorsId)
       .then((response) => {
         setPackageState(response.data.packageData);
         // setPackageState(response.data.packageData);
@@ -60,8 +60,8 @@ function VendorStudioPage() {
   const handleAddPackage = async (localState) => {
     try {
       const response = await AddPackage({
-        localState,
-      });
+        localState
+      },vendorsId);
 
       // Display toast message
       toast(response.data.alert);
@@ -73,7 +73,7 @@ function VendorStudioPage() {
       ]);
 
       // Fetch the updated package list
-      const updatedPackages = await packageList();
+      const updatedPackages = await packageList(vendorsId);
 
       // Update the packageState with the fetched list
       setPackageState(updatedPackages.data.packageData);

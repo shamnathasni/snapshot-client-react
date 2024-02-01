@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { StickyNavbar } from "../../Components/Layouts/Navbar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   bookingDetails,
   confirmBooking,
@@ -11,6 +11,7 @@ import Modal from "../../Components/Modal";
 
 function VendorBookingDetails() {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [bookingData, setBookingData] = useState("");
   const [showModal, setShowModal] = useState(false);
 
@@ -62,6 +63,7 @@ function VendorBookingDetails() {
         });
         setBookingData(newBooking);
       }
+      navigate("/vendor/studio")
       setShowModal(false);
     } catch (error) {
       console.log(error.message);
@@ -124,6 +126,7 @@ function VendorBookingDetails() {
                 </tr>
               </thead>
               <tbody>
+                {console.log(bookingData,"bookingData")}
                 {bookingData.map((value) => (
                   <tr key={value._id}>
                     <td className="">

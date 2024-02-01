@@ -8,7 +8,6 @@ function UploadWidgetInVendor({studioId}) {
   const upload = async (data) => {
     try {
       const response = await uploadStudioImages(data,studioId)
-        console.log(response,"rrr");
     } catch (error) {
       console.log(error.message);
     }
@@ -26,7 +25,6 @@ function UploadWidgetInVendor({studioId}) {
         if (!error && result && result.event === "success") {
           // Pass the uploaded image URL to the parent component
           upload(result.info.secure_url);
-          console.log(result.info.secure_url,"result.info.secure_url");
         }
       }
     );
