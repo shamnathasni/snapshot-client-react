@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const TIMEOUT_DURATION = 110000;
-const BASE_URL = "https://snapshot.trendtitan.shop";
+// const TIMEOUT_DURATION = 110000;
+const BASE_URL = "http://localhost:3000";
 
 const axiosInstance = axios.create({
     baseURL:BASE_URL,
-    timeout: TIMEOUT_DURATION,
+    // timeout: TIMEOUT_DURATION,
 });
 
 axiosInstance.interceptors.request.use(

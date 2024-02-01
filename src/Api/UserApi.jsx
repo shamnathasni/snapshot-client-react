@@ -52,6 +52,7 @@ export const userLogin = async (loginData) => {
     console.log(error.message);
   }
 };
+
 export const userImage = async (image) => {
   try {
     const response = await axiosInstance.post("/profileImage", { image });

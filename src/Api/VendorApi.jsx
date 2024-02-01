@@ -61,6 +61,17 @@ export const studioList = async (vendorsId) => {
   }
 };
 
+export const uploadStudioImages = async (image,studioId) => {
+  try {
+    const data = await axiosInstance.post("/vendor/uploadstudioimage", { image ,studioId});
+    
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
 export const vendorCategory = async () => {
   try {
     const data = await axiosInstance.get("/vendor/vendorcategory");

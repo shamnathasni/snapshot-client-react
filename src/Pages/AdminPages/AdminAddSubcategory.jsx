@@ -31,7 +31,7 @@ function AdminAddSubcategory() {
       const response = await addsubCategory({ formData, categoryId });
 
       if (response.data.status) {
-        navigate("/admin/subcategorylist");
+        navigate("/admin/subcategorylist",{state:{Id:categoryId}});
         toast(response.data.alert);
       }
     } catch (error) {

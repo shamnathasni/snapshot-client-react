@@ -173,12 +173,12 @@ function UserViewStudioPage() {
             </div>
             <hr className="align-text-bottom bg-black"></hr>
 
-            <div className="flex flex-row gap-3">
+            <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
               {studio.galleryImage.map((value, index) => (
                 <img
                   key={index}
                   sizes=""
-                  className="w-full md:w-1/6 py-2 cursor-pointer"
+                  className="w-full h-full py-2 cursor-pointer"
                   src={`${value}`}
                   alt={`Gallery Image ${index}`}
                   onClick={() => openModal(index)}

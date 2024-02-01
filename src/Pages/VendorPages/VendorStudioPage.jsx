@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import AddPackageModal from "../../Components/Modals/AddPackageModal"; // Adjust the path accordingly
 import { toast } from "react-toastify";
 import PackageCard from "../../Components/vendor/packageCard";
+import UploadWidgetInVendor from "../../Components/Upload/UploadWidjetInVendor";
 
 function VendorStudioPage() {
   const [studio, setStudio] = useState([]);
@@ -169,11 +170,20 @@ function VendorStudioPage() {
             </div>
           </div>
           <div className="py-10 flex-col">
+          <div className="flex justify-between">
             <h2 className="font-sans text-xl font-bold ">Gallery</h2>
+            {/* <button
+                onClick={""}
+                className="bg-[#872341] text-white w-[60px] text-center rounded-[9px] mb-3 p-2"
+              >
+                Add+
+              </button> */}
+              <UploadWidgetInVendor studioId={studio._id} />
+              </div>
             <hr></hr>
-            <div className="flex flex-row gap-2">
+            <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
               {studio.galleryImage.map((value, index) => (
-                <div className="flex flex-row w-1/2 md:w-1/6">
+                <div className="w-full h-full">
                   <img
                     key={index}
                     className="box-border "

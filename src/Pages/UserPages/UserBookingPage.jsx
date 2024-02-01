@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { detailsForPayment } from "../../Api/UserApi";
 
 function UserBookingPage() {
@@ -24,7 +24,7 @@ function UserBookingPage() {
 
     try {
       const response = await fetch(
-        "https://snapshot.trendtitan.shop/api/create-checkout-session",
+        "http://localhost:3000/api/create-checkout-session",
         {
           method: "post",
           headers: {
@@ -61,9 +61,11 @@ function UserBookingPage() {
         >
           Pay
         </button>
+        <Link to={"/profile"}>
         <button className="btn  bg-green-700 w-16 text-center text-lg text-white">
           Close
         </button>
+        </Link>
       </div>
     </div>
   );

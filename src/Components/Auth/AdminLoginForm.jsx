@@ -39,7 +39,7 @@ function AdminLoginForm() {
       }
     } catch (error) {
       console.log(error.message);
-    }FF
+    }
   };
 
   return (
