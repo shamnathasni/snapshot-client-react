@@ -24,7 +24,7 @@ function UserBookingPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/create-checkout-session",
+        "https://snapshot.trendtitan.shop/api/create-checkout-session",
         {
           method: "post",
           headers: {
