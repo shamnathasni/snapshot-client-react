@@ -14,7 +14,7 @@ function UserChatPage() {
 console.log(vendorData,"ven");
 
   useEffect(() => {
-    const newSocket = io("https://snapshot-studios.vercel.app");
+    const newSocket = io("https://snapshot.trendtitan.shop");
     setSocket(newSocket);
 
     if (bookingId && vendorId) {

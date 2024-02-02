@@ -13,7 +13,7 @@ function VendorChatPage() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const newSocket = io("https://snapshot-studios.vercel.app");
+    const newSocket = io("https://snapshot.trendtitan.shop");
     setSocket(newSocket);
 
     if (bookingId) {
