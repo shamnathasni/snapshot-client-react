@@ -13,6 +13,8 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) =>{ state.User.user
   console.log( state.User,"user")
+  const user2 = localStorage.getItem("token")
+  console.log( user2,"user2")
   });
  
 
