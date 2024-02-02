@@ -29,7 +29,7 @@ function VendorBookingDetails() {
     };
 
     fetchData();
-  }, [id]);
+  }, []);
 
   const confirmReject = () => {
     setShowModal(true);

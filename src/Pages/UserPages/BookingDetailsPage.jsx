@@ -22,7 +22,7 @@ function BookingDetailsPage() {
     };
 
     fetchData();
-  }, [userId]);
+  }, []);
 
   return (
     <div>
