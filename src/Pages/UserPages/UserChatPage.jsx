@@ -46,6 +46,7 @@ console.log(vendorData,"ven");
     chatDetails(bookingId)
       .then((res) => {
         const chatData = res.data.chatData;
+        console.log(chatData,"chatData");
         setChatMessages(chatData.chat);
         scrollToBottom();
       })
