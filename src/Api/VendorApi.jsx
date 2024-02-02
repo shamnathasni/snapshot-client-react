@@ -33,15 +33,15 @@ export const VendorImage = async (id, images) => {
 
 export const StudioFormApi = async (formData) => {
   try {
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      }
-    };
+    // const config = {
+    //   headers: {
+    //     "content-type": "multipart/form-data",
+    //   }
+    // };
     const data = await axiosInstance.post(
       "/vendor/studioform",
       formData,
-      config
+      // config
     );
 
     return data;
