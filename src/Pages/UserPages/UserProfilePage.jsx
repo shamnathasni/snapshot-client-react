@@ -11,12 +11,8 @@ import { StickyNavbar } from "../../Components/Layouts/Navbar";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) =>{ state.User.user
-  console.log( state.User,"user")
-  const user2 = localStorage.getItem("token")
-  console.log( user2,"user2")
-  });
- 
+  const user = useSelector((state) => state.User.user);
+ console.log(user.image, 'user');
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
