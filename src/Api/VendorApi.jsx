@@ -36,8 +36,7 @@ export const StudioFormApi = async (formData) => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-      },
-      withCredentials: true,
+      }
     };
     const data = await axiosInstance.post(
       "/vendor/studioform",

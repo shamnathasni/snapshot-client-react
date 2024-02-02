@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const TIMEOUT_DURATION = 110000;
-const BASE_URL = "https://snapshot.trendtitan.shop/";
+const BASE_URL = "https://snapshot.trendtitan.shop";
 
 const axiosInstance = axios.create({
     baseURL:BASE_URL,
