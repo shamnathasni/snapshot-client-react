@@ -26,7 +26,7 @@ function VendorAuthPage({ form }) {
               <span className="flex items-center justify-center font-MyFont text-[#872341] ">
                 Vendor
               </span>
-              <header className="font-bold font-serif text-3xl pb-5">
+              <header className="font-bold text-3xl pb-5">
                 {form === "login" ? "Sign In" : "Sign Up"}
               </header>
             </div>

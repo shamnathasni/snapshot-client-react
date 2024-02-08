@@ -76,12 +76,12 @@ function VendorLoginForm() {
       <div className="flex-col justify-center items-center text-center py-2">
         <div>
           <Link to="/vendor/signup" className="text-[#872341] px-2">
-            Don't have an account?
+            Don't have an Account?
           </Link>
         </div>
       </div>
       <Link to={"/"}>
-        <h1>back to home page</h1>
+        <h1>Back to home</h1>
       </Link>
     </div>
   );
