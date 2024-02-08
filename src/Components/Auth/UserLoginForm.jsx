@@ -11,8 +11,8 @@ import Oauth from "../../Firebase/Oauth";
 
 function UserLoginForm() {
   const schema = z.object({
-    email: z.string().email(),
-    password: z.string().min(5).max(10),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z.string().min(5, { message: "Password must be at least 5 characters" }).max(10, { message: "Password cannot exceed 10 characters" }),
   });
 
   const {
@@ -34,10 +34,10 @@ function UserLoginForm() {
         const { newUser } = response.data;
 
         dispatch(userDetails(newUser));
-        toast(response.data.alert);
+        toast.success(response.data.alert);
         navigate("/");
       } else {
-        toast(response.data.alert);
+        toast.error(response.data.alert);
       }
     } catch (error) {
       console.log(error.message);
