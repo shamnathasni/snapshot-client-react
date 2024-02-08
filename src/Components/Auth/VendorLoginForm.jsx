@@ -54,7 +54,9 @@ function VendorLoginForm() {
           placeholder="Enter your email"
           className="h-8 w-full rounded-[4px]  shadow-md text-center mb-2  border border-slate-300 placeholder:italic"
         />
-        {errors.email && <span className="text-red">{errors.email.message}</span>}
+        {errors.email && (
+          <span className="text-red">{errors.email.message}</span>
+        )}
         <input
           type="password"
           {...register("password")}
@@ -76,7 +78,6 @@ function VendorLoginForm() {
           <Link to="/vendor/signup" className="text-[#872341] px-2">
             Don't have an account?
           </Link>
-          <Link className="text-[#872341]">Forget Password</Link>
         </div>
       </div>
       <Link to={"/"}>
