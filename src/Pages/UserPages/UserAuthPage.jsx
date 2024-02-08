@@ -6,7 +6,7 @@ function UserAuthPage({ form }) {
   return (
     <div>
       <div className="w-full h-screen bg-authentication-background bg-cover flex justify-center items-center">
-        <div className="w-8/12 h-5/6 bg-[#fcf5ff] shadow-lg rounded-[4px] grid grid-cols-2">
+        <div className="w-8/12 h-5/6 bg-[#fcf5ff] shadow-lg rounded-[4px] grid md:grid-cols-2">
           <div
             style={
               form === "login"
@@ -19,7 +19,7 @@ function UserAuthPage({ form }) {
                     backgroundSize: "cover",
                   }
             }
-            className="rounded-l-[4px]"
+            className="rounded-l-[4px] hidden md:block"
           ></div>
           <div className="w-full flex  flex-col justify-center items-center py-2">
             <div>

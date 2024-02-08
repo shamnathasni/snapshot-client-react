@@ -5,13 +5,13 @@ function AdminAuthPage() {
   return (
     <div>
       <div className="w-full h-screen bg-admin-auth-background bg-cover flex justify-center items-center">
-        <div className="w-8/12 h-5/6 bg-[#fcf5ff] shadow-lg rounded-[4px] grid grid-cols-2">
+        <div className="w-8/12 h-5/6 bg-[#fcf5ff] shadow-lg rounded-[4px] grid md:grid-cols-2">
           <div
             style={{
               backgroundImage: "url(/Authentication/adminLogin.jpg)",
               backgroundSize: "cover",
             }}
-            className="rounded-l-[4px]"
+            className="rounded-l-[4px] hidden md:block"
           ></div>
           <div className="flex justify-center items-center flex-col">
             <div>
