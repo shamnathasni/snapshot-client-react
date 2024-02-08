@@ -52,14 +52,14 @@ function AdminLoginForm() {
           type="text"
           {...register("email")}
           placeholder="Enter your email"
-          className="h-8 w-full rounded-[4px]  shadow-md text-center mb-2  border border-slate-300 placeholder:italic"
+          className="h-8 w-full rounded-[4px]  shadow-md text-center mb-2  border border-slate-300"
         />
         {errors.email && <span className="text-red">{errors.email.message}</span>}
         <input
           type="password"
           {...register("password")}
           placeholder="Enter your password"
-          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 placeholder:italic"
+          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 "
         />
         {errors.password && (
           <span className="text-red">{errors.password.message}</span>
