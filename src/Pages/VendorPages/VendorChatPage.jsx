@@ -13,7 +13,7 @@ function VendorChatPage() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const newSocket = io("https://snapshot.trendtitan.shop");
+    const newSocket = io("http://localhost:3000");
     setSocket(newSocket);
 
     if (bookingId) {
