@@ -63,7 +63,7 @@ function VendorSignupForm() {
           type="text"
           {...register("name")}
           placeholder="Enter your name"
-          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 placeholder:italic"
+          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 "
         />
         {errors.name && (
           <span className="text-red-950"> {errors.name.message} </span>
@@ -73,7 +73,7 @@ function VendorSignupForm() {
           type="text"
           {...register("number")}
           placeholder="Enter your contact number"
-          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 placeholder:italic"
+          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 "
         />
         {errors.number && (
           <span className="text-red-950"> {errors.number.message} </span>
@@ -103,7 +103,7 @@ function VendorSignupForm() {
           type="password"
           {...register("confirmPassword")}
           placeholder="Confirm your password"
-          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300 placeholder:italic"
+          className="h-8 w-full rounded-[4px] shadow-md text-center  mb-2 mt-2 border border-slate-300"
         />
         {errors.confirmPassword && (
           <span className="text-red-950">
