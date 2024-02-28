@@ -53,7 +53,7 @@ function UserHomePage() {
             SnapShot
           </span>{" "}
         </h2>
-        <div className=" flex-col justify-evenly flex  md:flex-row">
+        <div className=" flex-col justify-evenly flex  md:flex-row ">
           <SimpleCard
             heading="WEDDING FUNCTIONS"
             para='"Capture the magic of your special day with our expert wedding photography services. Every love story deserves a beautiful frame."'

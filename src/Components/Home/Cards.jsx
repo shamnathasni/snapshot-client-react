@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export function SimpleCard(props) {
   return (
-    <Card className="mt-6 w-96 py-5 h-auto rounded-lg  bg-white px-4">
+    <Card className="mt-6 w-96 py-5 h-auto rounded-lg  bg-white px-2 md:px-4">
       <CardBody className="">
         <Typography
           variant="h5"
