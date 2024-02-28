@@ -29,7 +29,7 @@ function UserHomePage() {
     <>
       <StickyNavbar />
       <div
-        className="w-full h-screen overflow-hidden "
+        className="w-56 md:w-full h-56 md:h-screen overflow-hidden "
         style={{
           backgroundImage:"url(/Navbar/home.jpg)",
           backgroundSize: "cover",
