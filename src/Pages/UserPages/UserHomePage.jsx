@@ -31,7 +31,7 @@ function UserHomePage() {
       <div
         className="w-full h-screen overflow-hidden "
         style={{
-          backgroundImage: "url(/Navbar/home.jpg)",
+          backgroundImage:"url(/Navbar/home.jpg)",
           backgroundSize: "cover",
         }}
       >
