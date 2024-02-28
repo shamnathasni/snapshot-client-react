@@ -36,10 +36,10 @@ function UserHomePage() {
         }}
       >
         <div className="flex flex-col justify-center items-center">
-          <h4 className="text-[#22092C] text-4xl py-4 font-serif font-extrabold ">
-            WELCOME TO <span className="font-MyFont ">SnapShot</span>
+          <h4 className="text-[#22092C] text-2xl md:text-4xl py-4 font-serif font-extrabold ">
+            WELCOME TO <span className="font-MyFont 4xl md:2xl ">SnapShot</span>
           </h4>
-          <p className="text-[#872341] font-MyFont ">
+          <p className="text-[#872341] font-MyFont">
             Welcome to a day where each frame tells a story, and where every
             smile captured becomes a cherished treasure.
           </p>
