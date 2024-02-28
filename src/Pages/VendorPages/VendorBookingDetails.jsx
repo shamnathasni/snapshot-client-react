@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
-import { StickyNavbar } from "../../Components/Layouts/Navbar";
+import VendorNavbar from "../../Components/Layouts/VendorNavbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   bookingDetails,
@@ -8,6 +8,7 @@ import {
   rejectBooking,
 } from "../../Api/VendorApi";
 import Modal from "../../Components/Modal";
+import VendorNavbar from "../../Components/Layouts/VendorNavbar";
 
 function VendorBookingDetails() {
   const { id } = useParams();
@@ -72,7 +73,7 @@ function VendorBookingDetails() {
 
   return (
     <div>
-      <StickyNavbar />
+      <VendorNavbar/>
       <div className="p-9">
         <Card className="h-full w-full overflow-scroll flex justify-center items-center p-4 ">
           {bookingData ? (

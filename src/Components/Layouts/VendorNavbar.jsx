@@ -38,7 +38,7 @@ export default function VendorNavbar() {
   return (
     <header className="bg-">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 text-[#872341] lg:px-8 shadow-md"
+        className=" w-screen mx-auto flex max-w-7xl items-center justify-between p-6 text-[#872341] lg:px-8 shadow-md"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
