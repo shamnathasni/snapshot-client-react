@@ -12,7 +12,7 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.User.user);
- console.log(user.image, 'user');
+  console.log(user.image, "user");
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -46,7 +46,7 @@ const UserProfile = () => {
                         alt="card-image"
                         className=" rounded-full 
                       shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]
-                      h-36 w-36  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      h-36 w-36  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px max-w-180-px "
                       />
                     </label>
                   </div>
@@ -57,26 +57,6 @@ const UserProfile = () => {
                     isImage={user.image ? true : false}
                     onImageUpload={handleImageUpload}
                   />
-                </div>
-              </div>
-              <div className="w-full px-4 text-center mt-20">
-                <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      09/12/2023
-                    </span>
-                    <span className="text-[15px] text-blueGray-400">
-                      joinedDate
-                    </span>
-                  </div>
-                  <div className="mr-4 p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      10
-                    </span>
-                    <span className="text-[15px] text-blueGray-400">
-                      Date of Birth
-                    </span>
-                  </div>
                 </div>
               </div>
               <div className="text-center mt-12">
