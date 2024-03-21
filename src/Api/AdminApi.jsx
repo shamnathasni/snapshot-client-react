@@ -111,17 +111,10 @@ export const subCategoryList = async ({ categoryId }) => {
 
 export const addsubCategory = async ({ formData, categoryId }) => {
   try {
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      withCredentials: true,
-    };
-
+    
     const data = await axiosInstance.post(
       `/admin/addsubCategory/${categoryId}`,
-      formData,
-      config
+      formData
     );
 
     return data;
