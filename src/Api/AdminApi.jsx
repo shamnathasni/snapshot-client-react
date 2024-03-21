@@ -113,7 +113,7 @@ export const addsubCategory = async ({ formData, categoryId }) => {
   try {
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
       },
       withCredentials: true,
     };

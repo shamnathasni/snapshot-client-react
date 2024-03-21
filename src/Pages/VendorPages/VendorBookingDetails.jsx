@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
-import VendorNavbar from "../../Components/Layouts/VendorNavbar";
+// import VendorNavbar from "../../Components/Layouts/VendorNavbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   bookingDetails,
@@ -73,7 +73,7 @@ function VendorBookingDetails() {
 
   return (
     <>
-      <VendorNavbar />
+      <VendorNavbar/>
       <div>
         <div className="p-9">
           <Card className="h-full w-full overflow-scroll flex justify-center items-center p-4 ">
