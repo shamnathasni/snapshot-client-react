@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { resendOTP, verifyOtp } from "../../Api/UserApi";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -31,12 +31,35 @@ const EmailVerification = () => {
     }
   };
 
+  //TIMER RESEND OTP BUTTON
+  const [timer, setTimer] = useState(60); // Initial timer value in seconds
+  const [showResendButton, setShowResendButton] = useState(false);
+
+  useEffect(() => {
+    let intervalId;
+
+    if (timer > 0) {
+      intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else {
+      setShowResendButton(true);
+    }
+
+    return () => clearInterval(intervalId);
+  }, [timer]);
+
+  const handleResendClick = () => {
+    // Logic to resend OTP
+    setTimer(60); // Reset timer
+    setShowResendButton(false);
+  };
+
   const resendOtp = async () => {
     try {
       const response = await resendOTP(userData);
-      if (response.data.status) {
-        toast(response.data.alert);
-      } else {
+      console.log(response, "res");
+      if (response) {
         toast(response.data.alert);
       }
     } catch (error) {
@@ -83,14 +106,17 @@ const EmailVerification = () => {
                     </button>
                   </div>
 
-                  <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                    <p>Didn't receive code?</p>{" "}
-                    <span
-                      className="flex flex-row items-center text-blue-600 link-hover"
-                      onClick={resendOtp}
-                    >
-                      Resend
-                    </span>
+                  <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-black">
+                    {showResendButton ? (
+                      <button
+                        className="flex flex-row items-center text-green-800 hover:text-green-950"
+                        onClick={resendOtp}
+                      >
+                        Resend
+                      </button>
+                    ) : (
+                      <p>Resend OTP in <span  className="text-red-900 font-semibold">{timer}</span> seconds</p>
+                    )}
                   </div>
                 </div>
               </div>
