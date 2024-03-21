@@ -46,7 +46,7 @@ const UserProfile = () => {
                         alt="card-image"
                         className=" rounded-full 
                       shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]
-                      h-36 w-36  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px max-w-180-px "
+                      h-36 w-36  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px max-h-180-px "
                       />
                     </label>
                   </div>
